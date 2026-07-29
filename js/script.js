@@ -1,21 +1,18 @@
 /* ===================================================
-   WONDERLAND PORTFOLIO v3 — INTERACTIVE SCRIPT
-   Trịnh Khánh Linh · Foreign Trade University
-   Features: i18n, music, card cursor trail, chess falling,
-   fireflies, mascot hover interaction, skill bars, lightbox
+   WONDERLAND PORTFOLIO v4 — FULL INTERACTIVE SCRIPT
+   Mirror Entrance, Maze, Tarot, Mood, Card Trail, Chess
    =================================================== */
-
 document.addEventListener('DOMContentLoaded', () => {
     'use strict';
 
     /* ==========================================
-       1. TRANSLATIONS (EN + VI)
+       1. TRANSLATIONS
        ========================================== */
     const i18n = {
         en: {
-            nav_home:"Home",nav_about:"About",nav_skills:"Skills",nav_projects:"Projects",
-            nav_experience:"Experience",nav_achievements:"Achievements",nav_contact:"Contact",
-            music_label:"Music",
+            nav_home:"Home",nav_about:"About",nav_lang:"Languages",nav_skills:"Skills",
+            nav_projects:"Projects",nav_experience:"Experience",nav_achievements:"Achievements",
+            nav_game:"Minigame",nav_contact:"Contact",music_label:"Music",
             hero_chip:"\u2728 A Journey Through Wonderland",
             hero_role:"International Economics",hero_school:"Foreign Trade University (FTU)",
             hero_tagline:"Bridging global markets, economic research, and strategic vision \u2014 one curious step at a time.",
@@ -26,410 +23,561 @@ document.addEventListener('DOMContentLoaded', () => {
             about_p2:"Like exploring Wonderland, modern economics demands curiosity, analytical rigor, and the courage to venture beyond conventional perspectives.",
             stat_uni:"Foreign Trade University",stat_major:"International Economics",stat_loc:"Vietnam",
             edu_h3:"\u2733 Education",
-            edu_ftu:"3rd-year Student \u00B7 Faculty of International Economics \u00B7 Major in International Economics.",
+            edu_ftu_1:"3rd-year Student",edu_ftu_2:"Faculty of International Economics",edu_ftu_3:"Major in International Economics",
             edu_ctq_name:"Tuy\u00EAn Quang High School for the Gifted",
-            edu_ctq:"Graduated with Distinction \u00B7 Literature Major (Class 34) \u00B7 National Excellent Student Team in Literature (2022\u20132023).",
-            skills_chip:"Chapter II \u00B7 Hidden Magical Library",skills_h2:"Grimoire of Skills",
-            sk_lang:"Language Proficiency",sk_econ:"Economic & Market Analysis",
-            sk_econ_sub:"Forecasting \u00B7 Econometrics \u00B7 Data Viz",
+            edu_ctq_1:"Graduated with Distinction",edu_ctq_2:"Literature Major (Class 34)",edu_ctq_3:"National Excellent Student Team in Literature (2022\u20132023)",
+            lang_chip:"Chapter II \u00B7 Tower of Babel",lang_h2:"Language Proficiency",
+            lang_zh:"Chinese",lang_vi:"Vietnamese",lang_native:"Native",
+            skills_chip:"Chapter III \u00B7 Hidden Magical Library",skills_h2:"Grimoire of Skills",
+            sk_econ:"Economic & Market Analysis",sk_econ_sub:"Forecasting \u00B7 Econometrics \u00B7 Data Viz",
             sk_biz:"Business Strategy",sk_biz_sub:"Trade Policy \u00B7 FDI \u00B7 Corporate Finance",
-            sk_comm:"Communication & Soft Skills",sk_comm_sub:"CSKH \u00B7 Public Speaking \u00B7 Teamwork",
+            sk_comm:"Communication & Soft Skills",sk_comm_sub:"Customer Care \u00B7 Public Speaking \u00B7 Teamwork",
             sk_tech:"Software & Office Tools",sk_tech_sub:"MS Office \u00B7 SPSS \u00B7 R/Python basics",
             sk_research:"Research & Academic Writing",sk_research_sub:"Papers \u00B7 Literature Review \u00B7 Reports",
-            proj_chip:"Chapter III \u00B7 Hedge Maze",proj_h2:"Featured Projects",
-            proj_b1:"Web Platform",proj_t1:"ShiftLink \u2014 Smart Shift Management Platform",
-            proj_d1:"An intelligent shift management platform that helps managers and employees collaborate on a unified system \u2014 from registering availability to shift scheduling, shift swapping, and attendance tracking.",
+            proj_chip:"Chapter IV \u00B7 Hedge Maze",proj_h2:"Featured Projects",
+            proj_b1:"Web Platform",proj_t1:"ShiftLink \u2014 Smart Shift Management",
+            proj_d1:"An intelligent shift management platform that helps managers and employees collaborate \u2014 from registering availability to shift scheduling, shift swapping, and attendance tracking.",
             proj_b2:"Advisory",proj_t2:"FTU Admissions Advisory Platform",
-            proj_d2:"Organized admission outreach, file processing, and interactive consultation webinars for thousands of prospective students and parents.",
+            proj_d2:"Organized admission outreach, file processing, and consultation webinars for thousands of prospective students.",
             proj_link:"View on GitHub \u2192",
-            exp_chip:"Chapter IV \u00B7 Tea Party Garden",exp_h2:"Experience & Activities",
-            exp1_t:"Active Member \u2014 FTU Forum Student Club",
-            exp1_org:"Foreign Trade University Student Forum",
-            exp1_b1:"Admissions consultation for annual events: Admission Fair, FTU Open Tour, B\u00E1ch Khoa Open Day 1 & 2, Admission Webinar.",
-            exp1_b2:"Profile processing for Course 63 & 64: gathering, classifying, and answering inquiries from parents and students both online and offline.",
-            exp1_b3:"Organizing Committee member for IE SHINE 2024: Unity & Shine \u2014 the annual cultural night of the Faculty of International Economics.",
-            ach_chip:"Chapter V \u00B7 Royal Garden",ach_h2:"Achievements",
-            aw1_t:"1st Prize \u2014 Provincial Literature",aw1_d:"First Prize, Grade 11 Provincial Excellent Student Competition in Literature, Tuy\u00EAn Quang Province.",
-            aw2_t:"Consolation Prize \u2014 Regional Contest",aw2_d:"Literature prize at the 2022 Northern Coastal & Delta Regional Gifted Schools Competition.",
-            aw3_t:"3rd Prize \u2014 Provincial Literature",aw3_d:"Third Prize, Grade 12 Provincial Excellent Student Competition in Literature.",
+            exp_chip:"Chapter V \u00B7 Tea Party Garden",exp_h2:"Experience & Activities",
+            exp1_t:"Active Member \u2014 FTU Forum Student Club",exp1_org:"Foreign Trade University Student Forum",
+            exp1_b1:"Admissions consultation: Admission Fair, FTU Open Tour, B\u00E1ch Khoa Open Day 1 & 2, Admission Webinar.",
+            exp1_b2:"Profile processing for Course 63 & 64: gathering, classifying, and answering inquiries.",
+            exp2_t:"Organizing Committee \u2014 IE SHINE 2024: Unity & Shine",exp2_org:"Faculty of International Economics, FTU",
+            exp2_b1:"Organized the annual cultural night gala of the Faculty of International Economics.",
+            exp2_b2:"Coordinated logistics, media outreach, and student engagement activities.",
+            ach_chip:"Chapter VI \u00B7 Royal Garden",ach_h2:"Achievements",
+            aw1_t:"1st Prize \u2014 Provincial Literature",aw1_d:"Grade 11 Provincial Excellent Student Competition in Literature, Tuy\u00EAn Quang Province.",
+            aw2_t:"Consolation Prize \u2014 Regional Contest",aw2_d:"2022 Northern Coastal & Delta Regional Gifted Schools Competition in Literature.",
+            aw3_t:"3rd Prize \u2014 Provincial Literature",aw3_d:"Grade 12 Provincial Excellent Student Competition in Literature.",
             roles_h3:"\u2660 Media Ambassador Roles",
-            ct_chip:"Chapter VI \u00B7 Secret Garden at Sunset",ct_h2:"Let's Connect",
-            ct_sub:"Step through the looking glass for collaborations, research, or opportunities.",
+            game_chip:"Chapter VII \u00B7 The Mad Tea Party",game_h2:"Wonderland Games",game_sub:"Take a break and play!",
+            tab_maze:"\u265B Maze Escape",tab_tarot:"\u2663 Tarot Draw",tab_mood:"\u2665 Mood Tracker",
+            maze_time:"Time:",maze_pause:"Pause",maze_records:"Records",maze_start:"New Maze",
+            maze_hint:"Use W A S D or Arrow Keys to move. Reach the \u2733 to win!",
+            maze_best:"Best Times",maze_close:"Close",
+            tarot_draw:"Draw a card",tarot_prompt:"Click the card to reveal your Wonderland message!",tarot_btn:"Draw Card",
+            mood_title:"How are you feeling today?",mood_history:"Your Mood Journal",
+            ct_chip:"Chapter VIII \u00B7 Secret Garden at Sunset",ct_h2:"Let's Connect",
+            ct_sub:"Step through the looking glass for collaborations or opportunities.",
             ct_email:"Email",ct_phone:"Phone",ct_addr:"Address",
+            form_h3:"Send a Message",form_send:"Send Message \u2709",
             farewell:'"Curiosity is the beginning of wisdom. Thank you for visiting my Wonderland!" \u2014 Tr\u1ECBnh Kh\u00E1nh Linh',
             footer:"Designed with curiosity & magic by Tr\u1ECBnh Kh\u00E1nh Linh \u00A9 2026 \u00B7 Foreign Trade University, Hanoi."
         },
         vi: {
-            nav_home:"Trang ch\u1EE7",nav_about:"Gi\u1EDBi thi\u1EC7u",nav_skills:"K\u1EF9 n\u0103ng",nav_projects:"D\u1EF1 \u00E1n",
-            nav_experience:"Kinh nghi\u1EC7m",nav_achievements:"Th\u00E0nh t\u1EF1u",nav_contact:"Li\u00EAn h\u1EC7",
-            music_label:"Nh\u1EA1c n\u1EC1n",
+            nav_home:"Trang ch\u1EE7",nav_about:"Gi\u1EDBi thi\u1EC7u",nav_lang:"Ngo\u1EA1i ng\u1EEF",nav_skills:"K\u1EF9 n\u0103ng",
+            nav_projects:"D\u1EF1 \u00E1n",nav_experience:"Kinh nghi\u1EC7m",nav_achievements:"Gi\u1EA3i th\u01B0\u1EDFng",
+            nav_game:"Minigame",nav_contact:"Li\u00EAn h\u1EC7",music_label:"Nh\u1EA1c",
             hero_chip:"\u2728 H\u00E0nh Tr\u00ECnh Qua X\u1EE9 S\u1EDF Th\u1EA7n Ti\u00EAn",
-            hero_role:"Kinh t\u1EBF Qu\u1ED1c t\u1EBF",hero_school:"\u0110\u1EA1i h\u1ECDc Ngo\u1EA1i th\u01B0\u01A1ng (FTU)",
-            hero_tagline:"K\u1EBFt n\u1ED1i th\u1ECB tr\u01B0\u1EDDng to\u00E0n c\u1EA7u, nghi\u00EAn c\u1EE9u kinh t\u1EBF v\u00E0 t\u1EA7m nh\u00ECn chi\u1EBFn l\u01B0\u1EE3c \u2014 t\u1EEBng b\u01B0\u1EDBc t\u00F2 m\u00F2 kh\u00E1m ph\u00E1.",
-            btn_begin:"B\u1EAFt \u0111\u1EA7u H\u00E0nh tr\u00ECnh \u265F",btn_cv:"T\u1EA3i CV",scroll_hint:"Cu\u1ED9n \u0111\u1EC3 kh\u00E1m ph\u00E1",
+            hero_role:"Kinh t\u1EBF Qu\u1ED1c t\u1EBF",hero_school:"\u0110H Ngo\u1EA1i th\u01B0\u01A1ng (FTU)",
+            hero_tagline:"K\u1EBFt n\u1ED1i th\u1ECB tr\u01B0\u1EDDng to\u00E0n c\u1EA7u, nghi\u00EAn c\u1EE9u kinh t\u1EBF v\u00E0 t\u1EA7m nh\u00ECn chi\u1EBFn l\u01B0\u1EE3c.",
+            btn_begin:"B\u1EAFt \u0111\u1EA7u \u265F",btn_cv:"T\u1EA3i CV",scroll_hint:"Cu\u1ED9n \u0111\u1EC3 kh\u00E1m ph\u00E1",
             about_chip:"Ch\u01B0\u01A1ng I \u00B7 R\u1EEBng Ph\u00E9p Thu\u1EADt",about_h2:"V\u1EC1 B\u1EA3n Th\u00E2n",
             about_quote:"S\u1EF1 t\u00F2 m\u00F2 l\u00E0 kim ch\u1EC9 nam c\u1EE7a kinh t\u1EBF h\u1ECDc.",
-            about_p1:"M\u00ECnh l\u00E0 Tr\u1ECBnh Kh\u00E1nh Linh, sinh vi\u00EAn n\u0103m 3 chuy\u00EAn ng\u00E0nh Kinh t\u1EBF Qu\u1ED1c t\u1EBF t\u1EA1i \u0110\u1EA1i h\u1ECDc Ngo\u1EA1i th\u01B0\u01A1ng (FTU), H\u00E0 N\u1ED9i. H\u00E0nh tr\u00ECnh h\u1ECDc t\u1EADp g\u1EAFn li\u1EC1n v\u1EDBi ni\u1EC1m \u0111am m\u00EA ph\u00E2n t\u00EDch th\u01B0\u01A1ng m\u1EA1i to\u00E0n c\u1EA7u, chi\u1EBFn l\u01B0\u1EE3c t\u00E0i ch\u00EDnh xuy\u00EAn bi\u00EAn gi\u1EDBi v\u00E0 nghi\u00EAn c\u1EE9u th\u1ECB tr\u01B0\u1EDDng.",
-            about_p2:"Gi\u1ED1ng nh\u01B0 kh\u00E1m ph\u00E1 X\u1EE9 s\u1EDF di\u1EC7u k\u1EF3, kinh t\u1EBF hi\u1EC7n \u0111\u1EA1i \u0111\u00F2i h\u1ECFi s\u1EF1 t\u00F2 m\u00F2, t\u01B0 duy s\u1EAFc b\u00E9n v\u00E0 b\u1EA3n l\u0129nh v\u01B0\u1EE3t qua l\u1ED1i m\u00F2n.",
-            stat_uni:"\u0110\u1EA1i h\u1ECDc Ngo\u1EA1i th\u01B0\u01A1ng",stat_major:"Kinh t\u1EBF Qu\u1ED1c t\u1EBF",stat_loc:"Vi\u1EC7t Nam",
-            edu_h3:"\u2733 Qu\u00E1 Tr\u00ECnh H\u1ECDc V\u1EA5n",
-            edu_ftu:"Sinh vi\u00EAn n\u0103m 3 \u00B7 Khoa Kinh t\u1EBF qu\u1ED1c t\u1EBF \u00B7 Chuy\u00EAn ng\u00E0nh Kinh t\u1EBF qu\u1ED1c t\u1EBF.",
+            about_p1:"M\u00ECnh l\u00E0 Tr\u1ECBnh Kh\u00E1nh Linh, SV n\u0103m 3 chuy\u00EAn ng\u00E0nh KTQT t\u1EA1i \u0110H Ngo\u1EA1i th\u01B0\u01A1ng. H\u00E0nh tr\u00ECnh h\u1ECDc t\u1EADp g\u1EAFn li\u1EC1n v\u1EDBi \u0111am m\u00EA th\u01B0\u01A1ng m\u1EA1i to\u00E0n c\u1EA7u, chi\u1EBFn l\u01B0\u1EE3c t\u00E0i ch\u00EDnh v\u00E0 nghi\u00EAn c\u1EE9u th\u1ECB tr\u01B0\u1EDDng.",
+            about_p2:"Gi\u1ED1ng nh\u01B0 kh\u00E1m ph\u00E1 X\u1EE9 s\u1EDF di\u1EC7u k\u1EF3, kinh t\u1EBF \u0111\u00F2i h\u1ECFi s\u1EF1 t\u00F2 m\u00F2, t\u01B0 duy s\u1EAFc b\u00E9n v\u00E0 b\u1EA3n l\u0129nh.",
+            stat_uni:"\u0110H Ngo\u1EA1i th\u01B0\u01A1ng",stat_major:"Kinh t\u1EBF Qu\u1ED1c t\u1EBF",stat_loc:"Vi\u1EC7t Nam",
+            edu_h3:"\u2733 H\u1ECDc V\u1EA5n",
+            edu_ftu_1:"Sinh vi\u00EAn n\u0103m 3",edu_ftu_2:"Khoa Kinh t\u1EBF qu\u1ED1c t\u1EBF",edu_ftu_3:"Chuy\u00EAn ng\u00E0nh Kinh t\u1EBF qu\u1ED1c t\u1EBF",
             edu_ctq_name:"THPT Chuy\u00EAn Tuy\u00EAn Quang",
-            edu_ctq:"T\u1ED1t nghi\u1EC7p lo\u1EA1i Gi\u1ECFi \u00B7 Chuy\u00EAn V\u0103n (Kho\u00E1 34) \u00B7 Th\u00E0nh vi\u00EAn \u0110\u1ED9i tuy\u1EC3n HSG Qu\u1ED1c gia m\u00F4n Ng\u1EEF v\u0103n (2022\u20132023).",
-            skills_chip:"Ch\u01B0\u01A1ng II \u00B7 Th\u01B0 Vi\u1EC7n Ph\u00E9p Thu\u1EADt",skills_h2:"C\u1EA9m Nang K\u1EF9 N\u0103ng",
-            sk_lang:"Tr\u00ECnh \u0110\u1ED9 Ngo\u1EA1i Ng\u1EEF",sk_econ:"Ph\u00E2n T\u00EDch Kinh T\u1EBF",
-            sk_econ_sub:"D\u1EF1 b\u00E1o \u00B7 Kinh t\u1EBF l\u01B0\u1EE3ng \u00B7 Tr\u1EF1c quan h\u00F3a",
-            sk_biz:"Chi\u1EBFn L\u01B0\u1EE3c Kinh Doanh",sk_biz_sub:"Th\u01B0\u01A1ng m\u1EA1i \u00B7 FDI \u00B7 T\u00E0i ch\u00EDnh",
-            sk_comm:"Giao Ti\u1EBFp & K\u1EF9 N\u0103ng M\u1EC1m",sk_comm_sub:"CSKH \u00B7 Thuy\u1EBFt tr\u00ECnh \u00B7 L\u00E0m vi\u1EC7c nh\u00F3m",
-            sk_tech:"Ph\u1EA7n M\u1EC1m & C\u00F4ng C\u1EE5",sk_tech_sub:"MS Office \u00B7 SPSS \u00B7 R/Python",
-            sk_research:"Nghi\u00EAn C\u1EE9u & Vi\u1EBFt H\u1ECDc Thu\u1EADt",sk_research_sub:"B\u00E0i b\u00E1o \u00B7 T\u1ED5ng quan \u00B7 B\u00E1o c\u00E1o",
-            proj_chip:"Ch\u01B0\u01A1ng III \u00B7 M\u00EA Cung H\u00E0ng R\u00E0o",proj_h2:"D\u1EF1 \u00C1n N\u1ED5i B\u1EADt",
-            proj_b1:"N\u1EC1n t\u1EA3ng Web",proj_t1:"ShiftLink \u2014 N\u1EC1n t\u1EA3ng qu\u1EA3n l\u00FD ca th\u00F4ng minh",
-            proj_d1:"N\u1EC1n t\u1EA3ng qu\u1EA3n l\u00FD ca l\u00E0m vi\u1EC7c th\u00F4ng minh, gi\u00FAp qu\u1EA3n l\u00FD v\u00E0 nh\u00E2n vi\u00EAn ph\u1ED1i h\u1EE3p tr\u00EAn c\u00F9ng m\u1ED9t h\u1EC7 th\u1ED1ng \u2014 t\u1EEB \u0111\u0103ng k\u00FD l\u1ECBch r\u1EA3nh \u0111\u1EBFn x\u1EBFp ca, \u0111\u1ED5i ca v\u00E0 ch\u1EA5m c\u00F4ng.",
-            proj_b2:"T\u01B0 v\u1EA5n",proj_t2:"N\u1EC1n t\u1EA3ng T\u01B0 v\u1EA5n Tuy\u1EC3n sinh FTU",
-            proj_d2:"T\u1ED5 ch\u1EE9c ho\u1EA1t \u0111\u1ED9ng h\u01B0\u1EDBng nghi\u1EC7p, x\u1EED l\u00FD h\u1ED3 s\u01A1 v\u00E0 webinar t\u01B0 v\u1EA5n cho h\u00E0ng ng\u00E0n h\u1ECDc sinh.",
-            proj_link:"Xem tr\u00EAn GitHub \u2192",
-            exp_chip:"Ch\u01B0\u01A1ng IV \u00B7 V\u01B0\u1EDDn Ti\u1EC7c Tr\u00E0",exp_h2:"Kinh Nghi\u1EC7m & Ho\u1EA1t \u0110\u1ED9ng",
-            exp1_t:"Th\u00E0nh vi\u00EAn \u2014 CLB Di\u1EC5n \u0111\u00E0n SV FTU Forum",
-            exp1_org:"CLB Di\u1EC5n \u0111\u00E0n sinh vi\u00EAn \u0110H Ngo\u1EA1i th\u01B0\u01A1ng",
-            exp1_b1:"T\u01B0 v\u1EA5n tuy\u1EC3n sinh c\u00E1c s\u1EF1 ki\u1EC7n th\u01B0\u1EDDng ni\u00EAn: Ng\u00E0y h\u1ED9i tuy\u1EC3n sinh, FTU Open Tour, B\u00E1ch Khoa Open Day 1 & 2, Webinar tuy\u1EC3n sinh.",
-            exp1_b2:"H\u1ED7 tr\u1EE3 tuy\u1EC3n sinh Kho\u00E1 63, 64: thu nh\u1EADn & x\u1EED l\u00FD h\u1ED3 s\u01A1, gi\u1EA3i \u0111\u00E1p th\u1EAFc m\u1EAFc ph\u1EE5 huynh v\u00E0 h\u1ECDc sinh.",
-            exp1_b3:"BTC \u0110\u00EAm h\u1ED9i Khoa Kinh t\u1EBF qu\u1ED1c t\u1EBF \u2014 IE SHINE 2024: Unity & Shine.",
-            ach_chip:"Ch\u01B0\u01A1ng V \u00B7 V\u01B0\u1EDDn Ho\u00E0ng Gia",ach_h2:"Gi\u1EA3i Th\u01B0\u1EDFng",
-            aw1_t:"Gi\u1EA3i Nh\u1EA5t HSG C\u1EA5p T\u1EC9nh V\u0103n",aw1_d:"Gi\u1EA3i Nh\u1EA5t k\u1EF3 thi HSG c\u1EA5p t\u1EC9nh m\u00F4n Ng\u1EEF v\u0103n l\u1EDBp 11, T\u1EC9nh Tuy\u00EAn Quang.",
-            aw2_t:"Gi\u1EA3i KK HSG V\u00F9ng Duy\u00EAn H\u1EA3i & \u0110BBB",aw2_d:"Gi\u1EA3i Khuy\u1EBFn kh\u00EDch m\u00F4n Ng\u1EEF v\u0103n K\u1EF3 thi HSG THPT chuy\u00EAn khu v\u1EF1c Duy\u00EAn h\u1EA3i & \u0110BBB 2022.",
-            aw3_t:"Gi\u1EA3i Ba HSG C\u1EA5p T\u1EC9nh V\u0103n",aw3_d:"Gi\u1EA3i Ba k\u1EF3 thi HSG c\u1EA5p t\u1EC9nh m\u00F4n Ng\u1EEF v\u0103n l\u1EDBp 12.",
+            edu_ctq_1:"T\u1ED1t nghi\u1EC7p lo\u1EA1i Gi\u1ECFi",edu_ctq_2:"Chuy\u00EAn V\u0103n (Kho\u00E1 34)",edu_ctq_3:"HSG Qu\u1ED1c gia Ng\u1EEF v\u0103n (2022\u20132023)",
+            lang_chip:"Ch\u01B0\u01A1ng II \u00B7 Th\u00E1p Babel",lang_h2:"Tr\u00ECnh \u0110\u1ED9 Ngo\u1EA1i Ng\u1EEF",
+            lang_zh:"Ti\u1EBFng Trung",lang_vi:"Ti\u1EBFng Vi\u1EC7t",lang_native:"B\u1EA3n ng\u1EEF",
+            skills_chip:"Ch\u01B0\u01A1ng III \u00B7 Th\u01B0 Vi\u1EC7n Ph\u00E9p Thu\u1EADt",skills_h2:"C\u1EA9m Nang K\u1EF9 N\u0103ng",
+            sk_econ:"Ph\u00E2n T\u00EDch Kinh T\u1EBF",sk_econ_sub:"D\u1EF1 b\u00E1o \u00B7 Kinh t\u1EBF l\u01B0\u1EE3ng \u00B7 Data",
+            sk_biz:"Chi\u1EBFn L\u01B0\u1EE3c KD",sk_biz_sub:"Th\u01B0\u01A1ng m\u1EA1i \u00B7 FDI \u00B7 T\u00E0i ch\u00EDnh",
+            sk_comm:"Giao Ti\u1EBFp",sk_comm_sub:"CSKH \u00B7 Thuy\u1EBFt tr\u00ECnh \u00B7 Teamwork",
+            sk_tech:"Ph\u1EA7n M\u1EC1m",sk_tech_sub:"MS Office \u00B7 SPSS \u00B7 R/Python",
+            sk_research:"Nghi\u00EAn C\u1EE9u",sk_research_sub:"B\u00E0i b\u00E1o \u00B7 T\u1ED5ng quan \u00B7 B\u00E1o c\u00E1o",
+            proj_chip:"Ch\u01B0\u01A1ng IV \u00B7 M\u00EA Cung",proj_h2:"D\u1EF1 \u00C1n N\u1ED5i B\u1EADt",
+            proj_b1:"Web",proj_t1:"ShiftLink \u2014 Qu\u1EA3n l\u00FD ca th\u00F4ng minh",
+            proj_d1:"N\u1EC1n t\u1EA3ng qu\u1EA3n l\u00FD ca l\u00E0m vi\u1EC7c \u2014 \u0111\u0103ng k\u00FD l\u1ECBch, x\u1EBFp ca, \u0111\u1ED5i ca v\u00E0 ch\u1EA5m c\u00F4ng.",
+            proj_b2:"T\u01B0 v\u1EA5n",proj_t2:"T\u01B0 v\u1EA5n Tuy\u1EC3n sinh FTU",
+            proj_d2:"T\u1ED5 ch\u1EE9c t\u01B0 v\u1EA5n, x\u1EED l\u00FD h\u1ED3 s\u01A1 v\u00E0 webinar cho h\u1ECDc sinh.",
+            proj_link:"Xem GitHub \u2192",
+            exp_chip:"Ch\u01B0\u01A1ng V \u00B7 V\u01B0\u1EDDn Ti\u1EC7c Tr\u00E0",exp_h2:"Kinh Nghi\u1EC7m",
+            exp1_t:"Th\u00E0nh vi\u00EAn \u2014 CLB FTU Forum",exp1_org:"CLB Di\u1EC5n \u0111\u00E0n SV \u0110H Ngo\u1EA1i th\u01B0\u01A1ng",
+            exp1_b1:"T\u01B0 v\u1EA5n tuy\u1EC3n sinh: Ng\u00E0y h\u1ED9i, FTU Open Tour, BK Open Day, Webinar.",
+            exp1_b2:"X\u1EED l\u00FD h\u1ED3 s\u01A1 Kho\u00E1 63, 64.",
+            exp2_t:"BTC \u0110\u00EAm h\u1ED9i IE SHINE 2024: Unity & Shine",exp2_org:"Khoa KTQT \u2014 \u0110H Ngo\u1EA1i th\u01B0\u01A1ng",
+            exp2_b1:"T\u1ED5 ch\u1EE9c \u0111\u00EAm h\u1ED9i v\u0103n h\u00F3a Khoa KTQT.",
+            exp2_b2:"\u0110i\u1EC1u ph\u1ED1i truy\u1EC1n th\u00F4ng v\u00E0 ho\u1EA1t \u0111\u1ED9ng sinh vi\u00EAn.",
+            ach_chip:"Ch\u01B0\u01A1ng VI \u00B7 V\u01B0\u1EDDn Ho\u00E0ng Gia",ach_h2:"Gi\u1EA3i Th\u01B0\u1EDFng",
+            aw1_t:"Gi\u1EA3i Nh\u1EA5t HSG T\u1EC9nh V\u0103n",aw1_d:"HSG c\u1EA5p t\u1EC9nh Ng\u1EEF v\u0103n l\u1EDBp 11, Tuy\u00EAn Quang.",
+            aw2_t:"Gi\u1EA3i KK HSG V\u00F9ng",aw2_d:"Khu v\u1EF1c Duy\u00EAn h\u1EA3i & \u0110BBB 2022.",
+            aw3_t:"Gi\u1EA3i Ba HSG T\u1EC9nh V\u0103n",aw3_d:"HSG c\u1EA5p t\u1EC9nh Ng\u1EEF v\u0103n l\u1EDBp 12.",
             roles_h3:"\u2660 \u0110\u1EA1i S\u1EE9 Truy\u1EC1n Th\u00F4ng",
-            ct_chip:"Ch\u01B0\u01A1ng VI \u00B7 V\u01B0\u1EDDn B\u00ED M\u1EADt",ct_h2:"K\u1EBFt N\u1ED1i",
-            ct_sub:"B\u01B0\u1EDBc qua t\u1EA5m g\u01B0\u01A1ng ph\u00E9p thu\u1EADt \u0111\u1EC3 h\u1EE3p t\u00E1c h\u1ECDc thu\u1EADt, nghi\u00EAn c\u1EE9u ho\u1EB7c c\u01A1 h\u1ED9i ngh\u1EC1 nghi\u1EC7p.",
+            game_chip:"Ch\u01B0\u01A1ng VII \u00B7 Ti\u1EC7c Tr\u00E0 \u0110i\u00EAn",game_h2:"Tr\u00F2 Ch\u01A1i",game_sub:"Ngh\u1EC9 ng\u01A1i v\u00E0 ch\u01A1i n\u00E0o!",
+            tab_maze:"\u265B Tho\u00E1t M\u00EA Cung",tab_tarot:"\u2663 B\u1ED1c Tarot",tab_mood:"\u2665 Mood",
+            maze_time:"Th\u1EDDi gian:",maze_pause:"D\u1EEBng",maze_records:"K\u1EC9 l\u1EE5c",maze_start:"M\u00EA cung m\u1EDBi",
+            maze_hint:"D\u00F9ng W A S D ho\u1EB7c ph\u00EDm m\u0169i t\u00EAn. \u0110\u1EBFn \u2733 \u0111\u1EC3 th\u1EAFng!",
+            maze_best:"K\u1EC9 l\u1EE5c",maze_close:"\u0110\u00F3ng",
+            tarot_draw:"B\u1ED1c b\u00E0i",tarot_prompt:"B\u1EA5m v\u00E0o l\u00E1 b\u00E0i \u0111\u1EC3 nh\u1EADn th\u00F4ng \u0111i\u1EC7p!",tarot_btn:"B\u1ED1c B\u00E0i",
+            mood_title:"H\u00F4m nay b\u1EA1n c\u1EA3m th\u1EA5y th\u1EBF n\u00E0o?",mood_history:"Nh\u1EADt k\u00FD t\u00E2m tr\u1EA1ng",
+            ct_chip:"Ch\u01B0\u01A1ng VIII \u00B7 V\u01B0\u1EDDn B\u00ED M\u1EADt",ct_h2:"K\u1EBFt N\u1ED1i",
+            ct_sub:"B\u01B0\u1EDBc qua t\u1EA5m g\u01B0\u01A1ng \u0111\u1EC3 h\u1EE3p t\u00E1c.",
             ct_email:"Email",ct_phone:"\u0110i\u1EC7n tho\u1EA1i",ct_addr:"\u0110\u1ECBa ch\u1EC9",
-            farewell:'"S\u1EF1 t\u00F2 m\u00F2 l\u00E0 kh\u1EDFi \u0111\u1EA7u c\u1EE7a tr\u00ED tu\u1EC7. C\u1EA3m \u01A1n b\u1EA1n \u0111\u00E3 gh\u00E9 th\u0103m Wonderland!" \u2014 Tr\u1ECBnh Kh\u00E1nh Linh',
-            footer:"Thi\u1EBFt k\u1EBF b\u1EDFi Tr\u1ECBnh Kh\u00E1nh Linh \u00A9 2026 \u00B7 \u0110\u1EA1i h\u1ECDc Ngo\u1EA1i th\u01B0\u01A1ng, H\u00E0 N\u1ED9i."
+            form_h3:"G\u1EEDi Tin Nh\u1EAFn",form_send:"G\u1EEDi \u2709",
+            farewell:'"S\u1EF1 t\u00F2 m\u00F2 l\u00E0 kh\u1EDFi \u0111\u1EA7u. C\u1EA3m \u01A1n \u0111\u00E3 gh\u00E9 Wonderland!" \u2014 Linh',
+            footer:"Thi\u1EBFt k\u1EBF b\u1EDFi Tr\u1ECBnh Kh\u00E1nh Linh \u00A9 2026 \u00B7 \u0110H Ngo\u1EA1i th\u01B0\u01A1ng."
         }
     };
 
     /* ==========================================
-       2. LANGUAGE SWITCHER
+       2. MIRROR ENTRANCE
        ========================================== */
-    let lang = localStorage.getItem('linh_lang') || 'en';
-    const langBtn = document.getElementById('lang-btn');
-    const langLabel = document.getElementById('lang-label');
+    const mirrorScene = document.getElementById('mirror-scene');
+    const portfolioWrap = document.getElementById('portfolio-wrap');
+    const mirrorClick = document.getElementById('mirror-click');
 
-    function setLang(l) {
-        lang = l;
-        localStorage.setItem('linh_lang', l);
-        document.documentElement.setAttribute('data-lang', l);
-        langLabel.textContent = l === 'en' ? 'VI' : 'EN';
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-            const k = el.getAttribute('data-i18n');
-            if (i18n[l]?.[k]) el.textContent = i18n[l][k];
-        });
+    // Mirror sparkle particles
+    const mCanvas = document.getElementById('mirror-particles');
+    if (mCanvas) {
+        const mCtx = mCanvas.getContext('2d');
+        let mW, mH;
+        function mResize() { mW = mCanvas.width = window.innerWidth; mH = mCanvas.height = window.innerHeight; }
+        mResize(); window.addEventListener('resize', mResize);
+        const sparkles = [];
+        for (let i = 0; i < 40; i++) {
+            sparkles.push({ x: Math.random()*mW, y: Math.random()*mH, r: Math.random()*2+.5, a: Math.random(), da: (Math.random()-.5)*.02, vx: (Math.random()-.5)*.3, vy: (Math.random()-.5)*.3, c: ['#F6D383','#D57ACE','#1C8988','#E7B280'][Math.floor(Math.random()*4)] });
+        }
+        function drawMirrorP() {
+            if (mirrorScene.classList.contains('hidden')) return;
+            mCtx.clearRect(0,0,mW,mH);
+            sparkles.forEach(s => {
+                s.x += s.vx; s.y += s.vy; s.a += s.da;
+                if (s.a<=0||s.a>=1) s.da*=-1;
+                if (s.x<0) s.x=mW; if (s.x>mW) s.x=0;
+                if (s.y<0) s.y=mH; if (s.y>mH) s.y=0;
+                mCtx.save(); mCtx.globalAlpha=s.a*.5; mCtx.fillStyle=s.c;
+                mCtx.shadowBlur=10; mCtx.shadowColor=s.c;
+                mCtx.beginPath(); mCtx.arc(s.x,s.y,s.r,0,Math.PI*2); mCtx.fill(); mCtx.restore();
+            });
+            requestAnimationFrame(drawMirrorP);
+        }
+        drawMirrorP();
     }
-    setLang(lang);
-    langBtn?.addEventListener('click', () => setLang(lang === 'en' ? 'vi' : 'en'));
 
-    /* ==========================================
-       3. BACKGROUND MUSIC
-       ========================================== */
-    const audio = document.getElementById('bg-music');
-    const musicBtn = document.getElementById('music-btn');
-    let playing = false;
-    if (audio) audio.volume = 0;
-
-    function fadeIn() {
-        if (!audio) return;
-        audio.play().then(() => {
-            playing = true;
-            musicBtn?.classList.add('playing');
-            let v = 0;
-            const t = setInterval(() => { v = Math.min(v + 0.015, 0.3); audio.volume = v; if (v >= 0.3) clearInterval(t); }, 100);
-        }).catch(() => {});
-    }
-    function pauseMusic() {
-        if (!audio) return;
-        audio.pause(); playing = false;
-        musicBtn?.classList.remove('playing');
-    }
-    musicBtn?.addEventListener('click', () => playing ? pauseMusic() : fadeIn());
-    document.getElementById('begin-btn')?.addEventListener('click', () => { if (!playing) fadeIn(); });
-
-    /* ==========================================
-       4. MOBILE MENU
-       ========================================== */
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('nav-links');
-    hamburger?.addEventListener('click', () => {
-        const open = navLinks.classList.toggle('open');
-        hamburger.classList.toggle('open', open);
-        hamburger.setAttribute('aria-expanded', String(open));
+    mirrorClick?.addEventListener('click', () => {
+        mirrorScene.classList.add('hidden');
+        setTimeout(() => {
+            mirrorScene.style.display = 'none';
+            portfolioWrap.style.display = 'block';
+            document.body.style.overflow = 'auto';
+            initPortfolio();
+        }, 800);
     });
-    navLinks?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-        hamburger?.classList.remove('open');
-    }));
+    document.body.style.overflow = 'hidden';
 
     /* ==========================================
-       5. SCROLL: Header, Progress, Home Btn
+       3. INIT PORTFOLIO (after mirror)
        ========================================== */
-    const header = document.getElementById('site-header');
-    const homeBtn = document.getElementById('home-btn');
-    const progressBar = document.getElementById('scroll-progress');
+    function initPortfolio() {
+        // Language
+        let lang = localStorage.getItem('linh_lang') || 'en';
+        const langBtn = document.getElementById('lang-btn');
+        const langLabel = document.getElementById('lang-label');
+        function setLang(l) {
+            lang = l; localStorage.setItem('linh_lang', l);
+            document.documentElement.setAttribute('data-lang', l);
+            langLabel.textContent = l === 'en' ? 'VI' : 'EN';
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const k = el.getAttribute('data-i18n');
+                if (i18n[l]?.[k]) el.textContent = i18n[l][k];
+            });
+            // placeholders
+            document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+                const k = el.getAttribute('data-i18n-ph');
+                const ph = { form_name: l==='en'?'Your name':'Tên của bạn', form_email: l==='en'?'Your email':'Email', form_msg: l==='en'?'Your message...':'Tin nhắn...' };
+                if (ph[k]) el.placeholder = ph[k];
+            });
+        }
+        setLang(lang);
+        langBtn?.addEventListener('click', () => setLang(lang === 'en' ? 'vi' : 'en'));
 
-    function onScroll() {
-        const sy = window.scrollY;
-        const max = document.documentElement.scrollHeight - window.innerHeight;
-        header?.classList.toggle('scrolled', sy > 60);
-        homeBtn?.classList.toggle('show', sy > 350);
-        if (progressBar && max > 0) progressBar.style.width = `${(sy / max) * 100}%`;
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+        // Music
+        const audio = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-btn');
+        let playing = false;
+        if (audio) audio.volume = 0;
+        function fadeIn() {
+            if (!audio) return;
+            audio.play().then(() => { playing=true; musicBtn?.classList.add('playing'); let v=0; const t=setInterval(()=>{v=Math.min(v+.015,.3);audio.volume=v;if(v>=.3)clearInterval(t)},100); }).catch(()=>{});
+        }
+        function pauseMusic() { if(!audio)return; audio.pause(); playing=false; musicBtn?.classList.remove('playing'); }
+        musicBtn?.addEventListener('click', () => playing ? pauseMusic() : fadeIn());
+        document.getElementById('begin-btn')?.addEventListener('click', () => { if (!playing) fadeIn(); });
 
-    /* ==========================================
-       6. SCROLL-SPY
-       ========================================== */
-    const sections = document.querySelectorAll('section[id]');
-    const navAnchors = document.querySelectorAll('.nav-links a');
-    function updateNav() {
-        let cur = '';
-        sections.forEach(s => { if (window.scrollY >= s.offsetTop - 220) cur = s.id; });
-        navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${cur}`));
-    }
-    window.addEventListener('scroll', updateNav, { passive: true });
+        // Mobile menu
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        hamburger?.addEventListener('click', () => {
+            const o = navLinks.classList.toggle('open');
+            hamburger.classList.toggle('open', o);
+        });
+        navLinks?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { navLinks.classList.remove('open'); hamburger?.classList.remove('open'); }));
 
-    /* ==========================================
-       7. SCROLL-REVEAL (Intersection Observer)
-       ========================================== */
-    const revealEls = document.querySelectorAll('.reveal');
-    if ('IntersectionObserver' in window) {
-        const obs = new IntersectionObserver(entries => {
-            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-        revealEls.forEach(el => obs.observe(el));
-    } else {
-        revealEls.forEach(el => el.classList.add('visible'));
-    }
+        // Scroll
+        const header = document.getElementById('site-header');
+        const homeBtn = document.getElementById('home-btn');
+        const progressBar = document.getElementById('scroll-progress');
+        function onScroll() {
+            const sy = window.scrollY;
+            const max = document.documentElement.scrollHeight - window.innerHeight;
+            header?.classList.toggle('scrolled', sy > 60);
+            homeBtn?.classList.toggle('show', sy > 350);
+            if (progressBar && max > 0) progressBar.style.width = `${(sy/max)*100}%`;
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
 
-    /* ==========================================
-       8. SKILL BARS ANIMATION
-       ========================================== */
-    const skillRows = document.querySelectorAll('.skill-row');
-    if ('IntersectionObserver' in window) {
-        const barObs = new IntersectionObserver(entries => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    const pct = e.target.dataset.percent || '75';
-                    const fill = e.target.querySelector('.bar-fill');
-                    if (fill) {
-                        fill.style.width = pct + '%';
-                        fill.setAttribute('data-pct', pct + '%');
+        // Scroll-spy
+        const sections = document.querySelectorAll('section[id]');
+        const navAnchors = document.querySelectorAll('.nav-links a');
+        function updateNav() {
+            let cur = '';
+            sections.forEach(s => { if (window.scrollY >= s.offsetTop - 220) cur = s.id; });
+            navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${cur}`));
+        }
+        window.addEventListener('scroll', updateNav, { passive: true });
+
+        // Scroll-reveal
+        const revealEls = document.querySelectorAll('.reveal');
+        if ('IntersectionObserver' in window) {
+            const obs = new IntersectionObserver(entries => {
+                entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+            }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+            revealEls.forEach(el => obs.observe(el));
+        } else { revealEls.forEach(el => el.classList.add('visible')); }
+
+        // Skill bars + Language bars
+        const allBars = document.querySelectorAll('.skill-row, .lang-card');
+        if ('IntersectionObserver' in window) {
+            const barObs = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        // skill bars
+                        const pct = e.target.dataset?.percent;
+                        if (pct) {
+                            const fill = e.target.querySelector('.bar-fill');
+                            if (fill) { fill.style.width = pct + '%'; fill.setAttribute('data-pct', pct + '%'); }
+                        }
+                        // language bars
+                        const lf = e.target.querySelector('.lang-fill');
+                        if (lf) { lf.style.width = lf.dataset.percent + '%'; }
+                        barObs.unobserve(e.target);
                     }
-                    barObs.unobserve(e.target);
+                });
+            }, { threshold: 0.3 });
+            allBars.forEach(r => barObs.observe(r));
+        }
+
+        // Lightbox
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lb-img');
+        document.querySelectorAll('[data-lightbox]').forEach(el => {
+            el.addEventListener('click', () => { lbImg.src = el.dataset.lightbox; lb.classList.add('open'); });
+        });
+        document.getElementById('lb-close')?.addEventListener('click', () => lb?.classList.remove('open'));
+        lb?.addEventListener('click', e => { if (e.target === lb) lb.classList.remove('open'); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') lb?.classList.remove('open'); });
+
+        // Mascot hover
+        const mascotText = document.getElementById('mascot-text');
+        const mascotBubble = document.getElementById('mascot-bubble');
+        sections.forEach(sec => {
+            sec.addEventListener('mouseenter', () => {
+                const key = lang === 'en' ? 'mascotEn' : 'mascotVi';
+                const msg = sec.dataset[key];
+                if (msg && mascotText) {
+                    mascotBubble.style.opacity = '0';
+                    setTimeout(() => { mascotText.textContent = msg; mascotBubble.style.opacity = '1'; }, 200);
                 }
             });
-        }, { threshold: 0.3 });
-        skillRows.forEach(r => barObs.observe(r));
-    }
-
-    /* ==========================================
-       9. LIGHTBOX
-       ========================================== */
-    const lb = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lb-img');
-    const lbCap = document.getElementById('lb-cap');
-    document.querySelectorAll('[data-lightbox]').forEach(el => {
-        el.addEventListener('click', () => {
-            if (!lb) return;
-            lbImg.src = el.dataset.lightbox;
-            lbImg.alt = el.dataset.cap || '';
-            if (lbCap) lbCap.textContent = el.dataset.cap || '';
-            lb.classList.add('open');
         });
-    });
-    document.getElementById('lb-close')?.addEventListener('click', () => lb?.classList.remove('open'));
-    lb?.addEventListener('click', e => { if (e.target === lb) lb.classList.remove('open'); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') lb?.classList.remove('open'); });
-
-    /* ==========================================
-       10. MASCOT — Hover Interaction per Section
-       ========================================== */
-    const mascotText = document.getElementById('mascot-text');
-    const mascotBubble = document.getElementById('mascot-bubble');
-    let mascotTimeout;
-
-    sections.forEach(sec => {
-        sec.addEventListener('mouseenter', () => {
-            const key = lang === 'en' ? 'mascotEn' : 'mascotVi';
-            const msg = sec.dataset[key];
-            if (msg && mascotText) {
-                clearTimeout(mascotTimeout);
+        const defaultMsgs = {
+            en: ["Follow me! \u2728","Curiosity leads to discoveries!","Keep scrolling!","What a journey!"],
+            vi: ["Theo m\u00ECnh nh\u00E9! \u2728","T\u00F2 m\u00F2 d\u1EABn l\u1ED1i!","Cu\u1ED9n ti\u1EBFp!","Tuy\u1EC7t v\u1EDDi!"]
+        };
+        let dIdx = 0;
+        setInterval(() => {
+            dIdx = (dIdx + 1) % 4;
+            if (mascotText && mascotBubble) {
                 mascotBubble.style.opacity = '0';
-                mascotTimeout = setTimeout(() => {
-                    mascotText.textContent = msg;
-                    mascotBubble.style.opacity = '1';
-                }, 200);
+                setTimeout(() => { mascotText.textContent = defaultMsgs[lang]?.[dIdx] || ''; mascotBubble.style.opacity = '1'; }, 300);
             }
+        }, 8000);
+
+        // Contact form
+        const form = document.getElementById('contact-form');
+        const formNote = document.getElementById('form-note');
+        form?.addEventListener('submit', e => {
+            e.preventDefault();
+            formNote.textContent = lang === 'en' ? 'Thank you! Message received \u2714' : 'C\u1EA3m \u01A1n! \u0110\u00E3 nh\u1EADn tin nh\u1EAFn \u2714';
+            formNote.style.display = 'block';
+            form.reset();
+            setTimeout(() => { formNote.style.display = 'none'; }, 4000);
         });
-    });
 
-    // Default cycle when no hover
-    const defaultEN = [
-        "Follow me down the rabbit hole! \u2728",
-        "Curiosity leads to great discoveries!",
-        "Keep scrolling — there's more magic ahead!",
-        "What a wonderful journey this is!"
-    ];
-    const defaultVI = [
-        "H\u00E3y c\u00F9ng m\u00ECnh b\u01B0\u1EDBc v\u00E0o X\u1EE9 s\u1EDF di\u1EC7u k\u1EF3! \u2728",
-        "S\u1EF1 t\u00F2 m\u00F2 d\u1EABn l\u1ED1i kh\u00E1m ph\u00E1!",
-        "Cu\u1ED9n ti\u1EBFp \u2014 c\u00F2n nhi\u1EC1u \u0111i\u1EC1u th\u00FA v\u1ECB!",
-        "H\u00E0nh tr\u00ECnh tuy\u1EC7t v\u1EDDi qu\u00E1!"
-    ];
-    let dIdx = 0;
-    setInterval(() => {
-        dIdx = (dIdx + 1) % defaultEN.length;
-        if (mascotText && mascotBubble) {
-            mascotBubble.style.opacity = '0';
-            setTimeout(() => {
-                mascotText.textContent = lang === 'en' ? defaultEN[dIdx] : defaultVI[dIdx];
-                mascotBubble.style.opacity = '1';
-            }, 300);
-        }
-    }, 8000);
+        // ==========================================
+        // FX CANVAS: Fireflies + Chess + Card Trail
+        // ==========================================
+        const canvas = document.getElementById('fx-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let W, H;
+        function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+        resize(); window.addEventListener('resize', resize);
 
-    /* ==========================================
-       11. FX CANVAS: Fireflies + Chess Falling + Card Cursor Trail
-       ========================================== */
-    const canvas = document.getElementById('fx-canvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let W, H;
-    function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-    resize();
-    window.addEventListener('resize', resize);
-
-    // Mouse tracking for card trail
-    let mouseX = -100, mouseY = -100;
-    document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
-
-    // -- Fireflies --
-    const flies = [];
-    const flyCount = Math.min(Math.floor(W / 40), 30);
-    const flyColors = ['#F6D383', '#D57ACE', '#1C8988', '#E7B280'];
-    for (let i = 0; i < flyCount; i++) {
-        flies.push({
-            x: Math.random() * W, y: Math.random() * H,
-            r: Math.random() * 2 + 0.8,
-            c: flyColors[Math.floor(Math.random() * flyColors.length)],
-            a: Math.random() * 0.5 + 0.15,
-            da: (Math.random() - 0.5) * 0.008,
-            vx: (Math.random() - 0.5) * 0.4,
-            vy: (Math.random() - 0.5) * 0.4
-        });
-    }
-
-    // -- Falling Chess Pieces --
-    const chessPieces = ['\u2654', '\u2655', '\u2656', '\u2657', '\u2658', '\u2659',
-                         '\u265A', '\u265B', '\u265C', '\u265D', '\u265E', '\u265F'];
-    const chessItems = [];
-    const chessCount = 8;
-    for (let i = 0; i < chessCount; i++) {
-        chessItems.push({
-            x: Math.random() * W,
-            y: Math.random() * -H,
-            char: chessPieces[Math.floor(Math.random() * chessPieces.length)],
-            size: Math.random() * 16 + 14,
-            speed: Math.random() * 0.6 + 0.3,
-            rot: Math.random() * 360,
-            rotSpeed: (Math.random() - 0.5) * 1.5,
-            opacity: Math.random() * 0.25 + 0.08,
-            drift: (Math.random() - 0.5) * 0.3
-        });
-    }
-
-    // -- Card Suit Cursor Trail --
-    const suits = ['\u2660', '\u2665', '\u2666', '\u2663']; // ♠♥♦♣
-    const suitColors = ['#2F2F38', '#c0392b', '#c0392b', '#2F2F38'];
-    const trail = [];
-
-    let lastTrailTime = 0;
-
-    function animate(now) {
-        ctx.clearRect(0, 0, W, H);
+        let mouseX = -100, mouseY = -100;
+        document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
 
         // Fireflies
-        flies.forEach(f => {
-            f.x += f.vx; f.y += f.vy; f.a += f.da;
-            if (f.a <= 0.1 || f.a >= 0.6) f.da *= -1;
-            if (f.x < -10) f.x = W + 10; if (f.x > W + 10) f.x = -10;
-            if (f.y < -10) f.y = H + 10; if (f.y > H + 10) f.y = -10;
-            ctx.save();
-            ctx.globalAlpha = f.a;
-            ctx.fillStyle = f.c;
-            ctx.shadowBlur = 12; ctx.shadowColor = f.c;
-            ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2); ctx.fill();
-            ctx.restore();
-        });
+        const flies = [];
+        const flyCount = Math.min(Math.floor(W / 40), 30);
+        const flyC = ['#F6D383','#D57ACE','#1C8988','#E7B280'];
+        for (let i = 0; i < flyCount; i++) flies.push({ x:Math.random()*W, y:Math.random()*H, r:Math.random()*2+.8, c:flyC[Math.floor(Math.random()*4)], a:Math.random()*.5+.15, da:(Math.random()-.5)*.008, vx:(Math.random()-.5)*.4, vy:(Math.random()-.5)*.4 });
 
-        // Falling Chess Pieces
-        chessItems.forEach(c => {
-            c.y += c.speed;
-            c.x += c.drift;
-            c.rot += c.rotSpeed;
-            if (c.y > H + 40) {
-                c.y = -40;
-                c.x = Math.random() * W;
-                c.char = chessPieces[Math.floor(Math.random() * chessPieces.length)];
-            }
-            ctx.save();
-            ctx.globalAlpha = c.opacity;
-            ctx.translate(c.x, c.y);
-            ctx.rotate(c.rot * Math.PI / 180);
-            ctx.font = `${c.size}px serif`;
-            ctx.fillStyle = '#461C89';
-            ctx.textAlign = 'center';
-            ctx.fillText(c.char, 0, 0);
-            ctx.restore();
-        });
+        // Chess — bigger + faster
+        const chessPieces = ['\u2654','\u2655','\u2656','\u2657','\u2658','\u2659','\u265A','\u265B','\u265C','\u265D','\u265E','\u265F'];
+        const chess = [];
+        for (let i = 0; i < 10; i++) chess.push({ x:Math.random()*W, y:Math.random()*-H, char:chessPieces[Math.floor(Math.random()*12)], size:Math.random()*22+20, speed:Math.random()*1.2+0.6, rot:Math.random()*360, rotS:(Math.random()-.5)*2, opacity:Math.random()*.2+.1, drift:(Math.random()-.5)*.4 });
 
-        // Card Suit Cursor Trail
-        if (now - lastTrailTime > 80 && mouseX > 0) {
-            lastTrailTime = now;
-            const si = Math.floor(Math.random() * 4);
-            trail.push({
-                x: mouseX, y: mouseY,
-                char: suits[si], color: suitColors[si],
-                life: 1, size: Math.random() * 10 + 12,
-                vx: (Math.random() - 0.5) * 3,
-                vy: (Math.random() - 0.5) * 3 - 1,
-                rot: Math.random() * 360
+        // Card trail — theme colors
+        const suits = ['\u2660','\u2665','\u2666','\u2663'];
+        const suitColors = ['#461C89','#D57ACE','#1C8988','#F6D383'];
+        const trail = [];
+        let lastT = 0;
+
+        function animate(now) {
+            ctx.clearRect(0, 0, W, H);
+            // Fireflies
+            flies.forEach(f => {
+                f.x+=f.vx;f.y+=f.vy;f.a+=f.da;
+                if(f.a<=.1||f.a>=.6)f.da*=-1;
+                if(f.x<-10)f.x=W+10;if(f.x>W+10)f.x=-10;
+                if(f.y<-10)f.y=H+10;if(f.y>H+10)f.y=-10;
+                ctx.save();ctx.globalAlpha=f.a;ctx.fillStyle=f.c;ctx.shadowBlur=12;ctx.shadowColor=f.c;
+                ctx.beginPath();ctx.arc(f.x,f.y,f.r,0,Math.PI*2);ctx.fill();ctx.restore();
             });
+            // Chess
+            chess.forEach(c => {
+                c.y+=c.speed;c.x+=c.drift;c.rot+=c.rotS;
+                if(c.y>H+50){c.y=-50;c.x=Math.random()*W;c.char=chessPieces[Math.floor(Math.random()*12)];}
+                ctx.save();ctx.globalAlpha=c.opacity;ctx.translate(c.x,c.y);ctx.rotate(c.rot*Math.PI/180);
+                ctx.font=`${c.size}px serif`;ctx.fillStyle='#461C89';ctx.textAlign='center';ctx.fillText(c.char,0,0);ctx.restore();
+            });
+            // Card cursor trail — continuous everywhere
+            if (now - lastT > 70 && mouseX > 0) {
+                lastT = now;
+                const si = Math.floor(Math.random()*4);
+                trail.push({ x:mouseX, y:mouseY, char:suits[si], color:suitColors[si], life:1, size:Math.random()*10+12, vx:(Math.random()-.5)*3, vy:(Math.random()-.5)*3-1, rot:Math.random()*360 });
+            }
+            for (let i=trail.length-1;i>=0;i--) {
+                const t=trail[i];t.life-=.025;t.x+=t.vx;t.y+=t.vy;t.vy+=.05;t.rot+=3;
+                if(t.life<=0){trail.splice(i,1);continue;}
+                ctx.save();ctx.globalAlpha=t.life*.7;ctx.translate(t.x,t.y);ctx.rotate(t.rot*Math.PI/180);
+                ctx.font=`${t.size}px serif`;ctx.fillStyle=t.color;ctx.textAlign='center';ctx.fillText(t.char,0,0);ctx.restore();
+            }
+            requestAnimationFrame(animate);
+        }
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(animate);
+
+        // ==========================================
+        // GAME TABS
+        // ==========================================
+        document.querySelectorAll('.game-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.game-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                document.querySelectorAll('.game-panel').forEach(p => p.style.display = 'none');
+                document.getElementById('panel-' + tab.dataset.tab).style.display = 'block';
+            });
+        });
+
+        // ==========================================
+        // MAZE GAME
+        // ==========================================
+        const mazeCanvas = document.getElementById('maze-canvas');
+        const mCtx2 = mazeCanvas?.getContext('2d');
+        let mazeGrid, mazeW = 15, mazeH = 15, cellSize, px, py, mazeRunning = false, mazePaused = false, mazeStartTime, mazeElapsed = 0;
+        let mazeRecords = JSON.parse(localStorage.getItem('linh_maze_records') || '[]');
+        const mazeTimer = document.getElementById('maze-timer');
+
+        function generateMaze(w, h) {
+            const grid = Array.from({length:h}, () => Array.from({length:w}, () => ({top:true,right:true,bottom:true,left:true,visited:false})));
+            const stack = [];
+            let cx=0, cy=0;
+            grid[cy][cx].visited = true;
+            stack.push([cx, cy]);
+            while (stack.length) {
+                const neighbors = [];
+                if (cy>0 && !grid[cy-1][cx].visited) neighbors.push([cx,cy-1,'top','bottom']);
+                if (cy<h-1 && !grid[cy+1][cx].visited) neighbors.push([cx,cy+1,'bottom','top']);
+                if (cx>0 && !grid[cy][cx-1].visited) neighbors.push([cx-1,cy,'left','right']);
+                if (cx<w-1 && !grid[cy][cx+1].visited) neighbors.push([cx+1,cy,'right','left']);
+                if (neighbors.length) {
+                    const [nx,ny,wall1,wall2] = neighbors[Math.floor(Math.random()*neighbors.length)];
+                    grid[cy][cx][wall1] = false;
+                    grid[ny][nx][wall2] = false;
+                    grid[ny][nx].visited = true;
+                    stack.push([cx, cy]);
+                    cx=nx; cy=ny;
+                } else {
+                    [cx, cy] = stack.pop();
+                }
+            }
+            return grid;
         }
 
-        for (let i = trail.length - 1; i >= 0; i--) {
-            const t = trail[i];
-            t.life -= 0.025;
-            t.x += t.vx;
-            t.y += t.vy;
-            t.vy += 0.05; // gravity
-            t.rot += 3;
-            if (t.life <= 0) { trail.splice(i, 1); continue; }
-            ctx.save();
-            ctx.globalAlpha = t.life * 0.7;
-            ctx.translate(t.x, t.y);
-            ctx.rotate(t.rot * Math.PI / 180);
-            ctx.font = `${t.size}px serif`;
-            ctx.fillStyle = t.color;
-            ctx.textAlign = 'center';
-            ctx.fillText(t.char, 0, 0);
-            ctx.restore();
+        function drawMaze() {
+            if (!mCtx2) return;
+            const cs = cellSize;
+            mCtx2.clearRect(0, 0, mazeCanvas.width, mazeCanvas.height);
+            mCtx2.fillStyle = '#FFFDF9';
+            mCtx2.fillRect(0, 0, mazeCanvas.width, mazeCanvas.height);
+            mCtx2.strokeStyle = '#461C89';
+            mCtx2.lineWidth = 2;
+            for (let y=0; y<mazeH; y++) for (let x=0; x<mazeW; x++) {
+                const c = mazeGrid[y][x];
+                const px2 = x*cs, py2 = y*cs;
+                if (c.top) { mCtx2.beginPath(); mCtx2.moveTo(px2,py2); mCtx2.lineTo(px2+cs,py2); mCtx2.stroke(); }
+                if (c.right) { mCtx2.beginPath(); mCtx2.moveTo(px2+cs,py2); mCtx2.lineTo(px2+cs,py2+cs); mCtx2.stroke(); }
+                if (c.bottom) { mCtx2.beginPath(); mCtx2.moveTo(px2,py2+cs); mCtx2.lineTo(px2+cs,py2+cs); mCtx2.stroke(); }
+                if (c.left) { mCtx2.beginPath(); mCtx2.moveTo(px2,py2); mCtx2.lineTo(px2,py2+cs); mCtx2.stroke(); }
+            }
+            // Goal
+            mCtx2.font = `${cs*.6}px serif`;
+            mCtx2.textAlign = 'center';
+            mCtx2.fillStyle = '#F6D383';
+            mCtx2.fillText('\u2733', (mazeW-1)*cs+cs/2, (mazeH-1)*cs+cs*.7);
+            // Player
+            mCtx2.fillStyle = '#D57ACE';
+            mCtx2.beginPath();
+            mCtx2.arc(px*cs+cs/2, py*cs+cs/2, cs*.3, 0, Math.PI*2);
+            mCtx2.fill();
         }
 
-        requestAnimationFrame(animate);
-    }
+        function startMaze() {
+            cellSize = Math.floor(mazeCanvas.width / mazeW);
+            mazeGrid = generateMaze(mazeW, mazeH);
+            px = 0; py = 0;
+            mazeRunning = true; mazePaused = false; mazeElapsed = 0;
+            mazeStartTime = performance.now();
+            drawMaze();
+            requestAnimationFrame(mazeLoop);
+        }
 
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        requestAnimationFrame(animate);
-    }
+        function mazeLoop(now) {
+            if (!mazeRunning) return;
+            if (!mazePaused) {
+                mazeElapsed = ((now - mazeStartTime) / 1000);
+                if (mazeTimer) mazeTimer.textContent = mazeElapsed.toFixed(1) + 's';
+            }
+            if (px === mazeW-1 && py === mazeH-1) {
+                mazeRunning = false;
+                const time = parseFloat(mazeElapsed.toFixed(1));
+                mazeRecords.push(time);
+                mazeRecords.sort((a,b)=>a-b);
+                mazeRecords = mazeRecords.slice(0,5);
+                localStorage.setItem('linh_maze_records', JSON.stringify(mazeRecords));
+                if (mazeTimer) mazeTimer.textContent = time + 's \u2714';
+                return;
+            }
+            requestAnimationFrame(mazeLoop);
+        }
+
+        document.getElementById('maze-start')?.addEventListener('click', startMaze);
+        document.getElementById('maze-pause')?.addEventListener('click', () => {
+            if (!mazeRunning) return;
+            mazePaused = !mazePaused;
+            if (!mazePaused) { mazeStartTime = performance.now() - mazeElapsed*1000; requestAnimationFrame(mazeLoop); }
+        });
+        document.getElementById('maze-records')?.addEventListener('click', () => {
+            const panel = document.getElementById('maze-records-panel');
+            const list = document.getElementById('maze-records-list');
+            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+            list.innerHTML = mazeRecords.length ? mazeRecords.map((t,i) => `<li>${t}s</li>`).join('') : '<li>No records yet</li>';
+        });
+        document.getElementById('maze-close-records')?.addEventListener('click', () => { document.getElementById('maze-records-panel').style.display = 'none'; });
+
+        document.addEventListener('keydown', e => {
+            if (!mazeRunning || mazePaused) return;
+            let nx=px, ny=py;
+            if ((e.key==='w'||e.key==='W'||e.key==='ArrowUp')&&!mazeGrid[py][px].top) ny--;
+            else if ((e.key==='s'||e.key==='S'||e.key==='ArrowDown')&&!mazeGrid[py][px].bottom) ny++;
+            else if ((e.key==='a'||e.key==='A'||e.key==='ArrowLeft')&&!mazeGrid[py][px].left) nx--;
+            else if ((e.key==='d'||e.key==='D'||e.key==='ArrowRight')&&!mazeGrid[py][px].right) nx++;
+            if (nx!==px||ny!==py) { px=nx; py=ny; drawMaze(); }
+        });
+
+        // ==========================================
+        // TAROT GAME
+        // ==========================================
+        const tarotCards = [
+            {sym:'\u2660',name:'The Wanderer',msg:'Adventure awaits! Step boldly into the unknown.'},
+            {sym:'\u2665',name:'The Heart',msg:'Love and connection will guide your path today.'},
+            {sym:'\u2666',name:'The Diamond',msg:'Prosperity is on the horizon. Stay focused.'},
+            {sym:'\u2663',name:'The Clover',msg:'Lucky fortune! Something wonderful is coming.'},
+            {sym:'\u265B',name:'The Queen',msg:'Lead with grace and confidence. You are powerful.'},
+            {sym:'\u265A',name:'The King',msg:'Wisdom and authority. Trust your decisions.'},
+            {sym:'\u265F',name:'The Pawn',msg:'Every great journey starts with a single step.'},
+            {sym:'\u2733',name:'The Star',msg:'Shine bright! Your talents will be recognized.'},
+            {sym:'\u2654',name:'The Crown',msg:'Success crowns those who persevere.'},
+            {sym:'\u2602',name:'The Umbrella',msg:'Protection and care surround you today.'}
+        ];
+        const tarotCard = document.getElementById('tarot-card');
+        const tarotSymbol = document.getElementById('tarot-symbol');
+        const tarotName = document.getElementById('tarot-name');
+        const tarotMsg = document.getElementById('tarot-msg');
+
+        function drawTarot() {
+            const c = tarotCards[Math.floor(Math.random()*tarotCards.length)];
+            tarotCard.classList.remove('flipped');
+            setTimeout(() => {
+                tarotSymbol.textContent = c.sym;
+                tarotName.textContent = c.name;
+                tarotMsg.textContent = c.msg;
+                tarotCard.classList.add('flipped');
+            }, 300);
+        }
+        document.getElementById('tarot-draw-btn')?.addEventListener('click', drawTarot);
+        tarotCard?.addEventListener('click', drawTarot);
+
+        // ==========================================
+        // MOOD TRACKER
+        // ==========================================
+        const moodMsgs = {
+            amazing: 'You\'re glowing! Wonderland is brighter with you! \u2728',
+            happy: 'Happiness suits you! Keep spreading the joy! \u2600',
+            neutral: 'Balance is beautiful. Take a moment to breathe. \u2601',
+            tired: 'Rest is magical too. Take care of yourself. \u2615',
+            sad: 'Even in Wonderland, rain makes flowers grow. \u{1F338}'
+        };
+        let moodLog = JSON.parse(localStorage.getItem('linh_mood_log') || '[]');
+
+        document.querySelectorAll('.mood-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const mood = btn.dataset.mood;
+                const msg = moodMsgs[mood];
+                document.getElementById('mood-message').textContent = msg;
+                document.getElementById('mood-result').style.display = 'block';
+                const entry = { mood, time: new Date().toLocaleString(), emoji: btn.textContent.split(' ')[0] };
+                moodLog.unshift(entry);
+                if (moodLog.length > 20) moodLog = moodLog.slice(0, 20);
+                localStorage.setItem('linh_mood_log', JSON.stringify(moodLog));
+                renderMoodLog();
+            });
+        });
+
+        function renderMoodLog() {
+            const list = document.getElementById('mood-log');
+            list.innerHTML = moodLog.map(m => `<li>${m.emoji} ${m.mood} — ${m.time}</li>`).join('');
+        }
+        renderMoodLog();
+
+    } // end initPortfolio
 
 });

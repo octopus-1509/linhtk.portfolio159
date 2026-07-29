@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trịnh Khánh Linh — A Journey Through Wonderland | FTU Portfolio</title>
-    <meta name="description" content="Interactive Wonderland-themed portfolio of Trịnh Khánh Linh, International Economics student at Foreign Trade University (FTU), Hanoi.">
+    <meta name="description" content="Interactive Wonderland-themed portfolio of Trịnh Khánh Linh, International Economics student at Foreign Trade University.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -12,40 +12,37 @@
 </head>
 <body>
 
+    <!-- ===== MIRROR ENTRANCE SCENE ===== -->
+    <div class="mirror-scene" id="mirror-scene">
+        <div class="mirror-bg"></div>
+        <canvas id="mirror-particles"></canvas>
+        <div class="mirror-content">
+            <h1 class="mirror-title">Welcome to Wonderland</h1>
+            <div class="mirror-frame-wrap" id="mirror-click">
+                <img src="images/mirror.png" alt="Magic Mirror" class="mirror-img">
+                <span class="mirror-hint" id="mirror-hint" data-i18n-mirror-en="Touch the mirror to enter..." data-i18n-mirror-vi="Chạm vào gương để bước vào...">Touch the mirror to enter...</span>
+            </div>
+            <p class="mirror-sub">Step through the looking glass</p>
+        </div>
+    </div>
+
+    <!-- ===== MAIN PORTFOLIO (hidden until mirror clicked) ===== -->
+    <div class="portfolio-wrap" id="portfolio-wrap" style="display:none;">
+
     <!-- Scroll Progress -->
     <div class="scroll-progress" id="scroll-progress"></div>
 
-    <!-- Canvas: Fireflies + Chess pieces + Card trail -->
+    <!-- FX Canvas -->
     <canvas id="fx-canvas"></canvas>
 
-    <!-- Background Music -->
+    <!-- Background Music (Web Audio API generated) -->
     <audio id="bg-music" loop preload="auto">
         <source src="assets/music/alicemusic.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- 3D Rabbit Mascot -->
+    <!-- Rabbit Mascot (image-based) -->
     <div class="mascot" id="mascot">
-        <div class="mascot-char">
-            <div class="mc-ear mc-ear-l"></div>
-            <div class="mc-ear mc-ear-r"></div>
-            <div class="mc-head">
-                <div class="mc-eye mc-eye-l"><span class="mc-pupil"></span></div>
-                <div class="mc-eye mc-eye-r"><span class="mc-pupil"></span></div>
-                <div class="mc-nose"></div>
-                <div class="mc-cheek mc-cheek-l"></div>
-                <div class="mc-cheek mc-cheek-r"></div>
-                <div class="mc-mouth"></div>
-            </div>
-            <div class="mc-body">
-                <div class="mc-belly"></div>
-            </div>
-            <div class="mc-arm mc-arm-l"></div>
-            <div class="mc-arm mc-arm-r"></div>
-            <div class="mc-foot mc-foot-l"></div>
-            <div class="mc-foot mc-foot-r"></div>
-            <div class="mc-hat"></div>
-            <div class="mc-watch">&#9202;</div>
-        </div>
+        <img src="images/rabbit.png" alt="White Rabbit Guide" class="mascot-img" id="mascot-img">
         <div class="mascot-bubble" id="mascot-bubble">
             <p id="mascot-text">Follow me down the rabbit hole!</p>
         </div>
@@ -69,10 +66,12 @@
                 <ul>
                     <li><a href="#hero" class="active" data-i18n="nav_home">Home</a></li>
                     <li><a href="#about" data-i18n="nav_about">About</a></li>
+                    <li><a href="#languages" data-i18n="nav_lang">Languages</a></li>
                     <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
                     <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
                     <li><a href="#experience" data-i18n="nav_experience">Experience</a></li>
                     <li><a href="#achievements" data-i18n="nav_achievements">Achievements</a></li>
+                    <li><a href="#minigame" data-i18n="nav_game">Minigame</a></li>
                     <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
                 </ul>
             </nav>
@@ -82,10 +81,10 @@
                     <span id="lang-label">VI</span>
                 </button>
                 <button class="nav-btn music-btn" id="music-btn" aria-label="Toggle music">
-                    <svg id="music-icon-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
                     <span data-i18n="music_label">Music</span>
                 </button>
-                <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+                <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
                     <span></span><span></span><span></span>
                 </button>
             </div>
@@ -93,42 +92,34 @@
     </header>
 
     <main>
-
         <!-- ===== HERO ===== -->
-        <section id="hero" class="hero" data-mascot-en="Welcome! Click Begin Journey to start the magic!" data-mascot-vi="Xin chào! Bấm Bắt đầu để khám phá thế giới phép thuật!">
+        <section id="hero" class="hero" data-mascot-en="Welcome! Your magical journey begins now!" data-mascot-vi="Xin chào! Hành trình diệu kỳ bắt đầu!">
             <div class="hero-vignette"></div>
             <div class="hero-inner container reveal">
                 <span class="hero-chip" data-i18n="hero_chip">&#10024; A Journey Through Wonderland</span>
                 <h1 class="hero-name">Trịnh Khánh Linh</h1>
-                <p class="hero-role">
-                    <span data-i18n="hero_role">International Economics</span>
-                    <span class="hero-sep">&mdash;</span>
-                    <strong data-i18n="hero_school">Foreign Trade University (FTU)</strong>
-                </p>
+                <p class="hero-role"><span data-i18n="hero_role">International Economics</span><span class="hero-sep">&mdash;</span><strong data-i18n="hero_school">Foreign Trade University (FTU)</strong></p>
                 <p class="hero-tagline" data-i18n="hero_tagline">Bridging global markets, economic research, and strategic vision &mdash; one curious step at a time.</p>
                 <div class="hero-cta">
                     <a href="#about" class="btn btn-primary" id="begin-btn" data-i18n="btn_begin">Begin Journey &#9823;</a>
                     <a href="CV.pdf" class="btn btn-ghost" target="_blank" data-i18n="btn_cv">Download CV</a>
                 </div>
             </div>
-            <div class="scroll-hint">
-                <span data-i18n="scroll_hint">Scroll to explore</span>
-                <div class="scroll-mouse"><div class="scroll-dot"></div></div>
-            </div>
+            <div class="scroll-hint"><span data-i18n="scroll_hint">Scroll to explore</span><div class="scroll-mouse"><div class="scroll-dot"></div></div></div>
         </section>
 
         <!-- ===== ABOUT ===== -->
-        <section id="about" class="section sec-about" data-mascot-en="Meet Khánh Linh — a curious mind with big dreams!" data-mascot-vi="Gặp gỡ Khánh Linh — tò mò và đầy hoài bão!">
+        <section id="about" class="section sec-about" data-mascot-en="Meet Khánh Linh — curious mind, big dreams!" data-mascot-vi="Gặp gỡ Khánh Linh — tò mò và đầy hoài bão!">
             <div class="container">
                 <header class="sec-head reveal">
                     <span class="sec-chip" data-i18n="about_chip">Chapter I &middot; Enchanted Forest</span>
                     <h2 data-i18n="about_h2">About Me</h2>
                 </header>
-
                 <div class="about-grid">
                     <div class="about-portrait reveal reveal-left">
-                        <div class="portrait-frame">
-                            <img src="images/my_photo.JPG" alt="Trịnh Khánh Linh" loading="lazy">
+                        <div class="portrait-mirror-wrap">
+                            <img src="images/frame-removebg-preview.jpg" alt="Mirror Frame" class="portrait-mirror-frame">
+                            <img src="images/my_photo.JPG" alt="Trịnh Khánh Linh" class="portrait-photo" loading="lazy">
                         </div>
                     </div>
                     <div class="about-body reveal reveal-right">
@@ -143,7 +134,7 @@
                     </div>
                 </div>
 
-                <!-- Education — 2 large cards only -->
+                <!-- Education -->
                 <div class="edu-block reveal">
                     <h3 class="block-title" data-i18n="edu_h3">&#9733; Education</h3>
                     <div class="edu-cards-big">
@@ -152,15 +143,23 @@
                             <div class="edu-big-body">
                                 <span class="edu-year">2023 — 2027</span>
                                 <h3>Foreign Trade University (FTU)</h3>
-                                <p data-i18n="edu_ftu">3rd-year Student &middot; Faculty of International Economics &middot; Major in International Economics.</p>
+                                <ul class="edu-details">
+                                    <li data-i18n="edu_ftu_1">3rd-year Student</li>
+                                    <li data-i18n="edu_ftu_2">Faculty of International Economics</li>
+                                    <li data-i18n="edu_ftu_3">Major in International Economics</li>
+                                </ul>
                             </div>
                         </article>
-                        <article class="edu-big reveal" data-mascot-en="A gifted school that shaped her literary talent!" data-mascot-vi="Nơi đã rèn luyện tài năng văn chương!">
+                        <article class="edu-big reveal" data-mascot-en="A gifted school that shaped her talent!" data-mascot-vi="Nơi rèn luyện tài năng văn chương!">
                             <div class="edu-big-img"><img src="images/education/ctq.JPG" alt="Chuyên Tuyên Quang" loading="lazy"></div>
                             <div class="edu-big-body">
                                 <span class="edu-year">2020 — 2023</span>
                                 <h3 data-i18n="edu_ctq_name">Tuyên Quang High School for the Gifted</h3>
-                                <p data-i18n="edu_ctq">Graduated with Distinction &middot; Literature Major (Class 34) &middot; National Excellent Student Team in Literature (2022-2023).</p>
+                                <ul class="edu-details">
+                                    <li data-i18n="edu_ctq_1">Graduated with Distinction</li>
+                                    <li data-i18n="edu_ctq_2">Literature Major (Class 34)</li>
+                                    <li data-i18n="edu_ctq_3">National Excellent Student Team in Literature (2022-2023)</li>
+                                </ul>
                             </div>
                         </article>
                     </div>
@@ -168,19 +167,44 @@
             </div>
         </section>
 
-        <!-- ===== SKILLS — Progress Bars ===== -->
-        <section id="skills" class="section sec-skills" data-mascot-en="Impressive skill set! She's multi-talented!" data-mascot-vi="Bộ kỹ năng ấn tượng! Thật đa tài!">
+        <!-- ===== LANGUAGES (Separate Section) ===== -->
+        <section id="languages" class="section sec-languages" data-mascot-en="Three languages — that's impressive!" data-mascot-vi="Ba ngoại ngữ — thật ấn tượng!">
             <div class="container">
                 <header class="sec-head reveal">
-                    <span class="sec-chip" data-i18n="skills_chip">Chapter II &middot; Hidden Magical Library</span>
+                    <span class="sec-chip" data-i18n="lang_chip">Chapter II &middot; Tower of Babel</span>
+                    <h2 data-i18n="lang_h2">Language Proficiency</h2>
+                </header>
+                <div class="lang-cards">
+                    <div class="lang-card reveal">
+                        <div class="lang-flag">&#127468;&#127463;</div>
+                        <h3>English</h3>
+                        <span class="lang-level">IELTS 6.0</span>
+                        <div class="lang-bar"><div class="lang-fill" data-percent="75"></div></div>
+                    </div>
+                    <div class="lang-card reveal">
+                        <div class="lang-flag">&#127464;&#127475;</div>
+                        <h3 data-i18n="lang_zh">Chinese</h3>
+                        <span class="lang-level">HSK 5</span>
+                        <div class="lang-bar"><div class="lang-fill" data-percent="82"></div></div>
+                    </div>
+                    <div class="lang-card reveal">
+                        <div class="lang-flag">&#127483;&#127475;</div>
+                        <h3 data-i18n="lang_vi">Vietnamese</h3>
+                        <span class="lang-level" data-i18n="lang_native">Native</span>
+                        <div class="lang-bar"><div class="lang-fill" data-percent="98"></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SKILLS (without languages) ===== -->
+        <section id="skills" class="section sec-skills" data-mascot-en="Multi-talented skills unlocked!" data-mascot-vi="Kỹ năng đa dạng đã được mở khóa!">
+            <div class="container">
+                <header class="sec-head reveal">
+                    <span class="sec-chip" data-i18n="skills_chip">Chapter III &middot; Hidden Magical Library</span>
                     <h2 data-i18n="skills_h2">Grimoire of Skills</h2>
                 </header>
-
                 <div class="skills-bars reveal">
-                    <div class="skill-row" data-percent="92">
-                        <div class="skill-info"><span class="sk-label" data-i18n="sk_lang">Language Proficiency</span><span class="sk-sub">IELTS 6.0 &middot; HSK 5 &middot; Vietnamese Native</span></div>
-                        <div class="bar-track"><div class="bar-fill"></div></div>
-                    </div>
                     <div class="skill-row" data-percent="85">
                         <div class="skill-info"><span class="sk-label" data-i18n="sk_econ">Economic &amp; Market Analysis</span><span class="sk-sub" data-i18n="sk_econ_sub">Forecasting &middot; Econometrics &middot; Data Viz</span></div>
                         <div class="bar-track"><div class="bar-fill"></div></div>
@@ -190,10 +214,10 @@
                         <div class="bar-track"><div class="bar-fill"></div></div>
                     </div>
                     <div class="skill-row" data-percent="88">
-                        <div class="skill-info"><span class="sk-label" data-i18n="sk_comm">Communication &amp; Soft Skills</span><span class="sk-sub" data-i18n="sk_comm_sub">CSKH &middot; Public Speaking &middot; Teamwork</span></div>
+                        <div class="skill-info"><span class="sk-label" data-i18n="sk_comm">Communication &amp; Soft Skills</span><span class="sk-sub" data-i18n="sk_comm_sub">Customer Care &middot; Public Speaking &middot; Teamwork</span></div>
                         <div class="bar-track"><div class="bar-fill"></div></div>
                     </div>
-                    <div class="skill-row" data-percent="78">
+                    <div class="skill-row" data-percent="60">
                         <div class="skill-info"><span class="sk-label" data-i18n="sk_tech">Software &amp; Office Tools</span><span class="sk-sub" data-i18n="sk_tech_sub">MS Office &middot; SPSS &middot; R/Python basics</span></div>
                         <div class="bar-track"><div class="bar-fill"></div></div>
                     </div>
@@ -206,37 +230,27 @@
         </section>
 
         <!-- ===== PROJECTS ===== -->
-        <section id="projects" class="section sec-projects" data-mascot-en="Check out ShiftLink — her amazing web project!" data-mascot-vi="Xem dự án ShiftLink — nền tảng quản lý ca siêu thông minh!">
+        <section id="projects" class="section sec-projects" data-mascot-en="Check out ShiftLink — her amazing project!" data-mascot-vi="Xem dự án ShiftLink siêu thông minh!">
             <div class="container">
                 <header class="sec-head reveal">
-                    <span class="sec-chip" data-i18n="proj_chip">Chapter III &middot; Hedge Maze</span>
+                    <span class="sec-chip" data-i18n="proj_chip">Chapter IV &middot; Hedge Maze</span>
                     <h2 data-i18n="proj_h2">Featured Projects</h2>
                 </header>
-
                 <div class="proj-grid">
                     <article class="proj-card proj-card--hero reveal">
-                        <div class="proj-cover">
-                            <img src="images/activies and awards/forum.png" alt="ShiftLink Platform" loading="lazy">
-                            <span class="proj-badge" data-i18n="proj_b1">Web Platform</span>
-                        </div>
+                        <div class="proj-cover"><img src="images/shiftlink.png" alt="ShiftLink" loading="lazy"><span class="proj-badge" data-i18n="proj_b1">Web Platform</span></div>
                         <div class="proj-body">
-                            <h3 data-i18n="proj_t1">ShiftLink — Smart Shift Management Platform</h3>
-                            <p data-i18n="proj_d1">An intelligent shift management platform that helps managers and employees collaborate on a unified system — from registering availability to shift scheduling, shift swapping, and attendance tracking.</p>
+                            <h3 data-i18n="proj_t1">ShiftLink &mdash; Smart Shift Management</h3>
+                            <p data-i18n="proj_d1">An intelligent shift management platform that helps managers and employees collaborate &mdash; from registering availability to shift scheduling, shift swapping, and attendance tracking.</p>
                             <div class="proj-tags"><span>HTML/CSS/JS</span><span>UX Design</span><span>Scheduling</span><span>Attendance</span></div>
-                            <a href="https://github.com/octopus-1509/linhtk.portfolio159" target="_blank" class="proj-link" data-i18n="proj_link">View on GitHub &rarr;</a>
                         </div>
                     </article>
-
                     <article class="proj-card reveal">
-                        <div class="proj-cover">
-                            <img src="images/activies and awards/forum1.JPG" alt="FTU Forum Advisory" loading="lazy">
-                            <span class="proj-badge" data-i18n="proj_b2">Advisory</span>
-                        </div>
+                        <div class="proj-cover"><img src="images/activies and awards/forum.png" alt="FTU Advisory" loading="lazy"><span class="proj-badge" data-i18n="proj_b2">Advisory</span></div>
                         <div class="proj-body">
                             <h3 data-i18n="proj_t2">FTU Admissions Advisory Platform</h3>
-                            <p data-i18n="proj_d2">Organized admission outreach, file processing, and interactive consultation webinars for thousands of prospective students and parents.</p>
-                            <div class="proj-tags"><span>Event Management</span><span>Consulting</span><span>PR</span></div>
-                            <a href="https://github.com/octopus-1509/linhtk.portfolio159" target="_blank" class="proj-link" data-i18n="proj_link">View on GitHub &rarr;</a>
+                            <p data-i18n="proj_d2">Organized admission outreach, file processing, and consultation webinars for thousands of prospective students.</p>
+                            <div class="proj-tags"><span>Event Mgmt</span><span>Consulting</span><span>PR</span></div>
                         </div>
                     </article>
                 </div>
@@ -247,23 +261,38 @@
         <section id="experience" class="section sec-experience" data-mascot-en="From admissions to cultural nights — she does it all!" data-mascot-vi="Từ tư vấn tuyển sinh đến đêm hội — Linh làm tất!">
             <div class="container">
                 <header class="sec-head reveal">
-                    <span class="sec-chip" data-i18n="exp_chip">Chapter IV &middot; Tea Party Garden</span>
+                    <span class="sec-chip" data-i18n="exp_chip">Chapter V &middot; Tea Party Garden</span>
                     <h2 data-i18n="exp_h2">Experience &amp; Activities</h2>
                 </header>
-
                 <div class="timeline">
                     <article class="tl-item reveal">
-                        <div class="tl-marker"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--mystic)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+                        <div class="tl-marker"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--mystic)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
                         <div class="tl-card">
-                            <div class="tl-card-img"><img src="images/activies and awards/forum2.JPG" alt="FTU Forum" loading="lazy"></div>
-                            <span class="tl-date">2023 — Present</span>
-                            <h3 data-i18n="exp1_t">Active Member — FTU Forum Student Club</h3>
-                            <h4 data-i18n="exp1_org">Foreign Trade University Student Forum</h4>
-                            <ul>
-                                <li data-i18n="exp1_b1">Admissions consultation for annual events: Admission Fair, FTU Open Tour, Bách Khoa Open Day 1 &amp; 2, Admission Webinar.</li>
-                                <li data-i18n="exp1_b2">Profile processing for Course 63 &amp; 64: gathering, classifying, and answering inquiries from parents and students both online and offline.</li>
-                                <li data-i18n="exp1_b3">Organizing Committee member for IE SHINE 2024: Unity &amp; Shine — the annual cultural night of the Faculty of International Economics.</li>
-                            </ul>
+                            <div class="tl-card-img"><img src="images/activies and awards/forum1.JPG" alt="FTU Forum" loading="lazy"></div>
+                            <div class="tl-card-body">
+                                <span class="tl-date">2023 — Present</span>
+                                <h3 data-i18n="exp1_t">Active Member — FTU Forum Student Club</h3>
+                                <h4 data-i18n="exp1_org">Foreign Trade University Student Forum</h4>
+                                <ul>
+                                    <li data-i18n="exp1_b1">Admissions consultation: Admission Fair, FTU Open Tour, Bách Khoa Open Day 1 &amp; 2, Admission Webinar.</li>
+                                    <li data-i18n="exp1_b2">Profile processing for Course 63 &amp; 64: gathering, classifying, and answering inquiries.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="tl-item reveal">
+                        <div class="tl-marker"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                        <div class="tl-card">
+                            <div class="tl-card-img"><img src="images/activies and awards/ie.JPG" alt="IE SHINE 2024" loading="lazy"></div>
+                            <div class="tl-card-body">
+                                <span class="tl-date">2024</span>
+                                <h3 data-i18n="exp2_t">Organizing Committee — IE SHINE 2024: Unity &amp; Shine</h3>
+                                <h4 data-i18n="exp2_org">Faculty of International Economics, FTU</h4>
+                                <ul>
+                                    <li data-i18n="exp2_b1">Organized the annual cultural night gala of the Faculty of International Economics.</li>
+                                    <li data-i18n="exp2_b2">Coordinated logistics, media outreach, and student engagement activities.</li>
+                                </ul>
+                            </div>
                         </div>
                     </article>
                 </div>
@@ -271,79 +300,175 @@
         </section>
 
         <!-- ===== ACHIEVEMENTS ===== -->
-        <section id="achievements" class="section sec-achievements" data-mascot-en="Incredible honors! She truly shines!" data-mascot-vi="Thành tích đáng nể! Cô ấy thật sự tỏa sáng!">
+        <section id="achievements" class="section sec-achievements" data-mascot-en="Incredible honors! She truly shines!" data-mascot-vi="Thành tích đáng nể! Thật sự tỏa sáng!">
             <div class="container">
                 <header class="sec-head reveal">
-                    <span class="sec-chip" data-i18n="ach_chip">Chapter V &middot; Royal Garden</span>
+                    <span class="sec-chip" data-i18n="ach_chip">Chapter VI &middot; Royal Garden</span>
                     <h2 data-i18n="ach_h2">Achievements</h2>
                 </header>
 
-                <div class="awards-grid">
-                    <div class="award-card reveal">
-                        <div class="aw-img"><img src="images/activies and awards/dstt12.PNG" alt="1st Prize Literature" loading="lazy"></div>
-                        <div class="aw-body">
-                            <span class="aw-medal">&#9733;</span>
+                <!-- Awards — no images, prominent layout -->
+                <div class="awards-showcase">
+                    <div class="award-item award-gold reveal">
+                        <div class="aw-rank">1<sup>st</sup></div>
+                        <div class="aw-info">
                             <h3 data-i18n="aw1_t">1st Prize — Provincial Literature</h3>
-                            <p data-i18n="aw1_d">First Prize, Grade 11 Provincial Excellent Student Competition in Literature, Tuyên Quang Province.</p>
+                            <p data-i18n="aw1_d">Grade 11 Provincial Excellent Student Competition in Literature, Tuyên Quang Province.</p>
                         </div>
                     </div>
-                    <div class="award-card reveal">
-                        <div class="aw-img"><img src="images/activies and awards/dstt3.JPG" alt="Regional Contest" loading="lazy"></div>
-                        <div class="aw-body">
-                            <span class="aw-medal">&#9734;</span>
-                            <h3 data-i18n="aw2_t">Consolation Prize — Regional Contest</h3>
-                            <p data-i18n="aw2_d">Literature prize at the 2022 Northern Coastal &amp; Delta Regional Gifted Schools Competition.</p>
-                        </div>
-                    </div>
-                    <div class="award-card reveal">
-                        <div class="aw-img"><img src="images/activies and awards/dstt4.JPG" alt="3rd Prize Literature" loading="lazy"></div>
-                        <div class="aw-body">
-                            <span class="aw-medal">&#9830;</span>
+                    <div class="award-item award-bronze reveal">
+                        <div class="aw-rank">3<sup>rd</sup></div>
+                        <div class="aw-info">
                             <h3 data-i18n="aw3_t">3rd Prize — Provincial Literature</h3>
-                            <p data-i18n="aw3_d">Third Prize, Grade 12 Provincial Excellent Student Competition in Literature.</p>
+                            <p data-i18n="aw3_d">Grade 12 Provincial Excellent Student Competition in Literature.</p>
+                        </div>
+                    </div>
+                    <div class="award-item award-special reveal">
+                        <div class="aw-rank">&#9734;</div>
+                        <div class="aw-info">
+                            <h3 data-i18n="aw2_t">Consolation Prize — Regional Contest</h3>
+                            <p data-i18n="aw2_d">2022 Northern Coastal &amp; Delta Regional Gifted Schools Competition in Literature.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Ambassador Roles -->
+                <!-- Ambassador Roles with images -->
                 <div class="roles-block reveal">
                     <h3 class="block-title" data-i18n="roles_h3">&#9824; Media Ambassador Roles</h3>
-                    <div class="role-tags">
-                        <span class="role-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="var(--alana)" stroke="var(--mystic)" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Entrepreneur Z Camp 12</span>
-                        <span class="role-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="var(--alana)" stroke="var(--mystic)" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Entrepreneur Z Camp 13</span>
-                        <span class="role-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--mystic)" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg> The Banker 2026</span>
-                        <span class="role-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Innostart 2026</span>
+                    <div class="roles-grid">
+                        <div class="role-card reveal">
+                            <div class="role-img"><img src="images/activies and awards/Camp 12.PNG" alt="Entrepreneur Z Camp 12" loading="lazy"></div>
+                            <span class="role-name">Entrepreneur Z Camp 12</span>
+                        </div>
+                        <div class="role-card reveal">
+                            <div class="role-img"><img src="images/activies and awards/Camp 13.JPG" alt="Entrepreneur Z Camp 13" loading="lazy"></div>
+                            <span class="role-name">Entrepreneur Z Camp 13</span>
+                        </div>
+                        <div class="role-card reveal">
+                            <div class="role-img"><img src="images/activies and awards/The Banker.JPG" alt="The Banker 2026" loading="lazy"></div>
+                            <span class="role-name">The Banker 2026</span>
+                        </div>
+                        <div class="role-card reveal">
+                            <div class="role-img"><img src="images/activies and awards/Innostart.JPG" alt="Innostart 2026" loading="lazy"></div>
+                            <span class="role-name">Innostart 2026</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== MINIGAME — Maze + Tarot ===== -->
+        <section id="minigame" class="section sec-minigame" data-mascot-en="Time for fun! Try the maze or draw a tarot card!" data-mascot-vi="Giải trí nào! Thử mê cung hoặc bốc bài Tarot!">
+            <div class="container">
+                <header class="sec-head reveal">
+                    <span class="sec-chip" data-i18n="game_chip">Chapter VII &middot; The Mad Tea Party</span>
+                    <h2 data-i18n="game_h2">Wonderland Games</h2>
+                    <p class="sec-sub" data-i18n="game_sub">Take a break and play!</p>
+                </header>
+
+                <div class="game-tabs reveal">
+                    <button class="game-tab active" data-tab="maze" data-i18n="tab_maze">&#9819; Maze Escape</button>
+                    <button class="game-tab" data-tab="tarot" data-i18n="tab_tarot">&#9827; Tarot Draw</button>
+                    <button class="game-tab" data-tab="mood" data-i18n="tab_mood">&#9829; Mood Tracker</button>
+                </div>
+
+                <!-- MAZE GAME -->
+                <div class="game-panel" id="panel-maze">
+                    <div class="maze-controls">
+                        <div class="maze-info">
+                            <span data-i18n="maze_time">Time:</span> <strong id="maze-timer">0.0s</strong>
+                            <button class="maze-sm-btn" id="maze-pause" data-i18n="maze_pause">Pause</button>
+                            <button class="maze-sm-btn" id="maze-records" data-i18n="maze_records">Records</button>
+                        </div>
+                        <button class="btn btn-primary maze-start-btn" id="maze-start" data-i18n="maze_start">New Maze</button>
+                    </div>
+                    <canvas id="maze-canvas" width="400" height="400"></canvas>
+                    <p class="maze-hint" data-i18n="maze_hint">Use W A S D or Arrow Keys to move. Reach the &#9733; to win!</p>
+                    <div class="maze-records-panel" id="maze-records-panel" style="display:none;">
+                        <h4 data-i18n="maze_best">Best Times</h4>
+                        <ol id="maze-records-list"></ol>
+                        <button class="maze-sm-btn" id="maze-close-records" data-i18n="maze_close">Close</button>
+                    </div>
+                </div>
+
+                <!-- TAROT DRAW -->
+                <div class="game-panel" id="panel-tarot" style="display:none;">
+                    <div class="tarot-area">
+                        <div class="tarot-card" id="tarot-card">
+                            <div class="tarot-front" id="tarot-front">
+                                <span class="tarot-symbol" id="tarot-symbol">?</span>
+                                <p class="tarot-name" id="tarot-name" data-i18n="tarot_draw">Draw a card</p>
+                            </div>
+                            <div class="tarot-back">
+                                <span>&#9824;&#9829;&#9830;&#9827;</span>
+                            </div>
+                        </div>
+                        <p class="tarot-msg" id="tarot-msg" data-i18n="tarot_prompt">Click the card to reveal your Wonderland message!</p>
+                        <button class="btn btn-primary" id="tarot-draw-btn" data-i18n="tarot_btn">Draw Card</button>
+                    </div>
+                </div>
+
+                <!-- MOOD TRACKER -->
+                <div class="game-panel" id="panel-mood" style="display:none;">
+                    <div class="mood-area">
+                        <h3 data-i18n="mood_title">How are you feeling today?</h3>
+                        <div class="mood-options">
+                            <button class="mood-btn" data-mood="amazing">&#128525; Amazing</button>
+                            <button class="mood-btn" data-mood="happy">&#128522; Happy</button>
+                            <button class="mood-btn" data-mood="neutral">&#128528; Neutral</button>
+                            <button class="mood-btn" data-mood="tired">&#128564; Tired</button>
+                            <button class="mood-btn" data-mood="sad">&#128546; Sad</button>
+                        </div>
+                        <div class="mood-result" id="mood-result" style="display:none;">
+                            <p id="mood-message"></p>
+                            <div class="mood-history">
+                                <h4 data-i18n="mood_history">Your Mood Journal</h4>
+                                <ul id="mood-log"></ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- ===== CONTACT ===== -->
-        <section id="contact" class="section sec-contact" data-mascot-en="Don't be shy — reach out! The rabbit waves goodbye!" data-mascot-vi="Đừng ngại — hãy liên hệ nhé! Thỏ vẫy tay chào!">
+        <section id="contact" class="section sec-contact" data-mascot-en="Don't be shy — reach out! The rabbit waves goodbye!" data-mascot-vi="Đừng ngại — hãy liên hệ nhé!">
             <div class="container">
                 <header class="sec-head reveal">
-                    <span class="sec-chip" data-i18n="ct_chip">Chapter VI &middot; Secret Garden at Sunset</span>
+                    <span class="sec-chip" data-i18n="ct_chip">Chapter VIII &middot; Secret Garden at Sunset</span>
                     <h2 data-i18n="ct_h2">Let's Connect</h2>
-                    <p class="sec-sub" data-i18n="ct_sub">Step through the looking glass for collaborations, research, or opportunities.</p>
+                    <p class="sec-sub" data-i18n="ct_sub">Step through the looking glass for collaborations or opportunities.</p>
                 </header>
 
-                <div class="contact-card reveal">
-                    <div class="ct-item">
-                        <span class="ct-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
-                        <div><strong data-i18n="ct_email">Email</strong><a href="mailto:linhtk05.ftuforum@gmail.com">linhtk05.ftuforum@gmail.com</a></div>
+                <div class="contact-grid">
+                    <div class="contact-info reveal">
+                        <div class="ct-item">
+                            <span class="ct-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+                            <div><strong data-i18n="ct_email">Email</strong><a href="mailto:linhtk05.ftuforum@gmail.com">linhtk05.ftuforum@gmail.com</a></div>
+                        </div>
+                        <div class="ct-item">
+                            <span class="ct-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+                            <div><strong data-i18n="ct_phone">Phone</strong><p>0963 075 656</p></div>
+                        </div>
+                        <div class="ct-item">
+                            <span class="ct-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                            <div><strong data-i18n="ct_addr">Address</strong><p>Ngõ 218, Mỹ Đình 2, Từ Liêm, Hà Nội</p></div>
+                        </div>
+                        <div class="ct-item">
+                            <span class="ct-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></span>
+                            <div><strong>GitHub</strong><a href="https://github.com/octopus-1509/linhtk.portfolio159" target="_blank">octopus-1509</a></div>
+                        </div>
                     </div>
-                    <div class="ct-item">
-                        <span class="ct-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
-                        <div><strong data-i18n="ct_phone">Phone</strong><p>0963 075 656</p></div>
-                    </div>
-                    <div class="ct-item">
-                        <span class="ct-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-                        <div><strong data-i18n="ct_addr">Address</strong><p>Ngõ 218, Mỹ Đình 2, Từ Liêm, Hà Nội</p></div>
-                    </div>
-                    <div class="ct-item">
-                        <span class="ct-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></span>
-                        <div><strong>GitHub</strong><a href="https://github.com/octopus-1509/linhtk.portfolio159" target="_blank">octopus-1509/linhtk.portfolio159</a></div>
-                    </div>
+
+                    <!-- Contact Form -->
+                    <form class="contact-form reveal" id="contact-form">
+                        <h3 data-i18n="form_h3">Send a Message</h3>
+                        <input type="text" name="name" placeholder="Your name" data-i18n-ph="form_name" required>
+                        <input type="email" name="email" placeholder="Your email" data-i18n-ph="form_email" required>
+                        <textarea name="message" rows="4" placeholder="Your message..." data-i18n-ph="form_msg" required></textarea>
+                        <button type="submit" class="btn btn-primary" data-i18n="form_send">Send Message &#9993;</button>
+                        <p class="form-note" id="form-note" style="display:none;"></p>
+                    </form>
                 </div>
 
                 <div class="farewell reveal">
@@ -354,13 +479,14 @@
                 <p data-i18n="footer">Designed with curiosity &amp; magic by Trịnh Khánh Linh &copy; 2026 &middot; Foreign Trade University, Hanoi.</p>
             </footer>
         </section>
-
     </main>
 
     <!-- Home Button -->
     <a href="#hero" class="home-btn" id="home-btn" aria-label="Back to top">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     </a>
+
+    </div><!-- /portfolio-wrap -->
 
     <script src="js/script.js"></script>
 </body>
