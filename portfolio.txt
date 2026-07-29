@@ -1,0 +1,699 @@
+# ROLE
+
+You are a senior UI/UX designer, creative director, visual storyteller, and front-end engineer.
+
+Create a premium **single-page interactive portfolio website** for a student from **Foreign Trade University (FTU), Hanoi**, majoring in **International Economics**.
+
+The portfolio should not feel like a traditional website. Instead, visitors should experience a magical journey inspired by the atmosphere, storytelling, and elegance of **Alice in Wonderland**, while remaining completely original and avoiding any copyrighted characters, artwork, or assets.
+
+The final website should feel immersive, elegant, modern, cinematic, responsive, and professional.
+
+---
+
+# AVAILABLE FILES
+
+Use the following files as the content source:
+
+* CV.pdf
+* my_photo.jpg
+* education/ (contains 2 images)
+* activities_and_awards/ (contains 7 JPG images and 2 PNG images)
+
+Automatically extract relevant information from **CV.pdf** and organize it into the appropriate sections.
+
+---
+
+# WEBSITE CONCEPT
+
+Theme:
+
+**"A Journey Through Wonderland"**
+
+The portfolio is designed as one continuous magical journey.
+
+The website should be **ONE SINGLE PAGE** with seamless scrolling.
+
+Visitors progress through different magical environments as they scroll, discovering the owner's story naturally.
+
+The experience should feel like exploring a beautifully illustrated fantasy world instead of reading a résumé.
+
+---
+
+# SCROLL JOURNEY
+
+The page should transition smoothly through these environments:
+
+1. Magical Entrance
+2. Rabbit Hole
+3. Enchanted Forest
+4. Giant Mushroom Garden
+5. Hedge Maze
+6. Tea Party Garden
+7. Royal Garden
+8. Secret Garden
+
+Every transition should be smooth with no abrupt section changes.
+
+---
+
+# WEBSITE SECTIONS
+
+## 1. Hero
+
+Large cinematic introduction.
+
+Display:
+
+* Full name
+* Foreign Trade University
+* International Economics
+* Short personal tagline
+* "Begin Journey" button
+
+The white rabbit welcomes visitors and encourages them to scroll.
+
+---
+
+## 2. About Me
+
+Include:
+
+* Personal introduction
+* Portrait
+* Education
+* Career objective
+* Personal interests
+
+Environment:
+Enchanted Forest.
+
+---
+
+## 3. Skills
+
+Display:
+
+* Technical skills
+* Languages
+* Software
+* Data Analysis
+* Research
+* Presentation
+* Communication
+
+Use floating interactive cards.
+
+Environment:
+Hidden Magical Library.
+
+---
+
+## 4. Projects
+
+Show featured projects beautifully.
+
+Each project should contain:
+
+* Cover image
+* Description
+* Technologies
+* GitHub link
+* Live Demo (if available)
+
+Projects should appear behind elegant magical doors or antique frames.
+
+Environment:
+Hedge Maze.
+
+---
+
+## 5. Experience
+
+Display work experience as an elegant timeline.
+
+Include internships, leadership, volunteering, extracurricular activities, and organizations.
+
+Represent each milestone with antique pocket watches or glowing lanterns.
+
+Environment:
+Tea Party Garden.
+
+---
+
+## 6. Achievements
+
+Display:
+
+* Awards
+* Certificates
+* Competitions
+* Activities
+* Photo gallery
+
+Use uploaded images throughout this section.
+
+Environment:
+Royal Garden.
+
+---
+
+## 7. Contact
+
+Include:
+
+* Email
+* Phone
+* GitHub
+* LinkedIn (if available)
+
+Finish with a warm thank-you message.
+
+The rabbit waves goodbye before disappearing into the forest.
+
+Environment:
+Secret Garden at sunset.
+
+---
+
+# WHITE RABBIT MASCOT
+
+Create an original cute white rabbit inspired only by the atmosphere of Wonderland.
+
+Do NOT imitate Disney's character.
+
+The rabbit should:
+
+* Peek from behind bushes
+* Hop between sections
+* Occasionally look at the visitor
+* React to mouse movement
+* Point toward important buttons
+* Guide scrolling
+* Blink occasionally
+* Wave at the end
+* Hide when inactive
+* Celebrate reaching the final section
+
+Animations must remain subtle and elegant.
+
+---
+
+# VISUAL STYLE
+
+Combine:
+
+* Magical Realism
+* Storybook Aesthetic
+* Whimsical Fantasy
+* Elegant Victorian
+* Cozy Fantasy
+* Dreamy Illustration
+* Botanical Fantasy
+* Modern Minimalism
+
+Avoid:
+
+* Cartoon appearance
+* Childish design
+* Disney references
+* Overly saturated colors
+* Visual clutter
+
+The design should feel like a luxury illustrated storybook.
+
+---
+
+# COLOR PALETTE
+
+Use the following Wonderland-inspired palette.
+
+Primary Colors
+
+• Mystic — #461C89
+
+Used for:
+
+* Hero gradients
+* Important headings
+* Magical atmosphere
+* Decorative accents
+
+---
+
+• Cute Fuchsia — #D57ACE
+
+Used sparingly for:
+
+* Flowers
+* Magical glow
+* Hover effects
+* Decorative highlights
+
+---
+
+• Alana — #F6D383
+
+Used for:
+
+* Warm sunlight
+* Golden lighting
+* Borders
+* Highlights
+* Decorative ornaments
+
+---
+
+• Washed Out Orange — #E7B280
+
+Used for:
+
+* Mushrooms
+* Antique objects
+* Wooden bridges
+* Secondary backgrounds
+* Warm transitions
+
+---
+
+• Simple Teal — #1C8988
+
+Used for:
+
+* Nature
+* Leaves
+* Forest elements
+* Buttons
+* Interactive elements
+* Links
+
+---
+
+Supporting Neutral Colors
+
+* Ivory (#FAF8F2)
+* Warm White (#FFFDF9)
+* Soft Beige (#F3EEE5)
+* Charcoal (#2F2F38)
+* Dark Forest (#223228)
+
+---
+
+# COLOR USAGE
+
+Approximate distribution:
+
+60% Neutral colors
+
+25% Mystic + Simple Teal
+
+10% Alana lighting
+
+5% Cute Fuchsia highlights
+
+The interface should remain elegant and calm.
+
+Avoid large bright purple or pink backgrounds.
+
+Use colors to guide attention rather than decorate every element.
+
+---
+
+# LIGHTING
+
+Use cinematic soft lighting throughout the website.
+
+Include:
+
+* Warm sunlight
+* Bloom
+* Volumetric light rays
+* Magical glow
+* Floating dust particles
+* Fireflies
+* Soft fog
+* Gentle ambient lighting
+
+---
+
+# ENVIRONMENT DETAILS
+
+Include decorative elements such as:
+
+* Giant mushrooms
+* Ivy
+* Vines
+* Wild flowers
+* Butterflies
+* Pocket watches
+* Antique keys
+* Floating books
+* Floating leaves
+* Magic particles
+* Wooden bridges
+* Stone paths
+* Lanterns
+* Moss
+* Secret doors
+
+Each section should have its own unique atmosphere.
+
+---
+
+# ANIMATIONS
+
+Use only smooth, premium-quality animations.
+
+Include:
+
+* Parallax scrolling
+* Floating particles
+* Butterflies
+* Floating leaves
+* Fade in
+* Blur reveal
+* Scale animation
+* Mouse parallax
+* Hover interactions
+* Scroll-triggered animations
+* Soft camera movement
+* Animated SVG elements
+
+Animation duration:
+
+300–800 ms
+
+Use easing functions.
+
+Respect **prefers-reduced-motion**.
+
+Maintain smooth 60 FPS performance whenever possible.
+
+---
+
+# USER INTERFACE
+
+Style:
+
+* Rounded corners
+* Soft shadows
+* Glassmorphism where appropriate
+* Large spacing
+* Elegant typography
+* Clean layout
+* Premium cards
+* Sticky navigation
+* Scroll progress indicator
+* Back-to-top button
+
+The interface should remain clean despite the fantasy environment.
+
+---
+
+# TYPOGRAPHY
+
+Headings:
+
+Elegant serif font.
+
+Body:
+
+Modern readable sans-serif.
+
+Maintain excellent readability on all devices.
+
+---
+
+# RESPONSIVE DESIGN
+
+Fully responsive.
+
+Support:
+
+* Desktop
+* Laptop
+* Tablet
+* Mobile
+
+The layout should adapt smoothly without horizontal scrolling.
+
+Navigation becomes a floating mobile menu on small screens.
+
+---
+
+# ACCESSIBILITY
+
+Follow accessibility best practices.
+
+Include:
+
+* Semantic HTML
+* Keyboard navigation
+* ARIA labels
+* Alt text
+* High color contrast
+* Focus indicators
+* Reduced motion support
+
+---
+
+# PERFORMANCE
+
+Optimize for speed.
+
+Include:
+
+* Lazy loading
+* Optimized images
+* Minimal JavaScript
+* CSS animations when possible
+* Efficient rendering
+* Reusable components
+
+Avoid unnecessary libraries.
+
+---
+
+# TECHNOLOGY
+
+Use only:
+
+* HTML5
+* CSS3
+* Vanilla JavaScript (ES6+)
+
+Do not use frameworks unless absolutely necessary.
+
+---
+
+# FILE STRUCTURE
+
+index.html
+
+css/
+style.css
+
+js/
+script.js
+
+images/
+
+assets/
+
+CV.pdf
+
+---
+
+# NAVIGATION
+
+Use a sticky navigation bar.
+
+Include smooth scrolling between sections.
+
+Highlight the active section while scrolling.
+
+---
+
+# MICRO INTERACTIONS
+
+Include delightful details such as:
+
+* Butterflies avoid the cursor.
+* Flowers bloom on hover.
+* Leaves drift across the screen.
+* Lanterns gently glow.
+* Pocket watches slowly tick.
+* Keys rotate subtly.
+* The rabbit reacts to scrolling.
+* Hidden easter eggs reward exploration.
+
+Every animation should have a clear purpose.
+
+---
+
+# DESIGN PRINCIPLES
+
+* Original artwork only.
+* Do not copy Disney's Alice in Wonderland.
+* Prioritize usability over visual effects.
+* Keep the interface clean.
+* Every section should tell part of the owner's story.
+* Balance fantasy aesthetics with professionalism.
+* The website should impress recruiters within the first 10 seconds.
+
+---
+
+# GITHUB
+
+Repository:
+
+https://github.com/octopus-1509/linhtk.portfolio159.git
+
+GitHub Pages:
+
+https://octopus-1509.github.io/linhtk.portfolio159/
+
+If files already exist, improve them while preserving useful content.
+
+---
+
+# OUTPUT REQUIREMENTS
+
+Generate the complete project with the following structure:
+
+* index.html
+* css/style.css
+* js/script.js
+* images/
+* assets/
+
+Extract information from the provided files automatically.
+
+The final result should resemble an award-winning interactive portfolio with cinematic storytelling, premium UI/UX, smooth animations, excellent performance, full responsiveness, and a memorable Wonderland-inspired experience.
+---
+
+# BACKGROUND MUSIC
+
+Integrate the local audio file:
+
+```
+assets/music/alicemusic.mp3
+```
+
+Requirements:
+
+* Automatically preload the music.
+* Due to modern browser restrictions, do **not** autoplay with sound before user interaction.
+* Display an elegant music control button in the top-right corner.
+* When the visitor clicks **Begin Journey**, start playing the background music automatically.
+* Music should loop continuously.
+* Volume should default to **30%**.
+* Remember the playback state while navigating within the page.
+* Add a smooth fade-in (about 2 seconds) when playback starts.
+* If the user pauses the music, remember their preference during the session.
+
+Music button states:
+
+* ▶ Play
+* ⏸ Pause
+
+Add a subtle hover animation and a glowing effect consistent with the Wonderland theme.
+
+---
+
+# LANGUAGE SWITCHER
+
+Support bilingual content.
+
+Languages:
+
+* English (EN)
+* Vietnamese (VI)
+
+Add a language switch button in the navigation bar.
+
+Requirements:
+
+* Toggle instantly without reloading the page.
+* Store the selected language in localStorage.
+* English is the default language.
+* Translate all visible text, including:
+
+  * Navigation
+  * Hero
+  * About
+  * Skills
+  * Projects
+  * Experience
+  * Achievements
+  * Contact
+  * Footer
+  * Buttons
+  * Tooltips
+  * Messages
+
+The switch should animate smoothly.
+
+Example:
+
+```
+🌐 EN | VI
+```
+
+---
+
+# HOME BUTTON
+
+Add a floating Home button.
+
+Requirements:
+
+* Always visible.
+* Fixed at the bottom-right corner.
+* Smooth glassmorphism style.
+* Rounded button.
+* Wonderland-inspired icon (house or antique door).
+
+When clicked:
+
+* Smoothly scroll back to the Hero section.
+* Show a subtle glow animation.
+* Display only after the user has scrolled down approximately 300px.
+* Hide automatically when already at the top.
+
+---
+
+# NAVIGATION
+
+Sticky navigation bar should include:
+
+* Home
+* About
+* Skills
+* Projects
+* Experience
+* Achievements
+* Contact
+
+On the right side of the navigation bar:
+
+* 🌐 Language Switch (EN | VI)
+* 🎵 Music Button
+* Theme logo (optional)
+
+The navigation should shrink slightly while scrolling and highlight the current section.
+
+---
+
+# JAVASCRIPT FEATURES
+
+Implement:
+
+* Background music controller
+* Language switching (EN ⇄ VI)
+* localStorage persistence
+* Smooth scrolling
+* Active navigation highlight
+* Home button visibility
+* Back-to-top animation
+* Responsive mobile navigation
+* Accessible keyboard support
