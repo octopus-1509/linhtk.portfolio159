@@ -1,61 +1,69 @@
 <!DOCTYPE html>
 <html lang="en" data-lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trịnh Khánh Linh | International Economics - Foreign Trade University (FTU)</title>
-    <meta name="description"
-        content="Interactive Wonderland portfolio of Trịnh Khánh Linh, International Economics student at Foreign Trade University (FTU), Hanoi.">
-    <!-- Google Fonts -->
+    <title>Trịnh Khánh Linh — A Journey Through Wonderland | FTU Portfolio</title>
+    <meta name="description" content="Interactive Wonderland-themed portfolio of Trịnh Khánh Linh, International Economics student at Foreign Trade University (FTU), Hanoi. Explore her academic journey, skills, and achievements.">
+
+    <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap"
-        rel="stylesheet">
-    <!-- Custom CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
-    <!-- Background Magic Particles Canvas -->
-    <canvas id="particles-canvas"></canvas>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
 
-    <!-- Magical Audio Element -->
+    <!-- Floating Particles Canvas -->
+    <canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+    <!-- Background Music -->
     <audio id="bg-music" loop preload="auto">
         <source src="assets/music/alicemusic.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
     </audio>
 
-    <!-- White Rabbit Mascot Guide -->
-    <div id="white-rabbit" class="rabbit-mascot" aria-label="White Rabbit Guide">
-        <div class="rabbit-ears"></div>
-        <div class="rabbit-face">
-            <span class="eye left"></span>
-            <span class="eye right"></span>
-            <span class="nose"></span>
+    <!-- White Rabbit Mascot -->
+    <div class="rabbit-guide" id="rabbit-guide" aria-hidden="true">
+        <div class="rabbit-character">
+            <div class="rabbit-ear rabbit-ear-l"></div>
+            <div class="rabbit-ear rabbit-ear-r"></div>
+            <div class="rabbit-head">
+                <div class="rabbit-eye rabbit-eye-l"></div>
+                <div class="rabbit-eye rabbit-eye-r"></div>
+                <div class="rabbit-nose"></div>
+                <div class="rabbit-mouth"></div>
+            </div>
+            <div class="rabbit-body"></div>
+            <div class="rabbit-paw rabbit-paw-l"></div>
+            <div class="rabbit-paw rabbit-paw-r"></div>
         </div>
-        <div class="rabbit-pocketwatch">⏱️</div>
-        <div class="rabbit-speech" id="rabbit-speech">Follow me down the rabbit hole!</div>
+        <div class="rabbit-bubble" id="rabbit-bubble">
+            <p id="rabbit-text">Follow me down the rabbit hole! ✨</p>
+        </div>
     </div>
 
-    <!-- Image Lightbox Modal -->
-    <div id="image-lightbox" class="lightbox-modal" aria-hidden="true">
-        <span class="lightbox-close" id="lightbox-close">&times;</span>
-        <img class="lightbox-content" id="lightbox-img" alt="Enlarged gallery view">
-        <div class="lightbox-caption" id="lightbox-caption"></div>
+    <!-- Image Lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Close image viewer">&times;</button>
+        <img class="lightbox-img" id="lightbox-img" alt="">
+        <p class="lightbox-caption" id="lightbox-caption"></p>
     </div>
 
-    <!-- Sticky Navigation Bar -->
-    <header id="header" class="site-header">
-        <div class="nav-container">
-            <a href="#hero" class="logo">
-                <span class="logo-icon">🔑</span> Linh<span class="logo-highlight">.FTU</span>
+    <!-- ============ STICKY NAVIGATION ============ -->
+    <header class="site-header" id="site-header">
+        <div class="nav-wrap">
+            <a href="#hero" class="nav-logo" aria-label="Scroll to top">
+                <span class="logo-key">🔑</span>
+                <span class="logo-text">Linh<span class="logo-dot">.</span>FTU</span>
             </a>
-            <nav class="nav-menu" id="nav-menu">
+
+            <nav class="nav-links" id="nav-links" role="navigation" aria-label="Main navigation">
                 <ul>
-                    <li><a href="#hero" class="active" data-i18n="nav_home">Home</a></li>
+                    <li><a href="#hero" data-i18n="nav_home" class="active">Home</a></li>
                     <li><a href="#about" data-i18n="nav_about">About</a></li>
                     <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
                     <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
@@ -64,452 +72,411 @@
                     <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
                 </ul>
             </nav>
-            <div class="nav-controls">
-                <button id="lang-toggle" class="control-btn lang-btn" aria-label="Toggle Language">
+
+            <div class="nav-actions">
+                <button class="nav-btn lang-btn" id="lang-btn" aria-label="Switch language">
                     🌐 <span id="lang-label">VI</span>
                 </button>
-                <button id="music-toggle" class="control-btn music-btn" aria-label="Toggle Background Music">
-                    <span id="music-icon">▶</span> <span data-i18n="music_text">Music</span>
+                <button class="nav-btn music-btn" id="music-btn" aria-label="Toggle music">
+                    <span id="music-icon">♫</span>
+                    <span data-i18n="music_label">Music</span>
                 </button>
-                <button class="hamburger" id="hamburger" aria-label="Toggle Mobile Menu">
+                <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
                     <span></span><span></span><span></span>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Main Content Journey -->
+    <!-- ============ MAIN CONTENT ============ -->
     <main>
 
-        <!-- 1. HERO SECTION (Magical Entrance & Rabbit Hole) -->
-        <section id="hero" class="hero-section">
-            <div class="hero-bg-glow"></div>
-            <div class="floating-decor watch1">⏱️</div>
-            <div class="floating-decor key1">🗝️</div>
-            <div class="floating-decor card1">♠️</div>
+        <!-- ===== 1. HERO — Magical Entrance ===== -->
+        <section id="hero" class="hero">
+            <div class="hero-vignette"></div>
+            <div class="hero-particles">
+                <span class="h-particle p1">✦</span>
+                <span class="h-particle p2">🗝️</span>
+                <span class="h-particle p3">♠</span>
+                <span class="h-particle p4">🍃</span>
+                <span class="h-particle p5">✧</span>
+                <span class="h-particle p6">🌙</span>
+                <span class="h-particle p7">🦋</span>
+                <span class="h-particle p8">⏱️</span>
+            </div>
 
-            <div class="hero-content container">
-                <div class="hero-badge" data-i18n="hero_badge">✨ A Journey Through Wonderland</div>
-                <h1 class="hero-title">Trịnh Khánh Linh</h1>
-                <p class="hero-subtitle">
-                    <span data-i18n="hero_major">International Economics Student</span> @ <strong
-                        data-i18n="hero_school">Foreign Trade University, Hanoi (FTU)</strong>
+            <div class="hero-inner container reveal">
+                <span class="hero-chip" data-i18n="hero_chip">✨ A Journey Through Wonderland</span>
+                <h1 class="hero-name">Trịnh Khánh Linh</h1>
+                <p class="hero-role">
+                    <span data-i18n="hero_role">International Economics</span>
+                    <span class="hero-divider">—</span>
+                    <strong data-i18n="hero_school">Foreign Trade University (FTU)</strong>
                 </p>
-                <p class="hero-tagline" data-i18n="hero_tagline">Bridging global market dynamics, economic research, and
-                    strategic vision with a touch of curiosity.</p>
-                
-                <div class="hero-actions">
-                    <a href="#about" class="btn-magical" id="begin-journey" data-i18n="btn_begin">Begin Journey 🗝️</a>
-                    <a href="#contact" class="btn-outline" data-i18n="btn_contact">Get in Touch</a>
+                <p class="hero-tagline" data-i18n="hero_tagline">Bridging global markets, economic research, and strategic vision — one curious step at a time.</p>
+
+                <div class="hero-cta">
+                    <a href="#about" class="btn btn-primary" id="begin-btn" data-i18n="btn_begin">Begin Journey 🗝️</a>
+                    <a href="CV.pdf" class="btn btn-ghost" target="_blank" data-i18n="btn_cv">Download CV</a>
                 </div>
             </div>
 
-            <div class="scroll-indicator">
-                <span data-i18n="scroll_down">Scroll to explore Wonderland</span>
-                <div class="mouse-icon"></div>
+            <div class="scroll-hint">
+                <span data-i18n="scroll_hint">Scroll to explore</span>
+                <div class="scroll-mouse"><div class="scroll-dot"></div></div>
             </div>
         </section>
 
-        <!-- 2. ABOUT ME (Enchanted Forest) -->
-        <section id="about" class="section about-section">
+        <!-- ===== 2. ABOUT ME — Enchanted Forest ===== -->
+        <section id="about" class="section sec-about">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-tag" data-i18n="about_tag">Chapter I • Enchanted Forest</span>
-                    <h2 data-i18n="about_title">About Me & Education</h2>
-                </div>
+                <header class="sec-head reveal">
+                    <span class="sec-chip" data-i18n="about_chip">Chapter I · Enchanted Forest</span>
+                    <h2 data-i18n="about_h2">About Me</h2>
+                </header>
 
                 <div class="about-grid">
-                    <div class="about-image-wrapper">
-                        <div class="frame-antique">
-                            <img src="images/my_photo.JPG" alt="Trịnh Khánh Linh - FTU International Economics" class="portrait-img">
+                    <div class="about-portrait reveal reveal-left">
+                        <div class="portrait-frame">
+                            <img src="images/my_photo.JPG" alt="Trịnh Khánh Linh portrait" loading="lazy">
                         </div>
-                        <div class="floating-decor mushroom-icon">🍄</div>
+                        <div class="portrait-decor d1">🍄</div>
+                        <div class="portrait-decor d2">🌿</div>
+                        <div class="portrait-decor d3">🦋</div>
                     </div>
 
-                    <div class="about-text-content">
-                        <h3 data-i18n="about_heading">Curiosity is the compass of economics.</h3>
-                        <p data-i18n="about_desc1">I am Trịnh Khánh Linh, a 3rd-year undergraduate student majoring in International Economics at Foreign Trade University (FTU), Hanoi. My academic path is driven by a deep fascination with global trade dynamics, market analysis, and economic strategic planning.</p>
-                        <p data-i18n="about_desc2">Much like exploring Wonderland, navigating modern economics demands curiosity, analytical rigor, and the courage to venture beyond conventional perspectives. I am dedicated to applying academic theories to create real-world impact.</p>
+                    <div class="about-body reveal reveal-right">
+                        <h3 data-i18n="about_quote">Curiosity is the compass of economics.</h3>
+                        <p data-i18n="about_p1">I am Trịnh Khánh Linh, a 3rd-year undergraduate majoring in International Economics at Foreign Trade University (FTU), Hanoi. My academic journey is driven by a deep fascination with global trade dynamics, cross-border financial strategy, and market analysis.</p>
+                        <p data-i18n="about_p2">Like exploring Wonderland, modern economics demands curiosity, analytical rigor, and the courage to venture beyond conventional perspectives. I am dedicated to bridging academic theories with real-world impact.</p>
 
-                        <div class="about-highlights">
-                            <div class="highlight-box">
-                                <span class="h-number">FTU</span>
-                                <span class="h-label" data-i18n="hl_uni">Foreign Trade University</span>
+                        <div class="about-stats">
+                            <div class="stat-box reveal">
+                                <span class="stat-val">FTU</span>
+                                <span class="stat-lbl" data-i18n="stat_uni">Foreign Trade University</span>
                             </div>
-                            <div class="highlight-box">
-                                <span class="h-number">IE</span>
-                                <span class="h-label" data-i18n="hl_major">International Economics</span>
+                            <div class="stat-box reveal">
+                                <span class="stat-val">IE</span>
+                                <span class="stat-lbl" data-i18n="stat_major">International Economics</span>
                             </div>
-                            <div class="highlight-box">
-                                <span class="h-number">Hanoi</span>
-                                <span class="h-label" data-i18n="hl_loc">Based in Vietnam</span>
+                            <div class="stat-box reveal">
+                                <span class="stat-val">Hanoi</span>
+                                <span class="stat-lbl" data-i18n="stat_loc">Vietnam</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Education Cards sub-section -->
-                <div class="education-block">
-                    <h3 class="sub-block-title" data-i18n="edu_title">🎓 Academic Background</h3>
-                    <div class="edu-grid">
-                        
-                        <div class="edu-card">
-                            <div class="edu-img-wrap">
-                                <img src="images/education/ftu.jpg" alt="Foreign Trade University">
-                            </div>
-                            <div class="edu-info">
+                <!-- Education cards -->
+                <div class="edu-block reveal">
+                    <h3 class="block-title" data-i18n="edu_h3">🎓 Education</h3>
+                    <div class="edu-cards">
+                        <article class="edu-card reveal">
+                            <div class="edu-thumb"><img src="images/education/ftu.jpg" alt="Foreign Trade University" loading="lazy"></div>
+                            <div class="edu-body">
                                 <span class="edu-year">2023 — 2027</span>
-                                <h3>Foreign Trade University (FTU)</h3>
-                                <p class="edu-detail" data-i18n="edu_ftu_desc">3rd-year Student • Faculty of International Economics • Major in International Economics.</p>
+                                <h4>Foreign Trade University (FTU)</h4>
+                                <p data-i18n="edu_ftu">3rd-year Student · Faculty of International Economics · Major in International Economics.</p>
                             </div>
-                        </div>
-
-                        <div class="edu-card">
-                            <div class="edu-img-wrap">
-                                <img src="images/education/ctq.JPG" alt="Tuyên Quang High School for the Gifted">
-                            </div>
-                            <div class="edu-info">
+                        </article>
+                        <article class="edu-card reveal">
+                            <div class="edu-thumb"><img src="images/education/ctq.JPG" alt="Chuyên Tuyên Quang" loading="lazy"></div>
+                            <div class="edu-body">
                                 <span class="edu-year">2020 — 2023</span>
-                                <h3>Tuyên Quang High School for the Gifted</h3>
-                                <p class="edu-detail" data-i18n="edu_ctq_desc">Graduated with Distinction • Literature Major (Class 34) • National Excellent Student Team Member in Literature (2022 - 2023).</p>
+                                <h4 data-i18n="edu_ctq_name">Tuyên Quang High School for the Gifted</h4>
+                                <p data-i18n="edu_ctq">Graduated with Distinction · Literature Major (Class 34) · National Excellent Student Team in Literature (2022–2023).</p>
                             </div>
-                        </div>
-
-                        <div class="edu-card simple-edu">
+                        </article>
+                        <article class="edu-card edu-card--simple reveal">
                             <div class="edu-icon">🏫</div>
-                            <div class="edu-info">
-                                <span class="edu-year">Secondary Education</span>
-                                <h3>Lê Quý Đôn Secondary School</h3>
-                                <p class="edu-detail" data-i18n="edu_lqd_desc">Member of English Team (Grades 6 & 7) • Member of Literature Team (Grades 8 & 9).</p>
+                            <div class="edu-body">
+                                <span class="edu-year" data-i18n="edu_sec_yr">Secondary School</span>
+                                <h4>Lê Quý Đôn Secondary School</h4>
+                                <p data-i18n="edu_lqd">Member of English Team (Grades 6–7) · Member of Literature Team (Grades 8–9).</p>
                             </div>
-                        </div>
-
+                        </article>
                     </div>
                 </div>
-
             </div>
         </section>
 
-        <!-- 3. SKILLS (Hidden Magical Library) -->
-        <section id="skills" class="section skills-section">
+        <!-- ===== 3. SKILLS — Magical Library ===== -->
+        <section id="skills" class="section sec-skills">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-tag" data-i18n="skills_tag">Chapter II • Hidden Magical Library</span>
-                    <h2 data-i18n="skills_title">Magical Grimoire of Skills</h2>
-                </div>
+                <header class="sec-head reveal">
+                    <span class="sec-chip" data-i18n="skills_chip">Chapter II · Hidden Magical Library</span>
+                    <h2 data-i18n="skills_h2">Grimoire of Skills</h2>
+                </header>
 
                 <div class="skills-grid">
-
-                    <div class="skill-card">
-                        <div class="skill-icon">🌐</div>
-                        <h3 data-i18n="skill_lang_title">Language Proficiency</h3>
-                        <ul class="skill-list">
-                            <li><strong>English:</strong> IELTS 6.0</li>
-                            <li><strong>Chinese:</strong> HSK 5</li>
+                    <div class="skill-card reveal">
+                        <div class="sk-icon">🌐</div>
+                        <h3 data-i18n="sk_lang">Language Proficiency</h3>
+                        <ul class="sk-list">
+                            <li><strong>English</strong> — IELTS 6.0</li>
+                            <li><strong>Chinese</strong> — HSK 5</li>
+                            <li><strong>Vietnamese</strong> — Native</li>
                         </ul>
                     </div>
-
-                    <div class="skill-card">
-                        <div class="skill-icon">📊</div>
-                        <h3 data-i18n="skill_econ_title">Economic & Market Analysis</h3>
-                        <p data-i18n="skill_econ_desc">Macroeconomic forecasting, econometric modeling, market research, and statistical data visualization.</p>
+                    <div class="skill-card reveal">
+                        <div class="sk-icon">📊</div>
+                        <h3 data-i18n="sk_econ">Economic Analysis</h3>
+                        <p data-i18n="sk_econ_d">Macroeconomic forecasting, econometric modeling, market research, and statistical data visualization.</p>
                     </div>
-
-                    <div class="skill-card">
-                        <div class="skill-icon">💼</div>
-                        <h3 data-i18n="skill_biz_title">Business & Strategy</h3>
-                        <p data-i18n="skill_biz_desc">International trade policy, FDI flow evaluation, corporate finance principles, and strategic market research.</p>
+                    <div class="skill-card reveal">
+                        <div class="sk-icon">💼</div>
+                        <h3 data-i18n="sk_biz">Business Strategy</h3>
+                        <p data-i18n="sk_biz_d">International trade policy, FDI analysis, corporate finance, and strategic market research.</p>
                     </div>
-
-                    <div class="skill-card">
-                        <div class="skill-icon">🗣️</div>
-                        <h3 data-i18n="skill_comm_title">Communication & Soft Skills</h3>
-                        <p data-i18n="skill_comm_desc">Customer care (CSKH), problem solving, time management, public speaking, and cross-cultural networking.</p>
+                    <div class="skill-card reveal">
+                        <div class="sk-icon">🗣️</div>
+                        <h3 data-i18n="sk_comm">Communication</h3>
+                        <p data-i18n="sk_comm_d">Customer care, problem solving, time management, public speaking, and cross-cultural networking.</p>
                     </div>
-
-                    <div class="skill-card">
-                        <div class="skill-icon">💻</div>
-                        <h3 data-i18n="skill_tech_title">Software & Office Tools</h3>
-                        <p data-i18n="skill_tech_desc">MS Office (Advanced Excel, PowerPoint, Word), SPSS, basic analytical software, and digital workspace tools.</p>
+                    <div class="skill-card reveal">
+                        <div class="sk-icon">💻</div>
+                        <h3 data-i18n="sk_tech">Software & Tools</h3>
+                        <p data-i18n="sk_tech_d">MS Office (Advanced Excel, PowerPoint, Word), SPSS, R/Python basics, and digital productivity tools.</p>
                     </div>
-
+                    <div class="skill-card reveal">
+                        <div class="sk-icon">📖</div>
+                        <h3 data-i18n="sk_research">Research & Writing</h3>
+                        <p data-i18n="sk_research_d">Academic paper writing, literature review, qualitative & quantitative research methods, and report composition.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 4. PROJECTS (Hedge Maze) -->
-        <section id="projects" class="section projects-section">
+        <!-- ===== 4. PROJECTS — Hedge Maze ===== -->
+        <section id="projects" class="section sec-projects">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-tag" data-i18n="projects_tag">Chapter III • Hedge Maze</span>
-                    <h2 data-i18n="projects_title">Featured Research & Projects</h2>
-                </div>
+                <header class="sec-head reveal">
+                    <span class="sec-chip" data-i18n="proj_chip">Chapter III · Hedge Maze</span>
+                    <h2 data-i18n="proj_h2">Featured Projects</h2>
+                </header>
 
-                <div class="projects-grid">
+                <div class="proj-grid">
+                    <article class="proj-card reveal">
+                        <div class="proj-cover">
+                            <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=600&q=80" alt="Trade Research" loading="lazy">
+                            <span class="proj-badge" data-i18n="proj_b1">Research</span>
+                        </div>
+                        <div class="proj-body">
+                            <h3 data-i18n="proj_t1">Global Supply Chain & FDI Shift Analysis</h3>
+                            <p data-i18n="proj_d1">Empirical study examining post-pandemic global trade re-routing and FDI inflows into emerging Southeast Asian economies.</p>
+                            <div class="proj-tags"><span>Trade Policy</span><span>SPSS</span><span>Econometrics</span></div>
+                            <a href="https://github.com/octopus-1509/linhtk.portfolio159" target="_blank" class="proj-link" data-i18n="proj_link">View on GitHub →</a>
+                        </div>
+                    </article>
 
-                    <div class="project-card">
-                        <div class="project-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=600&q=80" alt="Trade Research">
-                            <span class="project-badge" data-i18n="proj_badge1">Research Paper</span>
+                    <article class="proj-card reveal">
+                        <div class="proj-cover">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="Case Competition" loading="lazy">
+                            <span class="proj-badge" data-i18n="proj_b2">Case Study</span>
                         </div>
-                        <div class="project-info">
-                            <h3 data-i18n="proj_title1">Global Supply Chain & FDI Shift Analysis</h3>
-                            <p data-i18n="proj_desc1">Empirical study examining post-pandemic global trade re-routing and foreign direct investment (FDI) inflows into emerging Southeast Asian economies.</p>
-                            <div class="tech-tags">
-                                <span>Trade Policy</span><span>SPSS</span><span>Econometrics</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://github.com/octopus-1509/linhtk.portfolio159" target="_blank" class="btn-sm" data-i18n="btn_github">GitHub Repository</a>
-                            </div>
+                        <div class="proj-body">
+                            <h3 data-i18n="proj_t2">FTU ASEAN Market Expansion</h3>
+                            <p data-i18n="proj_d2">Developed market entry blueprints and financial valuations for tech enterprises expanding across ASEAN regional markets.</p>
+                            <div class="proj-tags"><span>Market Strategy</span><span>Valuation</span><span>Pitch Deck</span></div>
+                            <a href="https://github.com/octopus-1509/linhtk.portfolio159" target="_blank" class="proj-link" data-i18n="proj_link">View on GitHub →</a>
                         </div>
-                    </div>
+                    </article>
 
-                    <div class="project-card">
-                        <div class="project-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="Case Competition">
-                            <span class="project-badge" data-i18n="proj_badge2">Business Strategy</span>
+                    <article class="proj-card reveal">
+                        <div class="proj-cover">
+                            <img src="images/activies and awards/forum.png" alt="FTU Forum Advisory" loading="lazy">
+                            <span class="proj-badge" data-i18n="proj_b3">Advisory</span>
                         </div>
-                        <div class="project-info">
-                            <h3 data-i18n="proj_title2">FTU ASEAN Expansion Case Study</h3>
-                            <p data-i18n="proj_desc2">Formulated market entry blueprints and financial valuations for tech enterprises expanding across regional ASEAN markets.</p>
-                            <div class="tech-tags">
-                                <span>Market Strategy</span><span>Valuation</span><span>Presentation</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://github.com/octopus-1509/linhtk.portfolio159" target="_blank" class="btn-sm" data-i18n="btn_github">GitHub Repository</a>
-                            </div>
+                        <div class="proj-body">
+                            <h3 data-i18n="proj_t3">FTU Admissions Advisory Platform</h3>
+                            <p data-i18n="proj_d3">Organized admission outreach, file processing, and interactive consultation webinars for thousands of prospective students.</p>
+                            <div class="proj-tags"><span>Event Management</span><span>Consulting</span><span>PR</span></div>
+                            <a href="https://github.com/octopus-1509/linhtk.portfolio159" target="_blank" class="proj-link" data-i18n="proj_link">View on GitHub →</a>
                         </div>
-                    </div>
-
-                    <div class="project-card">
-                        <div class="project-img-wrap">
-                            <img src="images/activies and awards/forum.png" alt="FTU Admissions Consultation">
-                            <span class="project-badge" data-i18n="proj_badge3">Advisory Project</span>
-                        </div>
-                        <div class="project-info">
-                            <h3 data-i18n="proj_title3">FTU Annual Admissions Advisory Platform</h3>
-                            <p data-i18n="proj_desc3">Organized admission outreach, file processing, and interactive consultation webinars for thousands of prospective students and parents.</p>
-                            <div class="tech-tags">
-                                <span>Event Logistics</span><span>Data Processing</span><span>Public Relations</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://github.com/octopus-1509/linhtk.portfolio159" target="_blank" class="btn-sm" data-i18n="btn_github">GitHub Repository</a>
-                            </div>
-                        </div>
-                    </div>
-
+                    </article>
                 </div>
             </div>
         </section>
 
-        <!-- 5. EXPERIENCE (Tea Party Garden) -->
-        <section id="experience" class="section experience-section">
+        <!-- ===== 5. EXPERIENCE — Tea Party Garden ===== -->
+        <section id="experience" class="section sec-experience">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-tag" data-i18n="exp_tag">Chapter IV • Tea Party Garden</span>
-                    <h2 data-i18n="exp_title">Work & Extracurricular Experience</h2>
-                </div>
+                <header class="sec-head reveal">
+                    <span class="sec-chip" data-i18n="exp_chip">Chapter IV · Tea Party Garden</span>
+                    <h2 data-i18n="exp_h2">Experience & Activities</h2>
+                </header>
 
                 <div class="timeline">
-
-                    <div class="timeline-item">
-                        <div class="timeline-icon">🕰️</div>
-                        <div class="timeline-content">
-                            <span class="timeline-date">2023 — Present</span>
-                            <h3 data-i18n="exp1_role">Active Member — FTU Forum Student Club</h3>
-                            <h4 data-i18n="exp1_org">Foreign Trade University Student Forum Club</h4>
-                            <ul class="timeline-bullet">
-                                <li data-i18n="exp1_bullet1">Participated in admissions consultation for major annual events organized by FTU Training Management Department: Admission Fair, FTU Open Tour, Bách Khoa Open Day 1 & 2, Admission Webinar.</li>
-                                <li data-i18n="exp1_bullet2">Supported admission activities for Course 63 and Course 64: gathered, classified, and processed admission profiles; answered inquiries from parents and prospective students both online and offline.</li>
+                    <article class="tl-item reveal">
+                        <div class="tl-marker">🕰️</div>
+                        <div class="tl-card">
+                            <span class="tl-date">2023 — Present</span>
+                            <h3 data-i18n="exp1_t">Active Member — FTU Forum Student Club</h3>
+                            <h4 data-i18n="exp1_org">Foreign Trade University Student Forum</h4>
+                            <ul>
+                                <li data-i18n="exp1_b1">Admissions consultation for annual events: Admission Fair, FTU Open Tour, Bách Khoa Open Day 1 & 2, Admission Webinar.</li>
+                                <li data-i18n="exp1_b2">Profile processing for Course 63 & 64: gathering, classifying, and answering inquiries from parents and students both online and offline.</li>
                             </ul>
                         </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-icon">⏳</div>
-                        <div class="timeline-content">
-                            <span class="timeline-date">2024 — Present</span>
-                            <h3 data-i18n="exp2_role">Academic & Event Coordinator</h3>
+                    </article>
+                    <article class="tl-item reveal">
+                        <div class="tl-marker">⏳</div>
+                        <div class="tl-card">
+                            <span class="tl-date">2024 — Present</span>
+                            <h3 data-i18n="exp2_t">Academic & Event Coordinator</h3>
                             <h4 data-i18n="exp2_org">Faculty of International Economics, FTU</h4>
-                            <ul class="timeline-bullet">
-                                <li data-i18n="exp2_bullet1">Organized academic forums, webinars, and cultural night events for student community development.</li>
-                                <li data-i18n="exp2_bullet2">Coordinated media outreach for student business competitions and career development programs.</li>
+                            <ul>
+                                <li data-i18n="exp2_b1">Organized academic forums, webinars, and cultural night events for student community development.</li>
+                                <li data-i18n="exp2_b2">Coordinated media outreach for student business competitions and career development programs.</li>
                             </ul>
                         </div>
-                    </div>
-
+                    </article>
                 </div>
             </div>
         </section>
 
-        <!-- 6. ACHIEVEMENTS (Royal Garden) -->
-        <section id="achievements" class="section achievements-section">
+        <!-- ===== 6. ACHIEVEMENTS — Royal Garden ===== -->
+        <section id="achievements" class="section sec-achievements">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-tag" data-i18n="ach_tag">Chapter V • Royal Garden</span>
-                    <h2 data-i18n="ach_title">Honors, Competitions & Activities Gallery</h2>
-                </div>
+                <header class="sec-head reveal">
+                    <span class="sec-chip" data-i18n="ach_chip">Chapter V · Royal Garden</span>
+                    <h2 data-i18n="ach_h2">Honors & Activities</h2>
+                </header>
 
-                <!-- Awards Grid -->
-                <div class="achievements-grid">
-
-                    <div class="achievement-card">
-                        <div class="ach-icon">🥇</div>
-                        <h3 data-i18n="ach_item1_title">1st Prize — Provincial Literature Contest</h3>
-                        <p data-i18n="ach_item1_desc">Awarded First Prize in Grade 11 Provincial Excellent Student Competition in Literature (Tuyên Quang Province).</p>
+                <!-- Awards -->
+                <div class="awards-grid">
+                    <div class="award-card reveal">
+                        <span class="aw-icon">🥇</span>
+                        <h3 data-i18n="aw1_t">1st Prize — Provincial Literature</h3>
+                        <p data-i18n="aw1_d">First Prize, Grade 11 Provincial Excellent Student Competition in Literature, Tuyên Quang Province.</p>
                     </div>
-
-                    <div class="achievement-card">
-                        <div class="ach-icon">🎖️</div>
-                        <h3 data-i18n="ach_item2_title">Consolation Prize — Regional HSG Contest</h3>
-                        <p data-i18n="ach_item2_desc">Consolation Prize in Literature at the 2022 Northern Coastal and Delta Regional Gifted Schools Competition.</p>
+                    <div class="award-card reveal">
+                        <span class="aw-icon">🎖️</span>
+                        <h3 data-i18n="aw2_t">Consolation Prize — Regional Contest</h3>
+                        <p data-i18n="aw2_d">Literature prize at the 2022 Northern Coastal & Delta Regional Gifted Schools Competition.</p>
                     </div>
-
-                    <div class="achievement-card">
-                        <div class="ach-icon">🥉</div>
-                        <h3 data-i18n="ach_item3_title">3rd Prize — Provincial Literature Contest</h3>
-                        <p data-i18n="ach_item3_desc">Awarded Third Prize in Grade 12 Provincial Excellent Student Competition in Literature.</p>
-                    </div>
-
-                </div>
-
-                <!-- Ambassador Roles & Activities -->
-                <div class="activities-block">
-                    <h3 class="sub-block-title" data-i18n="act_title">📣 Media Ambassador & Leadership Roles</h3>
-                    <div class="activities-tags">
-                        <span class="act-tag">🌟 Media Ambassador — Entrepreneur Z National Impact Camp 12</span>
-                        <span class="act-tag">🌟 Media Ambassador — Entrepreneur Z National Impact Camp 13</span>
-                        <span class="act-tag">🏦 Media Ambassador — The Banker 2026</span>
-                        <span class="act-tag">🚀 Media Ambassador — Innostart 2026 (Startup Hub)</span>
-                        <span class="act-tag">✨ Organizing Committee — IE SHINE 2024: Unity & Shine</span>
+                    <div class="award-card reveal">
+                        <span class="aw-icon">🥉</span>
+                        <h3 data-i18n="aw3_t">3rd Prize — Provincial Literature</h3>
+                        <p data-i18n="aw3_d">Third Prize, Grade 12 Provincial Excellent Student Competition in Literature.</p>
                     </div>
                 </div>
 
-                <!-- Photo Gallery Grid -->
-                <div class="gallery-block">
-                    <h3 class="sub-block-title" data-i18n="gallery_title">📸 Activities & Events Photo Gallery</h3>
-                    <p class="gallery-subtitle" data-i18n="gallery_subtitle">Click any image to view full screen.</p>
+                <!-- Ambassador Roles -->
+                <div class="roles-block reveal">
+                    <h3 class="block-title" data-i18n="roles_h3">📣 Ambassador & Leadership Roles</h3>
+                    <div class="role-tags">
+                        <span class="role-tag">🌟 Media Ambassador — Entrepreneur Z Camp 12</span>
+                        <span class="role-tag">🌟 Media Ambassador — Entrepreneur Z Camp 13</span>
+                        <span class="role-tag">🏦 Media Ambassador — The Banker 2026</span>
+                        <span class="role-tag">🚀 Media Ambassador — Innostart 2026</span>
+                        <span class="role-tag">✨ Organizing Committee — IE SHINE 2024</span>
+                    </div>
+                </div>
+
+                <!-- Photo Gallery -->
+                <div class="gallery-block reveal">
+                    <h3 class="block-title" data-i18n="gal_h3">📸 Photo Gallery</h3>
+                    <p class="gallery-sub" data-i18n="gal_sub">Click any photo to enlarge.</p>
 
                     <div class="gallery-grid">
-
-                        <div class="gallery-item" data-src="images/activies and awards/dstt12.PNG" data-caption="Media Ambassador - Entrepreneur Z Camp">
+                        <div class="gal-item" data-src="images/activies and awards/dstt12.PNG" data-cap="Entrepreneur Z Ambassador">
                             <img src="images/activies and awards/dstt12.PNG" alt="Entrepreneur Z Ambassador" loading="lazy">
-                            <div class="gallery-overlay"><span>🔍 View</span></div>
+                            <div class="gal-hover"><span>🔍</span></div>
                         </div>
-
-                        <div class="gallery-item" data-src="images/activies and awards/dstt2.JPG" data-caption="Ambassador Activities - Entrepreneur Z Camp">
-                            <img src="images/activies and awards/dstt2.JPG" alt="Entrepreneur Z Ambassador 2" loading="lazy">
-                            <div class="gallery-overlay"><span>🔍 View</span></div>
+                        <div class="gal-item" data-src="images/activies and awards/dstt2.JPG" data-cap="Ambassador Activities">
+                            <img src="images/activies and awards/dstt2.JPG" alt="Ambassador Activities" loading="lazy">
+                            <div class="gal-hover"><span>🔍</span></div>
                         </div>
-
-                        <div class="gallery-item" data-src="images/activies and awards/dstt3.JPG" data-caption="Ambassador Certificate - Impact Camp">
+                        <div class="gal-item" data-src="images/activies and awards/dstt3.JPG" data-cap="Impact Camp Certificate">
                             <img src="images/activies and awards/dstt3.JPG" alt="Impact Camp Certificate" loading="lazy">
-                            <div class="gallery-overlay"><span>🔍 View</span></div>
+                            <div class="gal-hover"><span>🔍</span></div>
                         </div>
-
-                        <div class="gallery-item" data-src="images/activies and awards/dstt4.JPG" data-caption="Media Outreach & Campaigning">
+                        <div class="gal-item" data-src="images/activies and awards/dstt4.JPG" data-cap="Media Outreach">
                             <img src="images/activies and awards/dstt4.JPG" alt="Media Campaign" loading="lazy">
-                            <div class="gallery-overlay"><span>🔍 View</span></div>
+                            <div class="gal-hover"><span>🔍</span></div>
                         </div>
-
-                        <div class="gallery-item" data-src="images/activies and awards/forum.png" data-caption="FTU Forum Student Club Activities">
-                            <img src="images/activies and awards/forum.png" alt="FTU Forum Banner" loading="lazy">
-                            <div class="gallery-overlay"><span>🔍 View</span></div>
+                        <div class="gal-item" data-src="images/activies and awards/forum.png" data-cap="FTU Forum Activities">
+                            <img src="images/activies and awards/forum.png" alt="FTU Forum" loading="lazy">
+                            <div class="gal-hover"><span>🔍</span></div>
                         </div>
-
-                        <div class="gallery-item" data-src="images/activies and awards/forum1.JPG" data-caption="FTU Open Tour & Admission Support">
+                        <div class="gal-item" data-src="images/activies and awards/forum1.JPG" data-cap="FTU Open Tour">
                             <img src="images/activies and awards/forum1.JPG" alt="FTU Open Tour" loading="lazy">
-                            <div class="gallery-overlay"><span>🔍 View</span></div>
+                            <div class="gal-hover"><span>🔍</span></div>
                         </div>
-
-                        <div class="gallery-item" data-src="images/activies and awards/forum2.JPG" data-caption="Admission Counseling Event">
+                        <div class="gal-item" data-src="images/activies and awards/forum2.JPG" data-cap="Admission Counseling">
                             <img src="images/activies and awards/forum2.JPG" alt="Admissions Counseling" loading="lazy">
-                            <div class="gallery-overlay"><span>🔍 View</span></div>
+                            <div class="gal-hover"><span>🔍</span></div>
                         </div>
-
-                        <div class="gallery-item" data-src="images/activies and awards/forum3.JPG" data-caption="FTU Forum Team Event">
-                            <img src="images/activies and awards/forum3.JPG" alt="FTU Forum Event" loading="lazy">
-                            <div class="gallery-overlay"><span>🔍 View</span></div>
+                        <div class="gal-item" data-src="images/activies and awards/forum3.JPG" data-cap="Forum Team">
+                            <img src="images/activies and awards/forum3.JPG" alt="Forum Team" loading="lazy">
+                            <div class="gal-hover"><span>🔍</span></div>
                         </div>
-
-                        <div class="gallery-item" data-src="images/activies and awards/ie.JPG" data-caption="IE SHINE 2024: Unity & Shine Night">
-                            <img src="images/activies and awards/ie.JPG" alt="IE SHINE 2024 Event" loading="lazy">
-                            <div class="gallery-overlay"><span>🔍 View</span></div>
+                        <div class="gal-item" data-src="images/activies and awards/ie.JPG" data-cap="IE SHINE 2024 Night">
+                            <img src="images/activies and awards/ie.JPG" alt="IE SHINE 2024" loading="lazy">
+                            <div class="gal-hover"><span>🔍</span></div>
                         </div>
-
                     </div>
                 </div>
-
             </div>
         </section>
 
-        <!-- 7. CONTACT (Secret Garden at Sunset) -->
-        <section id="contact" class="section contact-section">
+        <!-- ===== 7. CONTACT — Secret Garden ===== -->
+        <section id="contact" class="section sec-contact">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-tag" data-i18n="contact_tag">Chapter VI • Secret Garden at Sunset</span>
-                    <h2 data-i18n="contact_title">Step Through the Looking Glass</h2>
-                    <p data-i18n="contact_subtitle">Let's connect for academic collaborations, economic research, or professional opportunities.</p>
-                </div>
+                <header class="sec-head reveal">
+                    <span class="sec-chip" data-i18n="ct_chip">Chapter VI · Secret Garden at Sunset</span>
+                    <h2 data-i18n="ct_h2">Let's Connect</h2>
+                    <p class="sec-sub" data-i18n="ct_sub">Step through the looking glass for collaborations, research, or opportunities.</p>
+                </header>
 
-                <div class="contact-card-container">
-                    <div class="contact-info-box">
-
-                        <div class="contact-item">
-                            <span class="c-icon">📧</span>
-                            <div>
-                                <strong data-i18n="lbl_email">Email</strong>
-                                <a href="mailto:linhtk05.ftuforum@gmail.com">linhtk05.ftuforum@gmail.com</a>
-                            </div>
+                <div class="contact-card reveal">
+                    <div class="ct-item">
+                        <span class="ct-icon">📧</span>
+                        <div>
+                            <strong data-i18n="ct_email">Email</strong>
+                            <a href="mailto:linhtk05.ftuforum@gmail.com">linhtk05.ftuforum@gmail.com</a>
                         </div>
-
-                        <div class="contact-item">
-                            <span class="c-icon">📱</span>
-                            <div>
-                                <strong data-i18n="lbl_phone">Phone</strong>
-                                <p>0963 075 656</p>
-                            </div>
+                    </div>
+                    <div class="ct-item">
+                        <span class="ct-icon">📱</span>
+                        <div>
+                            <strong data-i18n="ct_phone">Phone</strong>
+                            <p>0963 075 656</p>
                         </div>
-
-                        <div class="contact-item">
-                            <span class="c-icon">📍</span>
-                            <div>
-                                <strong data-i18n="lbl_address">Address</strong>
-                                <p>Ngõ 218, Mỹ Đình 2, Từ Liêm, Hà Nội</p>
-                            </div>
+                    </div>
+                    <div class="ct-item">
+                        <span class="ct-icon">📍</span>
+                        <div>
+                            <strong data-i18n="ct_addr">Address</strong>
+                            <p>Ngõ 218, Mỹ Đình 2, Từ Liêm, Hà Nội</p>
                         </div>
-
-                        <div class="contact-item">
-                            <span class="c-icon">💻</span>
-                            <div>
-                                <strong data-i18n="lbl_github">GitHub Repository</strong>
-                                <a href="https://github.com/octopus-1509/linhtk.portfolio159" target="_blank">octopus-1509/linhtk.portfolio159</a>
-                            </div>
+                    </div>
+                    <div class="ct-item">
+                        <span class="ct-icon">💻</span>
+                        <div>
+                            <strong>GitHub</strong>
+                            <a href="https://github.com/octopus-1509/linhtk.portfolio159" target="_blank">octopus-1509/linhtk.portfolio159</a>
                         </div>
-
                     </div>
                 </div>
 
-                <div class="farewell-box">
-                    <p class="farewell-text" data-i18n="farewell_msg">"Curiosity is the beginning of wisdom. Thank you for visiting my Wonderland journey!" — Trịnh Khánh Linh</p>
+                <div class="farewell reveal">
+                    <p data-i18n="farewell">"Curiosity is the beginning of wisdom. Thank you for visiting my Wonderland!" — Trịnh Khánh Linh</p>
+                    <div class="farewell-rabbit">🐇 ✨</div>
                 </div>
-
             </div>
 
-            <footer class="footer-note">
-                <p data-i18n="footer_text">Designed with curiosity & magic by Trịnh Khánh Linh © 2026. Foreign Trade University, Hanoi.</p>
+            <footer class="site-footer">
+                <p data-i18n="footer">Designed with curiosity & magic by Trịnh Khánh Linh © 2026 · Foreign Trade University, Hanoi.</p>
             </footer>
         </section>
 
     </main>
 
     <!-- Floating Home Button -->
-    <a href="#hero" id="home-btn" class="home-floating-btn" aria-label="Return to top">
-        🚪
-    </a>
+    <a href="#hero" class="home-btn" id="home-btn" aria-label="Back to top">🚪</a>
 
-    <!-- Custom JavaScript -->
     <script src="js/script.js"></script>
 </body>
-
 </html>
