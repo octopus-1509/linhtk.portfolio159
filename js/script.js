@@ -53,11 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
             aw3_t:"3rd Prize \u2014 Provincial Literature",aw3_d:"Grade 12 Provincial Excellent Student Competition in Literature.",
             roles_h3:"\u2660 Media Ambassador Roles",
             game_chip:"Chapter VII \u00B7 The Mad Tea Party",game_h2:"Wonderland Games",game_sub:"Take a break and play!",
-            tab_maze:"\u265B Maze Escape",tab_tarot:"\u2663 Tarot Draw",tab_mood:"\u2665 Mood Tracker",
-            maze_time:"Time:",maze_pause:"Pause",maze_records:"Records",maze_start:"New Maze",
-            maze_hint:"Use W A S D or Arrow Keys to move. Reach the \u2733 to win!",
-            maze_best:"Best Times",maze_close:"Close",
-            tarot_draw:"Draw a card",tarot_prompt:"Click the card to reveal your Wonderland message!",tarot_btn:"Draw Card",
             mood_title:"How are you feeling today?",mood_history:"Your Mood Journal",
             ct_chip:"Chapter VIII \u00B7 Secret Garden at Sunset",ct_h2:"Let's Connect",
             ct_sub:"Step through the looking glass for collaborations or opportunities.",
@@ -110,11 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
             aw3_t:"Gi\u1EA3i Ba HSG T\u1EC9nh V\u0103n",aw3_d:"HSG c\u1EA5p t\u1EC9nh Ng\u1EEF v\u0103n l\u1EDBp 12.",
             roles_h3:"\u2660 \u0110\u1EA1i S\u1EE9 Truy\u1EC1n Th\u00F4ng",
             game_chip:"Ch\u01B0\u01A1ng VII \u00B7 Ti\u1EC7c Tr\u00E0 \u0110i\u00EAn",game_h2:"Tr\u00F2 Ch\u01A1i",game_sub:"Ngh\u1EC9 ng\u01A1i v\u00E0 ch\u01A1i n\u00E0o!",
-            tab_maze:"\u265B Tho\u00E1t M\u00EA Cung",tab_tarot:"\u2663 B\u1ED1c Tarot",tab_mood:"\u2665 Mood",
-            maze_time:"Th\u1EDDi gian:",maze_pause:"D\u1EEBng",maze_records:"K\u1EC9 l\u1EE5c",maze_start:"M\u00EA cung m\u1EDBi",
-            maze_hint:"D\u00F9ng W A S D ho\u1EB7c ph\u00EDm m\u0169i t\u00EAn. \u0110\u1EBFn \u2733 \u0111\u1EC3 th\u1EAFng!",
-            maze_best:"K\u1EC9 l\u1EE5c",maze_close:"\u0110\u00F3ng",
-            tarot_draw:"B\u1ED1c b\u00E0i",tarot_prompt:"B\u1EA5m v\u00E0o l\u00E1 b\u00E0i \u0111\u1EC3 nh\u1EADn th\u00F4ng \u0111i\u1EC7p!",tarot_btn:"B\u1ED1c B\u00E0i",
             mood_title:"H\u00F4m nay b\u1EA1n c\u1EA3m th\u1EA5y th\u1EBF n\u00E0o?",mood_history:"Nh\u1EADt k\u00FD t\u00E2m tr\u1EA1ng",
             ct_chip:"Ch\u01B0\u01A1ng VIII \u00B7 V\u01B0\u1EDDn B\u00ED M\u1EADt",ct_h2:"K\u1EBFt N\u1ED1i",
             ct_sub:"B\u01B0\u1EDBc qua t\u1EA5m g\u01B0\u01A1ng \u0111\u1EC3 h\u1EE3p t\u00E1c.",
@@ -322,13 +312,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // ==========================================
-        // FX CANVAS: Fireflies + Chess + Card Trail
+        // FX CANVAS: Fireflies + Chess
         // ==========================================
         const canvas = document.getElementById('fx-canvas');
-        if (!canvas) return;
+        const mCanvasCursor = document.getElementById('mouse-canvas');
+        if (!canvas || !mCanvasCursor) return;
         const ctx = canvas.getContext('2d');
+        const mCtx = mCanvasCursor.getContext('2d');
         let W, H;
-        function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+        function resize() { 
+            W = canvas.width = mCanvasCursor.width = window.innerWidth; 
+            H = canvas.height = mCanvasCursor.height = window.innerHeight; 
+        }
         resize(); window.addEventListener('resize', resize);
 
         let mouseX = -100, mouseY = -100;
@@ -340,10 +335,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const flyC = ['#F6D383','#D57ACE','#1C8988','#E7B280'];
         for (let i = 0; i < flyCount; i++) flies.push({ x:Math.random()*W, y:Math.random()*H, r:Math.random()*2+.8, c:flyC[Math.floor(Math.random()*4)], a:Math.random()*.5+.15, da:(Math.random()-.5)*.008, vx:(Math.random()-.5)*.4, vy:(Math.random()-.5)*.4 });
 
-        // Chess — bigger + faster
+        // Chess — bigger + faster + b/w 3d effect
         const chessPieces = ['\u2654','\u2655','\u2656','\u2657','\u2658','\u2659','\u265A','\u265B','\u265C','\u265D','\u265E','\u265F'];
         const chess = [];
-        for (let i = 0; i < 10; i++) chess.push({ x:Math.random()*W, y:Math.random()*-H, char:chessPieces[Math.floor(Math.random()*12)], size:Math.random()*22+20, speed:Math.random()*1.2+0.6, rot:Math.random()*360, rotS:(Math.random()-.5)*2, opacity:Math.random()*.2+.1, drift:(Math.random()-.5)*.4 });
+        for (let i = 0; i < 15; i++) chess.push({ x:Math.random()*W, y:Math.random()*-H, char:chessPieces[Math.floor(Math.random()*12)], size:Math.random()*22+20, speed:Math.random()*1.2+0.6, rot:Math.random()*360, rotS:(Math.random()-.5)*2, opacity:Math.random()*.2+.15, drift:(Math.random()-.5)*.4 });
 
         // Card trail — theme colors
         const suits = ['\u2660','\u2665','\u2666','\u2663'];
@@ -353,7 +348,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function animate(now) {
             ctx.clearRect(0, 0, W, H);
-            // Fireflies
+            mCtx.clearRect(0, 0, W, H);
+            
+            // Fireflies on bg
             flies.forEach(f => {
                 f.x+=f.vx;f.y+=f.vy;f.a+=f.da;
                 if(f.a<=.1||f.a>=.6)f.da*=-1;
@@ -362,14 +359,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.save();ctx.globalAlpha=f.a;ctx.fillStyle=f.c;ctx.shadowBlur=12;ctx.shadowColor=f.c;
                 ctx.beginPath();ctx.arc(f.x,f.y,f.r,0,Math.PI*2);ctx.fill();ctx.restore();
             });
-            // Chess
+            // Chess on bg
             chess.forEach(c => {
                 c.y+=c.speed;c.x+=c.drift;c.rot+=c.rotS;
                 if(c.y>H+50){c.y=-50;c.x=Math.random()*W;c.char=chessPieces[Math.floor(Math.random()*12)];}
                 ctx.save();ctx.globalAlpha=c.opacity;ctx.translate(c.x,c.y);ctx.rotate(c.rot*Math.PI/180);
-                ctx.font=`${c.size}px serif`;ctx.fillStyle='#461C89';ctx.textAlign='center';ctx.fillText(c.char,0,0);ctx.restore();
+                ctx.font=`${c.size}px serif`;
+                // Black/White simulated 3D
+                ctx.fillStyle = '#222';
+                ctx.shadowBlur = 4; ctx.shadowColor = '#fff';
+                ctx.textAlign='center';ctx.fillText(c.char,0,0);ctx.restore();
             });
-            // Card cursor trail — continuous everywhere
+            
+            // Card cursor trail on mouse canvas (top layer)
             if (now - lastT > 70 && mouseX > 0) {
                 lastT = now;
                 const si = Math.floor(Math.random()*4);
@@ -378,173 +380,12 @@ document.addEventListener('DOMContentLoaded', () => {
             for (let i=trail.length-1;i>=0;i--) {
                 const t=trail[i];t.life-=.025;t.x+=t.vx;t.y+=t.vy;t.vy+=.05;t.rot+=3;
                 if(t.life<=0){trail.splice(i,1);continue;}
-                ctx.save();ctx.globalAlpha=t.life*.7;ctx.translate(t.x,t.y);ctx.rotate(t.rot*Math.PI/180);
-                ctx.font=`${t.size}px serif`;ctx.fillStyle=t.color;ctx.textAlign='center';ctx.fillText(t.char,0,0);ctx.restore();
+                mCtx.save();mCtx.globalAlpha=t.life*.85;mCtx.translate(t.x,t.y);mCtx.rotate(t.rot*Math.PI/180);
+                mCtx.font=`${t.size}px serif`;mCtx.fillStyle=t.color;mCtx.textAlign='center';mCtx.fillText(t.char,0,0);mCtx.restore();
             }
             requestAnimationFrame(animate);
         }
         if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(animate);
-
-        // ==========================================
-        // GAME TABS
-        // ==========================================
-        document.querySelectorAll('.game-tab').forEach(tab => {
-            tab.addEventListener('click', () => {
-                document.querySelectorAll('.game-tab').forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                document.querySelectorAll('.game-panel').forEach(p => p.style.display = 'none');
-                document.getElementById('panel-' + tab.dataset.tab).style.display = 'block';
-            });
-        });
-
-        // ==========================================
-        // MAZE GAME
-        // ==========================================
-        const mazeCanvas = document.getElementById('maze-canvas');
-        const mCtx2 = mazeCanvas?.getContext('2d');
-        let mazeGrid, mazeW = 15, mazeH = 15, cellSize, px, py, mazeRunning = false, mazePaused = false, mazeStartTime, mazeElapsed = 0;
-        let mazeRecords = JSON.parse(localStorage.getItem('linh_maze_records') || '[]');
-        const mazeTimer = document.getElementById('maze-timer');
-
-        function generateMaze(w, h) {
-            const grid = Array.from({length:h}, () => Array.from({length:w}, () => ({top:true,right:true,bottom:true,left:true,visited:false})));
-            const stack = [];
-            let cx=0, cy=0;
-            grid[cy][cx].visited = true;
-            stack.push([cx, cy]);
-            while (stack.length) {
-                const neighbors = [];
-                if (cy>0 && !grid[cy-1][cx].visited) neighbors.push([cx,cy-1,'top','bottom']);
-                if (cy<h-1 && !grid[cy+1][cx].visited) neighbors.push([cx,cy+1,'bottom','top']);
-                if (cx>0 && !grid[cy][cx-1].visited) neighbors.push([cx-1,cy,'left','right']);
-                if (cx<w-1 && !grid[cy][cx+1].visited) neighbors.push([cx+1,cy,'right','left']);
-                if (neighbors.length) {
-                    const [nx,ny,wall1,wall2] = neighbors[Math.floor(Math.random()*neighbors.length)];
-                    grid[cy][cx][wall1] = false;
-                    grid[ny][nx][wall2] = false;
-                    grid[ny][nx].visited = true;
-                    stack.push([cx, cy]);
-                    cx=nx; cy=ny;
-                } else {
-                    [cx, cy] = stack.pop();
-                }
-            }
-            return grid;
-        }
-
-        function drawMaze() {
-            if (!mCtx2) return;
-            const cs = cellSize;
-            mCtx2.clearRect(0, 0, mazeCanvas.width, mazeCanvas.height);
-            mCtx2.fillStyle = '#FFFDF9';
-            mCtx2.fillRect(0, 0, mazeCanvas.width, mazeCanvas.height);
-            mCtx2.strokeStyle = '#461C89';
-            mCtx2.lineWidth = 2;
-            for (let y=0; y<mazeH; y++) for (let x=0; x<mazeW; x++) {
-                const c = mazeGrid[y][x];
-                const px2 = x*cs, py2 = y*cs;
-                if (c.top) { mCtx2.beginPath(); mCtx2.moveTo(px2,py2); mCtx2.lineTo(px2+cs,py2); mCtx2.stroke(); }
-                if (c.right) { mCtx2.beginPath(); mCtx2.moveTo(px2+cs,py2); mCtx2.lineTo(px2+cs,py2+cs); mCtx2.stroke(); }
-                if (c.bottom) { mCtx2.beginPath(); mCtx2.moveTo(px2,py2+cs); mCtx2.lineTo(px2+cs,py2+cs); mCtx2.stroke(); }
-                if (c.left) { mCtx2.beginPath(); mCtx2.moveTo(px2,py2); mCtx2.lineTo(px2,py2+cs); mCtx2.stroke(); }
-            }
-            // Goal
-            mCtx2.font = `${cs*.6}px serif`;
-            mCtx2.textAlign = 'center';
-            mCtx2.fillStyle = '#F6D383';
-            mCtx2.fillText('\u2733', (mazeW-1)*cs+cs/2, (mazeH-1)*cs+cs*.7);
-            // Player
-            mCtx2.fillStyle = '#D57ACE';
-            mCtx2.beginPath();
-            mCtx2.arc(px*cs+cs/2, py*cs+cs/2, cs*.3, 0, Math.PI*2);
-            mCtx2.fill();
-        }
-
-        function startMaze() {
-            cellSize = Math.floor(mazeCanvas.width / mazeW);
-            mazeGrid = generateMaze(mazeW, mazeH);
-            px = 0; py = 0;
-            mazeRunning = true; mazePaused = false; mazeElapsed = 0;
-            mazeStartTime = performance.now();
-            drawMaze();
-            requestAnimationFrame(mazeLoop);
-        }
-
-        function mazeLoop(now) {
-            if (!mazeRunning) return;
-            if (!mazePaused) {
-                mazeElapsed = ((now - mazeStartTime) / 1000);
-                if (mazeTimer) mazeTimer.textContent = mazeElapsed.toFixed(1) + 's';
-            }
-            if (px === mazeW-1 && py === mazeH-1) {
-                mazeRunning = false;
-                const time = parseFloat(mazeElapsed.toFixed(1));
-                mazeRecords.push(time);
-                mazeRecords.sort((a,b)=>a-b);
-                mazeRecords = mazeRecords.slice(0,5);
-                localStorage.setItem('linh_maze_records', JSON.stringify(mazeRecords));
-                if (mazeTimer) mazeTimer.textContent = time + 's \u2714';
-                return;
-            }
-            requestAnimationFrame(mazeLoop);
-        }
-
-        document.getElementById('maze-start')?.addEventListener('click', startMaze);
-        document.getElementById('maze-pause')?.addEventListener('click', () => {
-            if (!mazeRunning) return;
-            mazePaused = !mazePaused;
-            if (!mazePaused) { mazeStartTime = performance.now() - mazeElapsed*1000; requestAnimationFrame(mazeLoop); }
-        });
-        document.getElementById('maze-records')?.addEventListener('click', () => {
-            const panel = document.getElementById('maze-records-panel');
-            const list = document.getElementById('maze-records-list');
-            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
-            list.innerHTML = mazeRecords.length ? mazeRecords.map((t,i) => `<li>${t}s</li>`).join('') : '<li>No records yet</li>';
-        });
-        document.getElementById('maze-close-records')?.addEventListener('click', () => { document.getElementById('maze-records-panel').style.display = 'none'; });
-
-        document.addEventListener('keydown', e => {
-            if (!mazeRunning || mazePaused) return;
-            let nx=px, ny=py;
-            if ((e.key==='w'||e.key==='W'||e.key==='ArrowUp')&&!mazeGrid[py][px].top) ny--;
-            else if ((e.key==='s'||e.key==='S'||e.key==='ArrowDown')&&!mazeGrid[py][px].bottom) ny++;
-            else if ((e.key==='a'||e.key==='A'||e.key==='ArrowLeft')&&!mazeGrid[py][px].left) nx--;
-            else if ((e.key==='d'||e.key==='D'||e.key==='ArrowRight')&&!mazeGrid[py][px].right) nx++;
-            if (nx!==px||ny!==py) { px=nx; py=ny; drawMaze(); }
-        });
-
-        // ==========================================
-        // TAROT GAME
-        // ==========================================
-        const tarotCards = [
-            {sym:'\u2660',name:'The Wanderer',msg:'Adventure awaits! Step boldly into the unknown.'},
-            {sym:'\u2665',name:'The Heart',msg:'Love and connection will guide your path today.'},
-            {sym:'\u2666',name:'The Diamond',msg:'Prosperity is on the horizon. Stay focused.'},
-            {sym:'\u2663',name:'The Clover',msg:'Lucky fortune! Something wonderful is coming.'},
-            {sym:'\u265B',name:'The Queen',msg:'Lead with grace and confidence. You are powerful.'},
-            {sym:'\u265A',name:'The King',msg:'Wisdom and authority. Trust your decisions.'},
-            {sym:'\u265F',name:'The Pawn',msg:'Every great journey starts with a single step.'},
-            {sym:'\u2733',name:'The Star',msg:'Shine bright! Your talents will be recognized.'},
-            {sym:'\u2654',name:'The Crown',msg:'Success crowns those who persevere.'},
-            {sym:'\u2602',name:'The Umbrella',msg:'Protection and care surround you today.'}
-        ];
-        const tarotCard = document.getElementById('tarot-card');
-        const tarotSymbol = document.getElementById('tarot-symbol');
-        const tarotName = document.getElementById('tarot-name');
-        const tarotMsg = document.getElementById('tarot-msg');
-
-        function drawTarot() {
-            const c = tarotCards[Math.floor(Math.random()*tarotCards.length)];
-            tarotCard.classList.remove('flipped');
-            setTimeout(() => {
-                tarotSymbol.textContent = c.sym;
-                tarotName.textContent = c.name;
-                tarotMsg.textContent = c.msg;
-                tarotCard.classList.add('flipped');
-            }, 300);
-        }
-        document.getElementById('tarot-draw-btn')?.addEventListener('click', drawTarot);
-        tarotCard?.addEventListener('click', drawTarot);
 
         // ==========================================
         // MOOD TRACKER

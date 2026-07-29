@@ -245,7 +245,7 @@
                             <div class="proj-tags"><span>HTML/CSS/JS</span><span>UX Design</span><span>Scheduling</span><span>Attendance</span></div>
                         </div>
                     </article>
-                    <article class="proj-card reveal">
+                    <article class="proj-card proj-card--hero reveal">
                         <div class="proj-cover"><img src="images/activies and awards/forum.png" alt="FTU Advisory" loading="lazy"><span class="proj-badge" data-i18n="proj_b2">Advisory</span></div>
                         <div class="proj-body">
                             <h3 data-i18n="proj_t2">FTU Admissions Advisory Platform</h3>
@@ -357,8 +357,8 @@
             </div>
         </section>
 
-        <!-- ===== MINIGAME — Maze + Tarot ===== -->
-        <section id="minigame" class="section sec-minigame" data-mascot-en="Time for fun! Try the maze or draw a tarot card!" data-mascot-vi="Giải trí nào! Thử mê cung hoặc bốc bài Tarot!">
+        <!-- ===== MINIGAME — Mood Tracker ===== -->
+        <section id="minigame" class="section sec-minigame" data-mascot-en="Time for fun! Tell me how you feel!" data-mascot-vi="Giải trí nào! Bạn cảm thấy thế nào?">
             <div class="container">
                 <header class="sec-head reveal">
                     <span class="sec-chip" data-i18n="game_chip">Chapter VII &middot; The Mad Tea Party</span>
@@ -366,58 +366,16 @@
                     <p class="sec-sub" data-i18n="game_sub">Take a break and play!</p>
                 </header>
 
-                <div class="game-tabs reveal">
-                    <button class="game-tab active" data-tab="maze" data-i18n="tab_maze">&#9819; Maze Escape</button>
-                    <button class="game-tab" data-tab="tarot" data-i18n="tab_tarot">&#9827; Tarot Draw</button>
-                    <button class="game-tab" data-tab="mood" data-i18n="tab_mood">&#9829; Mood Tracker</button>
-                </div>
-
-                <!-- MAZE GAME -->
-                <div class="game-panel" id="panel-maze">
-                    <div class="maze-controls">
-                        <div class="maze-info">
-                            <span data-i18n="maze_time">Time:</span> <strong id="maze-timer">0.0s</strong>
-                            <button class="maze-sm-btn" id="maze-pause" data-i18n="maze_pause">Pause</button>
-                            <button class="maze-sm-btn" id="maze-records" data-i18n="maze_records">Records</button>
-                        </div>
-                        <button class="btn btn-primary maze-start-btn" id="maze-start" data-i18n="maze_start">New Maze</button>
-                    </div>
-                    <canvas id="maze-canvas" width="400" height="400"></canvas>
-                    <p class="maze-hint" data-i18n="maze_hint">Use W A S D or Arrow Keys to move. Reach the &#9733; to win!</p>
-                    <div class="maze-records-panel" id="maze-records-panel" style="display:none;">
-                        <h4 data-i18n="maze_best">Best Times</h4>
-                        <ol id="maze-records-list"></ol>
-                        <button class="maze-sm-btn" id="maze-close-records" data-i18n="maze_close">Close</button>
-                    </div>
-                </div>
-
-                <!-- TAROT DRAW -->
-                <div class="game-panel" id="panel-tarot" style="display:none;">
-                    <div class="tarot-area">
-                        <div class="tarot-card" id="tarot-card">
-                            <div class="tarot-front" id="tarot-front">
-                                <span class="tarot-symbol" id="tarot-symbol">?</span>
-                                <p class="tarot-name" id="tarot-name" data-i18n="tarot_draw">Draw a card</p>
-                            </div>
-                            <div class="tarot-back">
-                                <span>&#9824;&#9829;&#9830;&#9827;</span>
-                            </div>
-                        </div>
-                        <p class="tarot-msg" id="tarot-msg" data-i18n="tarot_prompt">Click the card to reveal your Wonderland message!</p>
-                        <button class="btn btn-primary" id="tarot-draw-btn" data-i18n="tarot_btn">Draw Card</button>
-                    </div>
-                </div>
-
                 <!-- MOOD TRACKER -->
-                <div class="game-panel" id="panel-mood" style="display:none;">
+                <div class="game-panel" id="panel-mood">
                     <div class="mood-area">
                         <h3 data-i18n="mood_title">How are you feeling today?</h3>
                         <div class="mood-options">
-                            <button class="mood-btn" data-mood="amazing">&#128525; Amazing</button>
-                            <button class="mood-btn" data-mood="happy">&#128522; Happy</button>
-                            <button class="mood-btn" data-mood="neutral">&#128528; Neutral</button>
-                            <button class="mood-btn" data-mood="tired">&#128564; Tired</button>
-                            <button class="mood-btn" data-mood="sad">&#128546; Sad</button>
+                            <button class="mood-btn" data-mood="amazing">Amazing</button>
+                            <button class="mood-btn" data-mood="happy">Happy</button>
+                            <button class="mood-btn" data-mood="neutral">Neutral</button>
+                            <button class="mood-btn" data-mood="tired">Tired</button>
+                            <button class="mood-btn" data-mood="sad">Sad</button>
                         </div>
                         <div class="mood-result" id="mood-result" style="display:none;">
                             <p id="mood-message"></p>
@@ -466,7 +424,7 @@
                         <input type="text" name="name" placeholder="Your name" data-i18n-ph="form_name" required>
                         <input type="email" name="email" placeholder="Your email" data-i18n-ph="form_email" required>
                         <textarea name="message" rows="4" placeholder="Your message..." data-i18n-ph="form_msg" required></textarea>
-                        <button type="submit" class="btn btn-primary" data-i18n="form_send">Send Message &#9993;</button>
+                        <button type="submit" class="btn btn-primary" data-i18n="form_send">Send Message</button>
                         <p class="form-note" id="form-note" style="display:none;"></p>
                     </form>
                 </div>
