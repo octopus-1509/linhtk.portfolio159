@@ -32,10 +32,10 @@
     <!-- Scroll Progress -->
     <div class="scroll-progress" id="scroll-progress"></div>
 
-    <!-- FX Canvas -->
+    <!-- FX Canvas (Chess pieces falling + Playing card cursor trail) -->
     <canvas id="fx-canvas"></canvas>
 
-    <!-- Background Music (Web Audio API generated) -->
+    <!-- Background Music -->
     <audio id="bg-music" loop preload="auto">
         <source src="assets/music/alicemusic.mp3" type="audio/mpeg">
     </audio>
@@ -80,10 +80,13 @@
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
                     <span id="lang-label">VI</span>
                 </button>
-                <button class="nav-btn music-btn" id="music-btn" aria-label="Toggle music">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-                    <span data-i18n="music_label">Music</span>
-                </button>
+                <div class="music-control-group" style="display:inline-flex; align-items:center; gap:5px;">
+                    <button class="nav-btn music-btn" id="music-btn" aria-label="Toggle music">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                        <span data-i18n="music_label">Music</span>
+                    </button>
+                    <input type="range" id="music-volume" min="0" max="1" step="0.05" value="0.5" title="Volume" style="width: 60px; cursor: pointer;">
+                </div>
                 <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
                     <span></span><span></span><span></span>
                 </button>
@@ -118,7 +121,7 @@
                 <div class="about-grid">
                     <div class="about-portrait reveal reveal-left">
                         <div class="portrait-mirror-wrap">
-                            <img src="images/frame-removebg-preview.jpg" alt="Mirror Frame" class="portrait-mirror-frame">
+                            <!-- Đã bỏ khung ảnh cá nhân theo yêu cầu -->
                             <img src="images/my_photo.JPG" alt="Trịnh Khánh Linh" class="portrait-photo" loading="lazy">
                         </div>
                     </div>
@@ -167,12 +170,12 @@
             </div>
         </section>
 
-        <!-- ===== LANGUAGES (Separate Section) ===== -->
+        <!-- ===== LANGUAGES (Đã đổi tên thành Ngoại ngữ, bỏ tiếng Việt theo yêu cầu) ===== -->
         <section id="languages" class="section sec-languages" data-mascot-en="Three languages — that's impressive!" data-mascot-vi="Ba ngoại ngữ — thật ấn tượng!">
             <div class="container">
                 <header class="sec-head reveal">
                     <span class="sec-chip" data-i18n="lang_chip">Chapter II &middot; Tower of Babel</span>
-                    <h2 data-i18n="lang_h2">Language Proficiency</h2>
+                    <h2 data-i18n="lang_h2">Ngoại ngữ</h2>
                 </header>
                 <div class="lang-cards">
                     <div class="lang-card reveal">
@@ -187,17 +190,11 @@
                         <span class="lang-level">HSK 5</span>
                         <div class="lang-bar"><div class="lang-fill" data-percent="82"></div></div>
                     </div>
-                    <div class="lang-card reveal">
-                        <div class="lang-flag">&#127483;&#127475;</div>
-                        <h3 data-i18n="lang_vi">Vietnamese</h3>
-                        <span class="lang-level" data-i18n="lang_native">Native</span>
-                        <div class="lang-bar"><div class="lang-fill" data-percent="98"></div></div>
-                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- ===== SKILLS (without languages) ===== -->
+        <!-- ===== SKILLS ===== -->
         <section id="skills" class="section sec-skills" data-mascot-en="Multi-talented skills unlocked!" data-mascot-vi="Kỹ năng đa dạng đã được mở khóa!">
             <div class="container">
                 <header class="sec-head reveal">
@@ -307,7 +304,7 @@
                     <h2 data-i18n="ach_h2">Achievements</h2>
                 </header>
 
-                <!-- Awards — no images, prominent layout -->
+                <!-- Awards -->
                 <div class="awards-showcase">
                     <div class="award-item award-gold reveal">
                         <div class="aw-rank">1<sup>st</sup></div>
@@ -332,7 +329,7 @@
                     </div>
                 </div>
 
-                <!-- Ambassador Roles with images -->
+                <!-- Ambassador Roles -->
                 <div class="roles-block reveal">
                     <h3 class="block-title" data-i18n="roles_h3">&#9824; Media Ambassador Roles</h3>
                     <div class="roles-grid">
@@ -357,7 +354,7 @@
             </div>
         </section>
 
-        <!-- ===== MINIGAME — Mood Tracker ===== -->
+        <!-- ===== MINIGAME — Mood Tracker (Đã thiết kế lại theo yêu cầu) ===== -->
         <section id="minigame" class="section sec-minigame" data-mascot-en="Time for fun! Tell me how you feel!" data-mascot-vi="Giải trí nào! Bạn cảm thấy thế nào?">
             <div class="container">
                 <header class="sec-head reveal">
@@ -371,17 +368,18 @@
                     <div class="mood-area">
                         <h3 data-i18n="mood_title">How are you feeling today?</h3>
                         <div class="mood-options">
-                            <button class="mood-btn" data-mood="amazing">Amazing</button>
-                            <button class="mood-btn" data-mood="happy">Happy</button>
-                            <button class="mood-btn" data-mood="neutral">Neutral</button>
-                            <button class="mood-btn" data-mood="tired">Tired</button>
-                            <button class="mood-btn" data-mood="sad">Sad</button>
+                            <button class="mood-btn" data-mood="amazing">✨ Amazing</button>
+                            <button class="mood-btn" data-mood="happy">😊 Happy</button>
+                            <button class="mood-btn" data-mood="neutral">☕ Neutral</button>
+                            <button class="mood-btn" data-mood="tired">💤 Tired</button>
+                            <button class="mood-btn" data-mood="sad">🌧️ Sad</button>
                         </div>
-                        <div class="mood-result" id="mood-result" style="display:none;">
-                            <p id="mood-message"></p>
+                        <!-- Khung hiển thị quote/thông điệp tương ứng khi chọn cảm xúc -->
+                        <div class="mood-result card-quote-box" id="mood-result" style="display:none; margin-top: 20px; padding: 20px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px dashed var(--mystic);">
+                            <p id="mood-message" style="font-size: 1.1rem; font-style: italic; margin-bottom: 15px;"></p>
                             <div class="mood-history">
-                                <h4 data-i18n="mood_history">Your Mood Journal</h4>
-                                <ul id="mood-log"></ul>
+                                <h4 data-i18n="mood_history" style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Your Mood Journal</h4>
+                                <ul id="mood-log" style="list-style: none; padding: 0; margin-top: 8px;"></ul>
                             </div>
                         </div>
                     </div>
