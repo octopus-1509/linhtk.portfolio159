@@ -17,12 +17,12 @@
             margin-bottom: 20px !important;
         }
         
-        /* Tăng độ rõ nền, giảm độ mờ nhạt (tăng opacity các lớp phủ background) */
+        /* Tăng độ rõ nền, giảm độ mờ nhạt */
         .portfolio-wrap {
-            background-color: #0b0f19 !important; /* Đảm bảo nền tối đậm đà, rõ nét */
+            background-color: #0b0f19 !important;
         }
         .hero-vignette, .mirror-bg {
-            opacity: 0.85 !important; /* Giảm độ trong suốt để nền hiện rõ sắc nét hơn */
+            opacity: 0.85 !important;
         }
 
         /* Phóng to ảnh cá nhân và thêm hiệu ứng hào quang Gold khi hover */
@@ -34,7 +34,6 @@
             transition: all 0.4s ease;
         }
         
-        /* Hiệu ứng hào quang vàng (gold aura) tỏa ra sau ảnh khi di chuột tới */
         .about-portrait .portrait-mirror-wrap::before {
             content: '';
             position: absolute;
@@ -74,6 +73,26 @@
             pointer-events: none;
             z-index: 99;
         }
+
+        /* CGI Badge / Icon chuyên nghiệp thay thế icon thường */
+        .cgi-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(169, 122, 10, 0.4));
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.3), inset 0 0 6px rgba(255, 255, 255, 0.2);
+            color: var(--gold);
+            font-size: 16px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .cgi-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 18px rgba(212, 175, 55, 0.6);
+        }
     </style>
 </head>
 <body>
@@ -98,7 +117,7 @@
     <!-- Scroll Progress -->
     <div class="scroll-progress" id="scroll-progress"></div>
 
-    <!-- FX Canvas: Quân cờ vua rơi bồng bềnh như lá + Vệt chuột lá bài tây (♠, ♦, ♥, ♣) -->
+    <!-- FX Canvas: Quân cờ tướng rơi lộn nhào ngẫu nhiên + Vệt chuột lá bài tây đỏ đen -->
     <canvas id="fx-canvas"></canvas>
 
     <!-- Background Music -->
@@ -143,12 +162,12 @@
             </nav>
             <div class="nav-actions">
                 <button class="nav-btn" id="lang-btn" aria-label="Switch language">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
+                    <span class="cgi-icon">&#127760;</span>
                     <span id="lang-label">VI</span>
                 </button>
                 <div class="music-control-group" style="display:inline-flex; align-items:center; gap:5px;">
                     <button class="nav-btn music-btn" id="music-btn" aria-label="Toggle music">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                        <span class="cgi-icon">&#127925;</span>
                         <span>Music</span>
                     </button>
                     <input type="range" id="music-volume" min="0" max="1" step="0.05" value="0.5" title="Volume" style="width: 50px; cursor: pointer;">
@@ -171,7 +190,6 @@
                 <p class="hero-tagline">Bridging global markets, economic research, and strategic vision &mdash; one curious step at a time.</p>
                 <div class="hero-cta">
                     <a href="#about" class="btn btn-primary" id="begin-btn">Begin Journey &#9823;</a>
-                    <a href="CV.pdf" class="btn btn-ghost" target="_blank">Download CV</a>
                 </div>
             </div>
             <div class="scroll-hint"><span>Scroll to explore</span><div class="scroll-mouse"><div class="scroll-dot"></div></div></div>
@@ -187,7 +205,6 @@
                 <div class="about-grid">
                     <div class="about-portrait reveal reveal-left">
                         <div class="portrait-mirror-wrap">
-                            <!-- Ảnh cá nhân phóng to, kèm hiệu ứng hào quang Gold khi hover -->
                             <img src="images/my_photo.JPG" alt="Trịnh Khánh Linh" class="portrait-photo" loading="lazy">
                         </div>
                     </div>
@@ -329,7 +346,7 @@
                 </header>
                 <div class="timeline">
                     <article class="tl-item reveal">
-                        <div class="tl-marker"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--mystic)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+                        <div class="tl-marker"><span class="cgi-icon">&#9873;</span></div>
                         <div class="tl-card">
                             <div class="tl-card-img"><img src="images/activies and awards/forum1.JPG" alt="FTU Forum" loading="lazy"></div>
                             <div class="tl-card-body">
@@ -343,7 +360,7 @@
                         </div>
                     </article>
                     <article class="tl-item reveal">
-                        <div class="tl-marker"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                        <div class="tl-marker"><span class="cgi-icon">&#9733;</span></div>
                         <div class="tl-card">
                             <div class="tl-card-img"><img src="images/activies and awards/ie.JPG" alt="IE SHINE 2024" loading="lazy"></div>
                             <div class="tl-card-body">
@@ -462,24 +479,24 @@
                 <div class="contact-grid">
                     <div class="contact-info reveal">
                         <div class="ct-item">
-                            <span class="ct-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+                            <span class="ct-icon"><span class="cgi-icon">&#9993;</span></span>
                             <div><strong>Email</strong><a href="mailto:linhtk05.ftuforum@gmail.com">linhtk05.ftuforum@gmail.com</a></div>
                         </div>
                         <div class="ct-item">
-                            <span class="ct-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+                            <span class="ct-icon"><span class="cgi-icon">&#9742;</span></span>
                             <div><strong>Phone</strong><p>0963 075 656</p></div>
                         </div>
                         <div class="ct-item">
-                            <span class="ct-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                            <span class="ct-icon"><span class="cgi-icon">&#128205;</span></span>
                             <div><strong>Address</strong><p>Ngõ 218, Mỹ Đình 2, Từ Liêm, Hà Nội</p></div>
                         </div>
                         <div class="ct-item">
-                            <span class="ct-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></span>
+                            <span class="ct-icon"><span class="cgi-icon">&#128187;</span></span>
                             <div><strong>GitHub</strong><a href="https://github.com/octopus-1509/linhtk.portfolio159" target="_blank">octopus-1509</a></div>
                         </div>
                     </div>
 
-                    <!-- Contact Form (Nút gửi chỉ có chữ "Gửi", bỏ hoàn toàn icon) -->
+                    <!-- Contact Form -->
                     <form class="contact-form reveal" id="contact-form">
                         <h3>Send a Message</h3>
                         <input type="text" name="name" placeholder="Your name" required>
@@ -491,19 +508,19 @@
                 </div>
 
                 <div class="farewell reveal">
-                    <p>"Curiosity is the beginning of wisdom. Thank you for visiting my Wonderland!" &mdash; Trịnh Khánh Linh</p>
+                    <p>"Hành trình qua chiếc gương khép lại, mở ra những chân trời tri thức và sáng tạo mới!" — Linh</p>
                 </div>
             </div>
-            <!-- Cập nhật dòng footer bỏ cụm "thiết kế bởi" -->
+            <!-- Cập nhật dòng footer theo yêu cầu -->
             <footer class="site-footer">
-                <p>Trịnh Khánh Linh © 2026 &middot; ĐH Ngoại thương.</p>
+                <p>Portfolio Trịnh Khánh Linh © 2026 &middot; ĐH Ngoại thương</p>
             </footer>
         </section>
     </main>
 
     <!-- Home Button -->
     <a href="#hero" class="home-btn" id="home-btn" aria-label="Back to top">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span class="cgi-icon">&#8593;</span>
     </a>
 
     </div><!-- /portfolio-wrap -->
@@ -538,7 +555,7 @@
                 });
             });
 
-            // Hiệu ứng Canvas: Chỉ có quân cờ vua rơi ngẫu nhiên bồng bềnh như lá rơi, và lá bài tây ở vệt chuột
+            // Hiệu ứng Canvas: Chỉ có quân cờ tướng rơi lộn nhào ngẫu nhiên (màu giống tên Trịnh Khánh Linh: gold), và lá bài tây đỏ đen ở vệt chuột
             const canvas = document.getElementById('fx-canvas');
             if (canvas) {
                 const ctx = canvas.getContext('2d');
@@ -550,35 +567,41 @@
                     height = canvas.height = window.innerHeight;
                 });
 
-                // Các ký hiệu quân cờ vua rơi
-                const chessPieces = ['♟', '♜', '♝', '♞', '♛', '♚'];
+                // Các ký hiệu quân cờ tướng (帥, 將, 仕, 護, 相, 象, 車, 砲, 卒, 兵)
+                const chineseChessPieces = ['帥', '將', '仕', '相', '車', '砲', '馬', '卒', '兵'];
                 let elements = [];
 
                 for (let i = 0; i < 22; i++) {
                     elements.push({
                         x: Math.random() * width,
                         y: Math.random() * height,
-                        symbol: chessPieces[Math.floor(Math.random() * chessPieces.length)],
-                        size: Math.floor(Math.random() * 16) + 14,
-                        speedY: Math.random() * 0.8 + 0.3, // Tốc độ rơi nhẹ nhàng
-                        speedX: (Math.random() - 0.5) * 0.8, // Lắc lư ngẫu nhiên theo chiều ngang như lá rơi
+                        symbol: chineseChessPieces[Math.floor(Math.random() * chineseChessPieces.length)],
+                        size: Math.floor(Math.random() * 18) + 16,
+                        speedY: Math.random() * 1.2 + 0.5, // Tốc độ rơi linh hoạt
+                        speedX: (Math.random() - 0.5) * 1.5, // Lượn lờ ngẫu nhiên
                         angle: Math.random() * Math.PI * 2,
-                        spin: (Math.random() - 0.5) * 0.02,
-                        opacity: Math.random() * 0.45 + 0.25
+                        spin: (Math.random() - 0.5) * 0.05, // Hiệu ứng lộn nhào xoay liên tục
+                        opacity: Math.random() * 0.5 + 0.3
                     });
                 }
 
-                // Vệt chuột lá bài tây mang màu sắc Wonderland (Bích ♠, Rô ♦, Cơ ♥, Tệp ♣)
+                // Vệt chuột lá bài tây mang màu sắc đỏ - đen (♠, ♦, ♥, ♣)
                 let mouseTrails = [];
                 window.addEventListener('mousemove', (e) => {
                     if (Math.random() < 0.35) {
-                        const cardSuits = ['♠', '♦', '♥', '♣'];
+                        const cardSuits = [
+                            { symbol: '♠', color: '#1a1a1a' },
+                            { symbol: '♣', color: '#1a1a1a' },
+                            { symbol: '♥', color: '#e63946' },
+                            { symbol: '♦', color: '#e63946' }
+                        ];
+                        const chosenCard = cardSuits[Math.floor(Math.random() * cardSuits.length)];
                         mouseTrails.push({
-                            x: e.clientX + (Math.random() * 10 - 5),
-                            y: e.clientY + (Math.random() * 10 - 5),
-                            symbol: cardSuits[Math.floor(Math.random() * cardSuits.length)],
-                            life: 1,
-                            color: Math.random() > 0.5 ? '#d4af37' : '#ff4d4d'
+                            x: e.clientX + (Math.random() * 12 - 6),
+                            y: e.clientY + (Math.random() * 12 - 6),
+                            symbol: chosenCard.symbol,
+                            color: chosenCard.color,
+                            life: 1
                         });
                     }
                 });
@@ -586,37 +609,41 @@
                 function animate() {
                     ctx.clearRect(0, 0, width, height);
 
-                    // Vẽ quân cờ vua rơi bồng bềnh như lá
+                    // Vẽ quân cờ tướng rơi lộn nhào, màu vàng gold trùng với màu tên Trịnh Khánh Linh
                     elements.forEach(el => {
                         ctx.save();
                         ctx.translate(el.x, el.y);
                         ctx.rotate(el.angle);
                         ctx.fillStyle = `rgba(212, 175, 55, ${el.opacity})`;
-                        ctx.font = `${el.size}px serif`;
+                        ctx.font = `bold ${el.size}px serif`;
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
                         ctx.fillText(el.symbol, 0, 0);
                         ctx.restore();
 
                         el.y += el.speedY;
-                        el.x += el.speedX + Math.sin(el.y * 0.02) * 0.4; // Tạo quỹ đạo bay lượn ngẫu nhiên
-                        el.angle += el.spin;
+                        el.x += el.speedX + Math.sin(el.y * 0.03) * 0.6; // Đổi hướng lượn sóng ngẫu nhiên
+                        el.angle += el.spin; // Lộn nhào liên tục
 
-                        if (el.y > height + 20) {
-                            el.y = -20;
+                        if (el.y > height + 30) {
+                            el.y = -30;
                             el.x = Math.random() * width;
                         }
-                        if (el.x < -20) el.x = width + 20;
-                        if (el.x > width + 20) el.x = -20;
+                        if (el.x < -30) el.x = width + 30;
+                        if (el.x > width + 30) el.x = -30;
                     });
 
-                    // Vẽ vệt chuột lá bài tây
+                    // Vẽ vệt chuột lá bài tây (đỏ - đen)
                     mouseTrails.forEach((trail, index) => {
                         ctx.fillStyle = trail.color;
                         ctx.globalAlpha = trail.life;
                         ctx.font = '16px serif';
+                        ctx.textAlign = 'left';
+                        ctx.textBaseline = 'alphabetic';
                         ctx.fillText(trail.symbol, trail.x, trail.y);
                         ctx.globalAlpha = 1;
 
-                        trail.y += 0.8;
+                        trail.y += 1;
                         trail.life -= 0.035;
                         if (trail.life <= 0) {
                             mouseTrails.splice(index, 1);
