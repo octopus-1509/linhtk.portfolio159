@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* Tối ưu giảm khoảng trống & tăng độ rõ của background */
+        /* Tối ưu giảm khoảng trống */
         .section {
             padding: 40px 0 !important;
         }
@@ -17,12 +17,20 @@
             margin-bottom: 20px !important;
         }
         
-        /* Tăng độ rõ nền, giảm độ mờ nhạt */
+        /* Điều chỉnh background dịu hơn, tăng độ sáng của chữ để không bị chìm */
         .portfolio-wrap {
-            background-color: #0b0f19 !important;
+            background-color: #0f172a !important; /* Xanh đen thẫm, dịu mắt, làm nổi bật chữ */
         }
         .hero-vignette, .mirror-bg {
-            opacity: 0.85 !important;
+            opacity: 0.65 !important; /* Giảm độ tối nền để chữ rõ ràng, dễ đọc */
+        }
+        
+        /* Tăng độ tương phản cho toàn bộ văn bản để không bị chìm nền */
+        body, p, span, h1, h2, h3, h4, li, a {
+            color: #f8fafc !important;
+        }
+        .text-muted, .sec-sub, .mirror-sub, .mirror-hint {
+            color: #cbd5e1 !important;
         }
 
         /* Phóng to ảnh cá nhân và thêm hiệu ứng hào quang Gold khi hover */
@@ -74,24 +82,24 @@
             z-index: 99;
         }
 
-        /* CGI Badge / Icon chuyên nghiệp thay thế icon thường */
+        /* CGI Badge / Icon chuyên nghiệp, tuyệt đối không dùng icon iPhone/Emoji thường */
         .cgi-icon {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(169, 122, 10, 0.4));
-            border: 1px solid rgba(212, 175, 55, 0.5);
-            box-shadow: 0 0 12px rgba(212, 175, 55, 0.3), inset 0 0 6px rgba(255, 255, 255, 0.2);
-            color: var(--gold);
-            font-size: 16px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(169, 122, 10, 0.45));
+            border: 1px solid rgba(212, 175, 55, 0.6);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.35);
+            color: #ffd700;
+            font-size: 14px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
         }
         .cgi-icon:hover {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 0 18px rgba(212, 175, 55, 0.6);
+            transform: scale(1.1);
         }
     </style>
 </head>
@@ -102,12 +110,12 @@
         <div class="mirror-bg"></div>
         <canvas id="mirror-particles"></canvas>
         <div class="mirror-content">
-            <h1 class="mirror-title">Welcome to Wonderland</h1>
+            <h1 class="mirror-title" data-en="Welcome to Wonderland" data-vi="Chào mừng đến với Xứ sở Thần tiên">Welcome to Wonderland</h1>
             <div class="mirror-frame-wrap" id="mirror-click">
                 <img src="images/mirror.png" alt="Magic Mirror" class="mirror-img">
-                <span class="mirror-hint" id="mirror-hint">Chạm nhẹ vào tấm gương kỳ diệu để bắt đầu hành trình...</span>
+                <span class="mirror-hint" id="mirror-hint" data-en="Tap the magical mirror to begin your journey..." data-vi="Chạm nhẹ vào tấm gương kỳ diệu để bắt đầu hành trình...">Tap the magical mirror to begin your journey...</span>
             </div>
-            <p class="mirror-sub">Step through the looking glass</p>
+            <p class="mirror-sub" data-en="Step through the looking glass" data-vi="Bước qua khung cửa gương nhiệm màu">Step through the looking glass</p>
         </div>
     </div>
 
@@ -120,9 +128,10 @@
     <!-- FX Canvas: Quân cờ tướng rơi lộn nhào ngẫu nhiên + Vệt chuột lá bài tây đỏ đen -->
     <canvas id="fx-canvas"></canvas>
 
-    <!-- Background Music -->
+    <!-- Background Music: Tự động phát hoặc phát mượt mà khi người dùng tương tác -->
     <audio id="bg-music" loop preload="auto">
         <source src="assets/music/alicemusic.mp3" type="audio/mpeg">
+        Trình duyệt của bạn không hỗ trợ phát âm thanh.
     </audio>
 
     <!-- Rabbit Mascot -->
@@ -149,28 +158,29 @@
             </a>
             <nav class="nav-links" id="nav-links">
                 <ul>
-                    <li><a href="#hero" class="active">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#languages">Languages</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#experience">Experience</a></li>
-                    <li><a href="#achievements">Achievements</a></li>
-                    <li><a href="#minigame">Minigame</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#hero" class="active" data-en="Home" data-vi="Trang chủ">Home</a></li>
+                    <li><a href="#about" data-en="About" data-vi="Giới thiệu">About</a></li>
+                    <li><a href="#languages" data-en="Languages" data-vi="Ngoại ngữ">Languages</a></li>
+                    <li><a href="#skills" data-en="Skills" data-vi="Kỹ năng">Skills</a></li>
+                    <li><a href="#projects" data-en="Projects" data-vi="Dự án">Projects</a></li>
+                    <li><a href="#experience" data-en="Experience" data-vi="Kinh nghiệm">Experience</a></li>
+                    <li><a href="#achievements" data-en="Achievements" data-vi="Thành tích">Achievements</a></li>
+                    <li><a href="#minigame" data-en="Minigame" data-vi="Trò chơi">Minigame</a></li>
+                    <li><a href="#contact" data-en="Contact" data-vi="Liên hệ">Contact</a></li>
                 </ul>
             </nav>
             <div class="nav-actions">
+                <!-- Nút chuyển ngôn ngữ VI-EN hoạt động thực tế -->
                 <button class="nav-btn" id="lang-btn" aria-label="Switch language">
-                    <span class="cgi-icon">&#127760;</span>
+                    <span class="cgi-icon">🌐</span>
                     <span id="lang-label">VI</span>
                 </button>
                 <div class="music-control-group" style="display:inline-flex; align-items:center; gap:5px;">
                     <button class="nav-btn music-btn" id="music-btn" aria-label="Toggle music">
-                        <span class="cgi-icon">&#127925;</span>
-                        <span>Music</span>
+                        <span class="cgi-icon">♫</span>
+                        <span id="music-label" data-en="Music" data-vi="Nhạc nền">Music</span>
                     </button>
-                    <input type="range" id="music-volume" min="0" max="1" step="0.05" value="0.5" title="Volume" style="width: 50px; cursor: pointer;">
+                    <input type="range" id="music-volume" min="0" max="1" step="0.05" value="0.7" title="Volume" style="width: 50px; cursor: pointer;">
                 </div>
                 <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
                     <span></span><span></span><span></span>
@@ -184,23 +194,23 @@
         <section id="hero" class="hero" data-mascot-vi="✨ Chào mừng cậu đã bước qua tấm gương nhiệm màu! Cùng khám phá hành trình của tớ nhé!">
             <div class="hero-vignette"></div>
             <div class="hero-inner container reveal">
-                <span class="hero-chip">&#10024; A Journey Through Wonderland</span>
+                <span class="hero-chip" data-en="✨ A Journey Through Wonderland" data-vi="✨ Hành trình xuyên qua Xứ sở Thần tiên">&#10024; A Journey Through Wonderland</span>
                 <h1 class="hero-name">Trịnh Khánh Linh</h1>
-                <p class="hero-role"><span>International Economics</span><span class="hero-sep">&mdash;</span><strong>Foreign Trade University (FTU)</strong></p>
-                <p class="hero-tagline">Bridging global markets, economic research, and strategic vision &mdash; one curious step at a time.</p>
+                <p class="hero-role"><span data-en="International Economics" data-vi="Kinh tế Quốc tế">International Economics</span><span class="hero-sep">&mdash;</span><strong>Foreign Trade University (FTU)</strong></p>
+                <p class="hero-tagline" data-en="Bridging global markets, economic research, and strategic vision &mdash; one curious step at a time." data-vi="Kết nối thị trường toàn cầu, nghiên cứu kinh tế và tầm nhìn chiến lược &mdash; qua từng bước chân đầy tò mò.">Bridging global markets, economic research, and strategic vision &mdash; one curious step at a time.</p>
                 <div class="hero-cta">
-                    <a href="#about" class="btn btn-primary" id="begin-btn">Begin Journey &#9823;</a>
+                    <a href="#about" class="btn btn-primary" id="begin-btn" data-en="Begin Journey &#9823;" data-vi="Bắt đầu hành trình &#9823;">Begin Journey &#9823;</a>
                 </div>
             </div>
-            <div class="scroll-hint"><span>Scroll to explore</span><div class="scroll-mouse"><div class="scroll-dot"></div></div></div>
+            <div class="scroll-hint"><span data-en="Scroll to explore" data-vi="Cuộn để khám phá">Scroll to explore</span><div class="scroll-mouse"><div class="scroll-dot"></div></div></div>
         </section>
 
         <!-- ===== ABOUT ===== -->
         <section id="about" class="section sec-about" data-mascot-vi="🌸 Cậu đang ngắm nhìn tớ nè! Kéo xuống dưới để khám phá thêm nhiều điều bất ngờ hơn nữa nha!">
             <div class="container">
                 <header class="sec-head reveal">
-                    <span class="sec-chip">Chapter I &middot; Enchanted Forest</span>
-                    <h2>About Me</h2>
+                    <span class="sec-chip" data-en="Chapter I &middot; Enchanted Forest" data-vi="Chương I &middot; Khu rừng phép thuật">Chapter I &middot; Enchanted Forest</span>
+                    <h2 data-en="About Me" data-vi="Về tôi">About Me</h2>
                 </header>
                 <div class="about-grid">
                     <div class="about-portrait reveal reveal-left">
@@ -209,20 +219,20 @@
                         </div>
                     </div>
                     <div class="about-body reveal reveal-right">
-                        <h3>Curiosity is the compass of economics.</h3>
-                        <p>I am Trịnh Khánh Linh, a 3rd-year undergraduate majoring in International Economics at Foreign Trade University (FTU), Hanoi. My academic journey is driven by a deep fascination with global trade dynamics, cross-border financial strategy, and market analysis.</p>
-                        <p>Like exploring Wonderland, modern economics demands curiosity, analytical rigor, and the courage to venture beyond conventional perspectives.</p>
+                        <h3 data-en="Curiosity is the compass of economics." data-vi="Sự tò mò là kim chỉ nam của kinh tế học.">Curiosity is the compass of economics.</h3>
+                        <p data-en="I am Trịnh Khánh Linh, a 3rd-year undergraduate majoring in International Economics at Foreign Trade University (FTU), Hanoi. My academic journey is driven by a deep fascination with global trade dynamics, cross-border financial strategy, and market analysis." data-vi="Tôi là Trịnh Khánh Linh, sinh viên năm 3 chuyên ngành Kinh tế Quốc tế tại Trường Đại học Ngoại thương (FTU), Hà Nội. Hành trình học tập của tôi được dẫn dắt bởi niềm đam mê sâu sắc với động lực thương mại toàn cầu, chiến lược tài chính xuyên biên giới và phân tích thị trường.">I am Trịnh Khánh Linh, a 3rd-year undergraduate majoring in International Economics at Foreign Trade University (FTU), Hanoi. My academic journey is driven by a deep fascination with global trade dynamics, cross-border financial strategy, and market analysis.</p>
+                        <p data-en="Like exploring Wonderland, modern economics demands curiosity, analytical rigor, and the courage to venture beyond conventional perspectives." data-vi="Giống như việc khám phá xứ sở thần tiên, kinh tế học hiện đại đòi hỏi sự tò mò, tư duy phân tích sắc sảo và lòng dũng cảm vượt qua các khuôn mẫu thông thường.">Like exploring Wonderland, modern economics demands curiosity, analytical rigor, and the courage to venture beyond conventional perspectives.</p>
                         <div class="about-stats">
-                            <div class="stat-box"><span class="stat-val">FTU</span><span class="stat-lbl">Foreign Trade University</span></div>
-                            <div class="stat-box"><span class="stat-val">IE</span><span class="stat-lbl">International Economics</span></div>
-                            <div class="stat-box"><span class="stat-val">Hanoi</span><span class="stat-lbl">Vietnam</span></div>
+                            <div class="stat-box"><span class="stat-val">FTU</span><span class="stat-lbl" data-en="Foreign Trade University" data-vi="ĐH Ngoại thương">Foreign Trade University</span></div>
+                            <div class="stat-box"><span class="stat-val">IE</span><span class="stat-lbl" data-en="International Economics" data-vi="Kinh tế Quốc tế">International Economics</span></div>
+                            <div class="stat-box"><span class="stat-val">Hanoi</span><span class="stat-lbl" data-en="Vietnam" data-vi="Việt Nam">Vietnam</span></div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Education -->
                 <div class="edu-block reveal" style="margin-top: 30px;">
-                    <h3 class="block-title">&#9733; Education</h3>
+                    <h3 class="block-title" data-en="&#9733; Education" data-vi="&#9733; Học vấn">&#9733; Education</h3>
                     <div class="edu-cards-big">
                         <article class="edu-big reveal" data-mascot-vi="🎓 Dưới mái nhà FTU, tớ thỏa sức học hỏi và trau dồi tri thức mỗi ngày đấy!">
                             <div class="edu-big-img"><img src="images/education/ftu.jpg" alt="FTU" loading="lazy"></div>
@@ -230,9 +240,9 @@
                                 <span class="edu-year">2023 — 2027</span>
                                 <h3>Foreign Trade University (FTU)</h3>
                                 <ul class="edu-details">
-                                    <li>3rd-year Student</li>
-                                    <li>Faculty of International Economics</li>
-                                    <li>Major in International Economics</li>
+                                    <li data-en="3rd-year Student" data-vi="Sinh viên năm 3">3rd-year Student</li>
+                                    <li data-en="Faculty of International Economics" data-vi="Khoa Kinh tế và Kinh doanh Quốc tế">Faculty of International Economics</li>
+                                    <li data-en="Major in International Economics" data-vi="Chuyên ngành Kinh tế Quốc tế">Major in International Economics</li>
                                 </ul>
                             </div>
                         </article>
@@ -240,11 +250,11 @@
                             <div class="edu-big-img"><img src="images/education/ctq.JPG" alt="Chuyên Tuyên Quang" loading="lazy"></div>
                             <div class="edu-big-body">
                                 <span class="edu-year">2020 — 2023</span>
-                                <h3>Tuyên Quang High School for the Gifted</h3>
+                                <h3 data-en="Tuyên Quang High School for the Gifted" data-vi="Trường THPT Chuyên Tuyên Quang">Tuyên Quang High School for the Gifted</h3>
                                 <ul class="edu-details">
-                                    <li>Graduated with Distinction</li>
-                                    <li>Literature Major (Class 34)</li>
-                                    <li>National Excellent Student Team in Literature (2022-2023)</li>
+                                    <li data-en="Graduated with Distinction" data-vi="Tốt nghiệp loại Giỏi">Graduated with Distinction</li>
+                                    <li data-en="Literature Major (Class 34)" data-vi="Chuyên Văn (Khóa 34)">Literature Major (Class 34)</li>
+                                    <li data-en="National Excellent Student Team in Literature (2022-2023)" data-vi="Đội tuyển HSG Quốc gia môn Ngữ Văn (2022-2023)">National Excellent Student Team in Literature (2022-2023)</li>
                                 </ul>
                             </div>
                         </article>
@@ -257,8 +267,8 @@
         <section id="languages" class="section sec-languages" data-mascot-vi="💬 Cậu có muốn thử tài trò chuyện bằng tiếng Anh hay tiếng Trung với tớ không nào?">
             <div class="container">
                 <header class="sec-head reveal">
-                    <span class="sec-chip">Chapter II &middot; Tower of Babel</span>
-                    <h2>Ngoại ngữ</h2>
+                    <span class="sec-chip" data-en="Chapter II &middot; Tower of Babel" data-vi="Chương II &middot; Tháp ngôn ngữ">Chapter II &middot; Tower of Babel</span>
+                    <h2 data-en="Languages" data-vi="Ngoại ngữ">Ngoại ngữ</h2>
                 </header>
                 <div class="lang-cards">
                     <div class="lang-card reveal">
@@ -269,7 +279,7 @@
                     </div>
                     <div class="lang-card reveal">
                         <div class="lang-flag">&#127464;&#127475;</div>
-                        <h3>Chinese</h3>
+                        <h3 data-en="Chinese" data-vi="Tiếng Trung">Chinese</h3>
                         <span class="lang-level">HSK 5</span>
                         <div class="lang-bar"><div class="lang-fill" data-percent="82"></div></div>
                     </div>
@@ -281,28 +291,28 @@
         <section id="skills" class="section sec-skills" data-mascot-vi="🔮 Kho tàng kỹ năng phép thuật này đã đồng hành cùng tớ trong suốt các dự án đấy!">
             <div class="container">
                 <header class="sec-head reveal">
-                    <span class="sec-chip">Chapter III &middot; Hidden Magical Library</span>
-                    <h2>Grimoire of Skills</h2>
+                    <span class="sec-chip" data-en="Chapter III &middot; Hidden Magical Library" data-vi="Chương III &middot; Thư viện phép thuật ẩn giấu">Chapter III &middot; Hidden Magical Library</span>
+                    <h2 data-en="Grimoire of Skills" data-vi="Kỹ năng chuyên môn">Grimoire of Skills</h2>
                 </header>
                 <div class="skills-bars reveal">
                     <div class="skill-row" data-percent="85">
-                        <div class="skill-info"><span class="sk-label">Economic &amp; Market Analysis</span><span class="sk-sub">Forecasting &middot; Econometrics &middot; Data Viz</span></div>
+                        <div class="skill-info"><span class="sk-label" data-en="Economic &amp; Market Analysis" data-vi="Phân tích Kinh tế &amp; Thị trường">Economic &amp; Market Analysis</span><span class="sk-sub" data-en="Forecasting &middot; Econometrics &middot; Data Viz" data-vi="Dự báo &middot; Kinh tế lượng &middot; Trực quan hóa dữ liệu">Forecasting &middot; Econometrics &middot; Data Viz</span></div>
                         <div class="bar-track"><div class="bar-fill"></div></div>
                     </div>
                     <div class="skill-row" data-percent="80">
-                        <div class="skill-info"><span class="sk-label">Business Strategy</span><span class="sk-sub">Trade Policy &middot; FDI &middot; Corporate Finance</span></div>
+                        <div class="skill-info"><span class="sk-label" data-en="Business Strategy" data-vi="Chiến lược Kinh doanh">Business Strategy</span><span class="sk-sub" data-en="Trade Policy &middot; FDI &middot; Corporate Finance" data-vi="Chính sách Thương mại &middot; FDI &middot; Tài chính Doanh nghiệp">Trade Policy &middot; FDI &middot; Corporate Finance</span></div>
                         <div class="bar-track"><div class="bar-fill"></div></div>
                     </div>
                     <div class="skill-row" data-percent="88">
-                        <div class="skill-info"><span class="sk-label">Communication &amp; Soft Skills</span><span class="sk-sub">Customer Care &middot; Public Speaking &middot; Teamwork</span></div>
+                        <div class="skill-info"><span class="sk-label" data-en="Communication &amp; Soft Skills" data-vi="Giao tiếp &amp; Kỹ năng mềm">Communication &amp; Soft Skills</span><span class="sk-sub" data-en="Customer Care &middot; Public Speaking &middot; Teamwork" data-vi="Chăm sóc khách hàng &middot; Thuyết trình &middot; Làm việc nhóm">Customer Care &middot; Public Speaking &middot; Teamwork</span></div>
                         <div class="bar-track"><div class="bar-fill"></div></div>
                     </div>
                     <div class="skill-row" data-percent="60">
-                        <div class="skill-info"><span class="sk-label">Software &amp; Office Tools</span><span class="sk-sub">MS Office &middot; SPSS &middot; R/Python basics</span></div>
+                        <div class="skill-info"><span class="sk-label" data-en="Software &amp; Office Tools" data-vi="Phần mềm &amp; Công cụ văn phòng">Software &amp; Office Tools</span><span class="sk-sub" data-en="MS Office &middot; SPSS &middot; R/Python basics" data-vi="MS Office &middot; SPSS &middot; Cơ bản R/Python">MS Office &middot; SPSS &middot; R/Python basics</span></div>
                         <div class="bar-track"><div class="bar-fill"></div></div>
                     </div>
                     <div class="skill-row" data-percent="83">
-                        <div class="skill-info"><span class="sk-label">Research &amp; Academic Writing</span><span class="sk-sub">Papers &middot; Literature Review &middot; Reports</span></div>
+                        <div class="skill-info"><span class="sk-label" data-en="Research &amp; Academic Writing" data-vi="Nghiên cứu &amp; Viết học thuật">Research &amp; Academic Writing</span><span class="sk-sub" data-en="Papers &middot; Literature Review &middot; Reports" data-vi="Bài báo &middot; Tổng quan tài liệu &middot; Báo cáo">Papers &middot; Literature Review &middot; Reports</span></div>
                         <div class="bar-track"><div class="bar-fill"></div></div>
                     </div>
                 </div>
@@ -313,24 +323,24 @@
         <section id="projects" class="section sec-projects" data-mascot-vi="💡 ShiftLink chính là tâm huyết của tớ đấy, khám phá ngay tính năng thông minh của nó nhé!">
             <div class="container">
                 <header class="sec-head reveal">
-                    <span class="sec-chip">Chapter IV &middot; Hedge Maze</span>
-                    <h2>Featured Projects</h2>
+                    <span class="sec-chip" data-en="Chapter IV &middot; Hedge Maze" data-vi="Chương IV &middot; Mê cung kỳ bí">Chapter IV &middot; Hedge Maze</span>
+                    <h2 data-en="Featured Projects" data-vi="Dự án tiêu biểu">Featured Projects</h2>
                 </header>
                 <div class="proj-grid">
                     <article class="proj-card proj-card--hero reveal">
-                        <div class="proj-cover"><img src="images/shiftlink.png" alt="ShiftLink" loading="lazy"><span class="proj-badge">Web Platform</span></div>
+                        <div class="proj-cover"><img src="images/shiftlink.png" alt="ShiftLink" loading="lazy"><span class="proj-badge" data-en="Web Platform" data-vi="Nền tảng Web">Web Platform</span></div>
                         <div class="proj-body">
-                            <h3>ShiftLink &mdash; Smart Shift Management</h3>
-                            <p>An intelligent shift management platform that helps managers and employees collaborate &mdash; from registering availability to shift scheduling, shift swapping, and attendance tracking.</p>
-                            <div class="proj-tags"><span>HTML/CSS/JS</span><span>UX Design</span><span>Scheduling</span><span>Attendance</span></div>
+                            <h3 data-en="ShiftLink &mdash; Smart Shift Management" data-vi="ShiftLink &mdash; Quản lý ca làm việc thông minh">ShiftLink &mdash; Smart Shift Management</h3>
+                            <p data-en="An intelligent shift management platform that helps managers and employees collaborate &mdash; from registering availability to shift scheduling, shift swapping, and attendance tracking." data-vi="Nền tảng quản lý ca làm việc thông minh giúp nhà quản lý và nhân viên phối hợp hiệu quả &mdash; từ đăng ký lịch rảnh, sắp xếp ca, đổi ca cho đến theo dõi chấm công.">An intelligent shift management platform that helps managers and employees collaborate &mdash; from registering availability to shift scheduling, shift swapping, and attendance tracking.</p>
+                            <div class="proj-tags"><span>HTML/CSS/JS</span><span data-en="UX Design" data-vi="Thiết kế UX">UX Design</span><span data-en="Scheduling" data-vi="Sắp xếp lịch">Scheduling</span><span data-en="Attendance" data-vi="Chấm công">Attendance</span></div>
                         </div>
                     </article>
                     <article class="proj-card proj-card--hero reveal">
-                        <div class="proj-cover"><img src="images/activies and awards/forum.png" alt="FTU Advisory" loading="lazy"><span class="proj-badge">Advisory</span></div>
+                        <div class="proj-cover"><img src="images/activies and awards/forum.png" alt="FTU Advisory" loading="lazy"><span class="proj-badge" data-en="Advisory" data-vi="Tư vấn">Advisory</span></div>
                         <div class="proj-body">
-                            <h3>FTU Admissions Advisory Platform</h3>
-                            <p>Organized admission outreach, file processing, and consultation webinars for thousands of prospective students.</p>
-                            <div class="proj-tags"><span>Event Mgmt</span><span>Consulting</span><span>PR</span></div>
+                            <h3 data-en="FTU Admissions Advisory Platform" data-vi="Nền tảng Tư vấn Tuyển sinh FTU">FTU Admissions Advisory Platform</h3>
+                            <p data-en="Organized admission outreach, file processing, and consultation webinars for thousands of prospective students." data-vi="Tổ chức truyền thông tuyển sinh, xử lý hồ sơ và các buổi hội thảo tư vấn trực tuyến cho hàng ngàn thí sinh tiềm năng.">Organized admission outreach, file processing, and consultation webinars for thousands of prospective students.</p>
+                            <div class="proj-tags"><span data-en="Event Mgmt" data-vi="Quản lý sự kiện">Event Mgmt</span><span data-en="Consulting" data-vi="Tư vấn">Consulting</span><span>PR</span></div>
                         </div>
                     </article>
                 </div>
@@ -341,8 +351,8 @@
         <section id="experience" class="section sec-experience" data-mascot-vi="🌟 Những hoạt động ngoại khóa năng động này đã mang lại cho tớ vô số trải nghiệm quý giá!">
             <div class="container">
                 <header class="sec-head reveal">
-                    <span class="sec-chip">Chapter V &middot; Tea Party Garden</span>
-                    <h2>Experience &amp; Activities</h2>
+                    <span class="sec-chip" data-en="Chapter V &middot; Tea Party Garden" data-vi="Chương V &middot; Vườn tiệc trà">Chapter V &middot; Tea Party Garden</span>
+                    <h2 data-en="Experience &amp; Activities" data-vi="Kinh nghiệm &amp; Hoạt động">Experience &amp; Activities</h2>
                 </header>
                 <div class="timeline">
                     <article class="tl-item reveal">
@@ -351,10 +361,10 @@
                             <div class="tl-card-img"><img src="images/activies and awards/forum1.JPG" alt="FTU Forum" loading="lazy"></div>
                             <div class="tl-card-body">
                                 <span class="tl-date">2023 — Present</span>
-                                <h3>CLB Diễn đàn sinh viên Trường Đại học Ngoại thương - FTU Forum</h3>
+                                <h3 data-en="CLB Diễn đàn sinh viên Trường Đại học Ngoại thương - FTU Forum" data-vi="CLB Diễn đàn sinh viên Trường Đại học Ngoại thương - FTU Forum">CLB Diễn đàn sinh viên Trường Đại học Ngoại thương - FTU Forum</h3>
                                 <ul>
-                                    <li>Tham gia hoạt động tư vấn trong các sự kiện thường niên của Phòng Quản lý đào tạo: Ngày hội tuyển sinh, FTU Open Tour, Bách Khoa Open Day 1, 2, Webinar Tư vấn tuyển sinh...</li>
-                                    <li>Hỗ trợ hoạt động tuyển sinh của Trường Đại học Ngoại thương cho Khoá 63, 64 thông qua thu nhận và xử lý hồ sơ xét tuyển, hỗ trợ giải đáp thắc mắc cho phụ huynh và học sinh online và offline.</li>
+                                    <li data-en="Participated in advisory activities for annual events hosted by the Academic Affairs Department: Admission Open Days, FTU Open Tours, Admissions Webinars..." data-vi="Tham gia hoạt động tư vấn trong các sự kiện thường niên của Phòng Quản lý đào tạo: Ngày hội tuyển sinh, FTU Open Tour, Webinar Tư vấn tuyển sinh...">Tham gia hoạt động tư vấn trong các sự kiện thường niên của Phòng Quản lý đào tạo: Ngày hội tuyển sinh, FTU Open Tour, Webinar Tư vấn tuyển sinh...</li>
+                                    <li data-en="Supported admission operations for intakes K63 and K64 through application processing and student/parent inquiry support." data-vi="Hỗ trợ hoạt động tuyển sinh của Trường Đại học Ngoại thương cho Khoá 63, 64 thông qua thu nhận và xử lý hồ sơ xét tuyển, giải đáp thắc mắc online/offline.">Hỗ trợ hoạt động tuyển sinh của Trường Đại học Ngoại thương cho Khoá 63, 64 thông qua thu nhận và xử lý hồ sơ xét tuyển, giải đáp thắc mắc online/offline.</li>
                                 </ul>
                             </div>
                         </div>
@@ -365,11 +375,11 @@
                             <div class="tl-card-img"><img src="images/activies and awards/ie.JPG" alt="IE SHINE 2024" loading="lazy"></div>
                             <div class="tl-card-body">
                                 <span class="tl-date">2024</span>
-                                <h3>Organizing Committee — IE SHINE 2024: Unity &amp; Shine</h3>
-                                <h4>Faculty of International Economics, FTU</h4>
+                                <h3 data-en="Organizing Committee — IE SHINE 2024: Unity &amp; Shine" data-vi="Ban Tổ chức — IE SHINE 2024: Unity &amp; Shine">Organizing Committee — IE SHINE 2024: Unity &amp; Shine</h3>
+                                <h4 data-en="Faculty of International Economics, FTU" data-vi="Khoa Kinh tế Quốc tế, FTU">Faculty of International Economics, FTU</h4>
                                 <ul>
-                                    <li>Organized the annual cultural night gala of the Faculty of International Economics.</li>
-                                    <li>Coordinated logistics, media outreach, and student engagement activities.</li>
+                                    <li data-en="Organized the annual cultural night gala of the Faculty of International Economics." data-vi="Tổ chức đêm hội văn hóa thường niên của Khoa Kinh tế Quốc tế.">Organized the annual cultural night gala of the Faculty of International Economics.</li>
+                                    <li data-en="Coordinated logistics, media outreach, and student engagement activities." data-vi="Điều phối hậu cần, truyền thông và các hoạt động kết nối sinh viên.">Coordinated logistics, media outreach, and student engagement activities.</li>
                                 </ul>
                             </div>
                         </div>
@@ -382,8 +392,8 @@
         <section id="achievements" class="section sec-achievements" data-mascot-vi="🏆 Các cột mốc giải thưởng và vai trò đại sứ này là niềm tự hào lớn trên hành trình của tớ!">
             <div class="container">
                 <header class="sec-head reveal">
-                    <span class="sec-chip">Chapter VI &middot; Royal Garden</span>
-                    <h2>Achievements</h2>
+                    <span class="sec-chip" data-en="Chapter VI &middot; Royal Garden" data-vi="Chương VI &middot; Vườn Hoàng gia">Chapter VI &middot; Royal Garden</span>
+                    <h2 data-en="Achievements" data-vi="Thành tích">Achievements</h2>
                 </header>
 
                 <!-- Awards -->
@@ -391,29 +401,29 @@
                     <div class="award-item award-gold reveal">
                         <div class="aw-rank">1<sup>st</sup></div>
                         <div class="aw-info">
-                            <h3>1st Prize — Provincial Literature</h3>
-                            <p>Grade 11 Provincial Excellent Student Competition in Literature, Tuyên Quang Province.</p>
+                            <h3 data-en="1st Prize — Provincial Literature" data-vi="Giải Nhất — Học sinh giỏi Tỉnh môn Văn">1st Prize — Provincial Literature</h3>
+                            <p data-en="Grade 11 Provincial Excellent Student Competition in Literature, Tuyên Quang Province." data-vi="Kỳ thi chọn học sinh giỏi cấp tỉnh lớp 11 môn Ngữ Văn, Tỉnh Tuyên Quang.">Grade 11 Provincial Excellent Student Competition in Literature, Tuyên Quang Province.</p>
                         </div>
                     </div>
                     <div class="award-item award-bronze reveal">
                         <div class="aw-rank">3<sup>rd</sup></div>
                         <div class="aw-info">
-                            <h3>3rd Prize — Provincial Literature</h3>
-                            <p>Grade 12 Provincial Excellent Student Competition in Literature.</p>
+                            <h3 data-en="3rd Prize — Provincial Literature" data-vi="Giải Ba — Học sinh giỏi Tỉnh môn Văn">3rd Prize — Provincial Literature</h3>
+                            <p data-en="Grade 12 Provincial Excellent Student Competition in Literature." data-vi="Kỳ thi chọn học sinh giỏi cấp tỉnh lớp 12 môn Ngữ Văn.">Grade 12 Provincial Excellent Student Competition in Literature.</p>
                         </div>
                     </div>
                     <div class="award-item award-special reveal">
                         <div class="aw-rank">&#9734;</div>
                         <div class="aw-info">
-                            <h3>Consolation Prize — Regional Contest</h3>
-                            <p>2022 Northern Coastal &amp; Delta Regional Gifted Schools Competition in Literature.</p>
+                            <h3 data-en="Consolation Prize — Regional Contest" data-vi="Giải Khuyến khích — Trại hè Hùng Vương">Consolation Prize — Regional Contest</h3>
+                            <p data-en="2022 Northern Coastal &amp; Delta Regional Gifted Schools Competition in Literature." data-vi="Kỳ thi học sinh giỏi các trường THPT chuyên khu vực Duyên hải và Đồng bằng Bắc Bộ năm 2022 môn Ngữ Văn.">2022 Northern Coastal &amp; Delta Regional Gifted Schools Competition in Literature.</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Ambassador Roles -->
                 <div class="roles-block reveal" style="margin-top: 30px;">
-                    <h3 class="block-title">&#9830; Media Ambassador Roles</h3>
+                    <h3 class="block-title" data-en="&#9830; Media Ambassador Roles" data-vi="&#9830; Vai trò Đại sứ Truyền thông">&#9830; Media Ambassador Roles</h3>
                     <div class="roles-grid">
                         <div class="role-card reveal">
                             <div class="role-img"><img src="images/activies and awards/Camp 12.PNG" alt="Entrepreneur Z Camp 12" loading="lazy"></div>
@@ -440,25 +450,25 @@
         <section id="minigame" class="section sec-minigame" data-mascot-vi="☕ Chào mừng đến với tiệc trà Mad Tea Party! Hôm nay tâm trạng của cậu thế nào rồi?">
             <div class="container">
                 <header class="sec-head reveal">
-                    <span class="sec-chip">Chapter VII &middot; The Mad Tea Party</span>
-                    <h2>Wonderland Games</h2>
-                    <p class="sec-sub">Take a break and play!</p>
+                    <span class="sec-chip" data-en="Chapter VII &middot; The Mad Tea Party" data-vi="Chương VII &middot; Tiệc trà Mad Tea Party">Chapter VII &middot; The Mad Tea Party</span>
+                    <h2 data-en="Wonderland Games" data-vi="Trò chơi Xứ sở Thần tiên">Wonderland Games</h2>
+                    <p class="sec-sub" data-en="Take a break and play!" data-vi="Hãy thư giãn và giải trí cùng tớ nhé!">Take a break and play!</p>
                 </header>
 
                 <div class="game-panel" id="panel-mood">
                     <div class="mood-area">
-                        <h3>How are you feeling today?</h3>
+                        <h3 data-en="How are you feeling today?" data-vi="Hôm nay tâm trạng của cậu thế nào?">How are you feeling today?</h3>
                         <div class="mood-options">
-                            <button class="mood-btn" data-mood="amazing">✨ Tuyệt vời</button>
-                            <button class="mood-btn" data-mood="happy">😊 Vui vẻ</button>
-                            <button class="mood-btn" data-mood="neutral">☕ Bình ổn</button>
-                            <button class="mood-btn" data-mood="tired">💤 Mệt mỏi</button>
-                            <button class="mood-btn" data-mood="sad">🌧️ Buồn nhẹ</button>
+                            <button class="mood-btn" data-mood="amazing" data-en="✨ Amazing" data-vi="✨ Tuyệt vời">✨ Amazing</button>
+                            <button class="mood-btn" data-mood="happy" data-en="😊 Happy" data-vi="😊 Vui vẻ">😊 Happy</button>
+                            <button class="mood-btn" data-mood="neutral" data-en="☕ Peaceful" data-vi="☕ Bình ổn">☕ Peaceful</button>
+                            <button class="mood-btn" data-mood="tired" data-en="💤 Tired" data-vi="💤 Mệt mỏi">💤 Tired</button>
+                            <button class="mood-btn" data-mood="sad" data-en="🌧️ A bit sad" data-vi="🌧️ Buồn nhẹ">🌧️ A bit sad</button>
                         </div>
                         <div class="mood-result card-quote-box" id="mood-result" style="display:none; margin-top: 20px; padding: 20px; border-radius: 12px; background: rgba(255,255,255,0.06); border: 1px dashed var(--mystic);">
                             <p id="mood-message" style="font-size: 1.1rem; font-style: italic; line-height: 1.6; color: var(--gold); margin-bottom: 12px;"></p>
                             <div class="mood-history" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
-                                <h4 style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Nhật ký cảm xúc</h4>
+                                <h4 data-en="Mood Journal" data-vi="Nhật ký cảm xúc" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Mood Journal</h4>
                                 <ul id="mood-log" style="list-style: none; padding: 0; margin-top: 6px; font-size: 0.9rem;"></ul>
                             </div>
                         </div>
@@ -471,9 +481,9 @@
         <section id="contact" class="section sec-contact" data-mascot-vi="💌 Đừng ngần ngại gửi lời nhắn cho tớ nhé, chú thỏ trắng đang vẫy tay chào tạm biệt cậu kìa!">
             <div class="container">
                 <header class="sec-head reveal">
-                    <span class="sec-chip">Chapter VIII &middot; Secret Garden at Sunset</span>
-                    <h2>Let's Connect</h2>
-                    <p class="sec-sub">Step through the looking glass for collaborations or opportunities.</p>
+                    <span class="sec-chip" data-en="Chapter VIII &middot; Secret Garden at Sunset" data-vi="Chương VIII &middot; Khu vườn bí mật lúc hoàng hôn">Chapter VIII &middot; Secret Garden at Sunset</span>
+                    <h2 data-en="Let's Connect" data-vi="Kết nối cùng tôi">Let's Connect</h2>
+                    <p class="sec-sub" data-en="Step through the looking glass for collaborations or opportunities." data-vi="Hãy bước qua gương để cùng hợp tác hoặc trao đổi cơ hội mới.">Step through the looking glass for collaborations or opportunities.</p>
                 </header>
 
                 <div class="contact-grid">
@@ -484,11 +494,11 @@
                         </div>
                         <div class="ct-item">
                             <span class="ct-icon"><span class="cgi-icon">&#9742;</span></span>
-                            <div><strong>Phone</strong><p>0963 075 656</p></div>
+                            <div><strong data-en="Phone" data-vi="Điện thoại">Phone</strong><p>0963 075 656</p></div>
                         </div>
                         <div class="ct-item">
                             <span class="ct-icon"><span class="cgi-icon">&#128205;</span></span>
-                            <div><strong>Address</strong><p>Ngõ 218, Mỹ Đình 2, Từ Liêm, Hà Nội</p></div>
+                            <div><strong data-en="Address" data-vi="Địa chỉ">Address</strong><p data-en="My Dinh 2, Tu Liem, Hanoi" data-vi="Ngõ 218, Mỹ Đình 2, Từ Liêm, Hà Nội">Ngõ 218, Mỹ Đình 2, Từ Liêm, Hà Nội</p></div>
                         </div>
                         <div class="ct-item">
                             <span class="ct-icon"><span class="cgi-icon">&#128187;</span></span>
@@ -498,20 +508,20 @@
 
                     <!-- Contact Form -->
                     <form class="contact-form reveal" id="contact-form">
-                        <h3>Send a Message</h3>
-                        <input type="text" name="name" placeholder="Your name" required>
-                        <input type="email" name="email" placeholder="Your email" required>
-                        <textarea name="message" rows="4" placeholder="Your message..." required></textarea>
-                        <button type="submit" class="btn btn-primary">Gửi</button>
+                        <h3 data-en="Send a Message" data-vi="Gửi lời nhắn">Send a Message</h3>
+                        <input type="text" name="name" data-en-placeholder="Your name" data-vi-placeholder="Tên của bạn" placeholder="Your name" required>
+                        <input type="email" name="email" data-en-placeholder="Your email" data-vi-placeholder="Email của bạn" placeholder="Your email" required>
+                        <textarea name="message" rows="4" data-en-placeholder="Your message..." data-vi-placeholder="Lời nhắn của bạn..." placeholder="Your message..." required></textarea>
+                        <button type="submit" class="btn btn-primary" data-en="Gửi" data-vi="Gửi">Gửi</button>
                         <p class="form-note" id="form-note" style="display:none;"></p>
                     </form>
                 </div>
 
                 <div class="farewell reveal">
-                    <p>"Hành trình qua chiếc gương khép lại, mở ra những chân trời tri thức và sáng tạo mới!" — Linh</p>
+                    <p data-en="&quot;Curiosity is the beginning of wisdom. Thank you for visiting my Wonderland!&quot; &mdash; Trịnh Khánh Linh" data-vi="&quot;Sự tò mò là khởi đầu của trí tuệ. Cảm ơn đã ghé thăm Wonderland của tớ!&quot; &mdash; Trịnh Khánh Linh">&quot;Curiosity is the beginning of wisdom. Thank you for visiting my Wonderland!&quot; &mdash; Trịnh Khánh Linh</p>
                 </div>
             </div>
-            <!-- Cập nhật dòng footer theo yêu cầu -->
+            <!-- Footer chuẩn -->
             <footer class="site-footer">
                 <p>Portfolio Trịnh Khánh Linh © 2026 &middot; ĐH Ngoại thương</p>
             </footer>
@@ -528,13 +538,109 @@
     <script src="js/script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Xử lý thông điệp cảm xúc tương ứng trong minigame
+            // --- ÂM THANH ALICEMUSIC.MP3 & TƯƠNG TÁC TỰ ĐỘNG PHÁT ---
+            const bgMusic = document.getElementById('bg-music');
+            const musicBtn = document.getElementById('music-btn');
+            const musicVolume = document.getElementById('music-volume');
+            const mirrorScene = document.getElementById('mirror-scene');
+            const mirrorClick = document.getElementById('mirror-click');
+            const portfolioWrap = document.getElementById('portfolio-wrap');
+
+            if (bgMusic) {
+                bgMusic.volume = musicVolume ? musicVolume.value : 0.7;
+            }
+
+            // Hàm kích hoạt nhạc khi user click qua gương
+            if (mirrorClick) {
+                mirrorClick.addEventListener('click', () => {
+                    if (bgMusic) {
+                        bgMusic.play().catch(err => console.log("Audio autoplay prevented:", err));
+                    }
+                    if (mirrorScene) {
+                        mirrorScene.style.opacity = '0';
+                        setTimeout(() => {
+                            mirrorScene.style.display = 'none';
+                            portfolioWrap.style.display = 'block';
+                        }, 500);
+                    }
+                });
+            }
+
+            if (musicBtn && bgMusic) {
+                musicBtn.addEventListener('click', () => {
+                    if (bgMusic.paused) {
+                        bgMusic.play();
+                        musicBtn.style.borderColor = 'var(--gold)';
+                    } else {
+                        bgMusic.pause();
+                        musicBtn.style.borderColor = 'rgba(255,255,255,0.2)';
+                    }
+                });
+            }
+
+            if (musicVolume && bgMusic) {
+                musicVolume.addEventListener('input', (e) => {
+                    bgMusic.volume = e.target.value;
+                });
+            }
+
+            // --- TÍNH NĂNG CHUYỂN NGÔN NGỮ VI - EN THỰC TẾ ---
+            const langBtn = document.getElementById('lang-btn');
+            const langLabel = document.getElementById('lang-label');
+            let currentLang = 'en'; // Mặc định tiếng Anh
+
+            function switchLanguage(lang) {
+                currentLang = lang;
+                if (langLabel) langLabel.textContent = lang.toUpperCase();
+
+                // Dịch toàn bộ các thẻ có data-en và data-vi
+                document.querySelectorAll('[data-en]').forEach(el => {
+                    const text = el.getAttribute(`data-${lang}`);
+                    if (text) {
+                        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                            el.placeholder = text;
+                        } else {
+                            el.textContent = text;
+                        }
+                    }
+                });
+
+                // Dịch placeholder riêng cho form
+                document.querySelectorAll('[data-en-placeholder]').forEach(el => {
+                    const ph = el.getAttribute(`data-${lang}-placeholder`);
+                    if (ph) el.placeholder = ph;
+                });
+            }
+
+            if (langBtn) {
+                langBtn.addEventListener('click', () => {
+                    const newLang = currentLang === 'en' ? 'vi' : 'en';
+                    switchLanguage(newLang);
+                });
+            }
+
+            // --- XỬ LÝ MINIGAME MOOD TRACKER ---
             const moodMessages = {
-                amazing: "✨ Thật tuyệt vời! Năng lượng rực rỡ của cậu hôm nay chắc chắn sẽ thắp sáng cả xứ sở thần tiên đấy!",
-                happy: "😊 Nụ cười của cậu chính là thứ phép thuật đẹp đẽ nhất. Hãy giữ mãi tinh thần tích cực này nhé!",
-                neutral: "☕ Một ngày bình yên và nhẹ nhàng. Đôi khi sự tĩnh lặng lại là khoảng thời gian tuyệt vời để chiêm nghiệm!",
-                tired: "💤 Cậu đã vất vả nhiều rồi! Hãy thong thả nhấp một ngụm trà ấm và nghỉ ngơi thật thoải mái nha.",
-                sad: "🌧️ Không sao cả, ngay cả ở Wonderland cũng có những ngày trời mưa mà. Tớ luôn ở đây lắng nghe cậu!"
+                amazing: {
+                    en: "✨ Amazing! Your brilliant energy today will definitely light up the whole Wonderland!",
+                    vi: "✨ Thật tuyệt vời! Năng lượng rực rỡ của cậu hôm nay chắc chắn sẽ thắp sáng cả xứ sở thần tiên đấy!"
+                },
+                happy: {
+                    en: "😊 Your smile is the most beautiful magic. Keep that positive spirit shining!",
+                    vi: "😊 Nụ cười của cậu chính là thứ phép thuật đẹp đẽ nhất. Hãy giữ mãi tinh thần tích cực này nhé!"
+                },
+                neutral: {
+                    en: "☕ A peaceful and calm day. Sometimes tranquility is the best time for contemplation.",
+                    vi: "☕ Một ngày bình yên và nhẹ nhàng. Đôi khi sự tĩnh lặng lại là khoảng thời gian tuyệt vời để chiêm nghiệm!"
+                },
+                tired: {
+                    en: "💤 You've worked so hard! Take a slow sip of warm tea and rest comfortably.",
+                    vi: "💤 Cậu đã vất vả nhiều rồi! Hãy thong thả nhấp một ngụm trà ấm và nghỉ ngơi thật thoải mái nha."
+                },
+                sad: {
+                    en: "🌧️ It's completely fine, even Wonderland has rainy days. I'm always here to listen!",
+                    vi: "🌧️ Không sao cả, ngay cả ở Wonderland cũng có những ngày trời mưa mà. Tớ luôn ở đây lắng nghe cậu!"
+                }
             };
 
             const moodButtons = document.querySelectorAll('.mood-btn');
@@ -545,7 +651,7 @@
             moodButtons.forEach(btn => {
                 btn.addEventListener('click', () => {
                     const mood = btn.getAttribute('data-mood');
-                    moodMessage.textContent = moodMessages[mood];
+                    moodMessage.textContent = moodMessages[mood][currentLang] || moodMessages[mood]['en'];
                     moodResult.style.display = 'block';
 
                     const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -555,7 +661,7 @@
                 });
             });
 
-            // Hiệu ứng Canvas: Chỉ có quân cờ tướng rơi lộn nhào ngẫu nhiên (màu giống tên Trịnh Khánh Linh: gold), và lá bài tây đỏ đen ở vệt chuột
+            // --- HIỆU ỨNG CANVAS: QUÂN CỜ TƯỚNG RƠI LỘN NHÀO + VỆT CHUỘT LÁ BÀI TÂY ĐỎ ĐEN ---
             const canvas = document.getElementById('fx-canvas');
             if (canvas) {
                 const ctx = canvas.getContext('2d');
@@ -567,7 +673,7 @@
                     height = canvas.height = window.innerHeight;
                 });
 
-                // Các ký hiệu quân cờ tướng (帥, 將, 仕, 護, 相, 象, 車, 砲, 卒, 兵)
+                // Các ký hiệu quân cờ tướng
                 const chineseChessPieces = ['帥', '將', '仕', '相', '車', '砲', '馬', '卒', '兵'];
                 let elements = [];
 
@@ -577,15 +683,15 @@
                         y: Math.random() * height,
                         symbol: chineseChessPieces[Math.floor(Math.random() * chineseChessPieces.length)],
                         size: Math.floor(Math.random() * 18) + 16,
-                        speedY: Math.random() * 1.2 + 0.5, // Tốc độ rơi linh hoạt
-                        speedX: (Math.random() - 0.5) * 1.5, // Lượn lờ ngẫu nhiên
+                        speedY: Math.random() * 1.2 + 0.5,
+                        speedX: (Math.random() - 0.5) * 1.5,
                         angle: Math.random() * Math.PI * 2,
-                        spin: (Math.random() - 0.5) * 0.05, // Hiệu ứng lộn nhào xoay liên tục
+                        spin: (Math.random() - 0.5) * 0.05, // Lộn nhào liên tục
                         opacity: Math.random() * 0.5 + 0.3
                     });
                 }
 
-                // Vệt chuột lá bài tây mang màu sắc đỏ - đen (♠, ♦, ♥, ♣)
+                // Vệt chuột lá bài tây đỏ - đen
                 let mouseTrails = [];
                 window.addEventListener('mousemove', (e) => {
                     if (Math.random() < 0.35) {
@@ -609,7 +715,7 @@
                 function animate() {
                     ctx.clearRect(0, 0, width, height);
 
-                    // Vẽ quân cờ tướng rơi lộn nhào, màu vàng gold trùng với màu tên Trịnh Khánh Linh
+                    // Vẽ quân cờ tướng rơi lộn nhào màu gold
                     elements.forEach(el => {
                         ctx.save();
                         ctx.translate(el.x, el.y);
@@ -622,8 +728,8 @@
                         ctx.restore();
 
                         el.y += el.speedY;
-                        el.x += el.speedX + Math.sin(el.y * 0.03) * 0.6; // Đổi hướng lượn sóng ngẫu nhiên
-                        el.angle += el.spin; // Lộn nhào liên tục
+                        el.x += el.speedX + Math.sin(el.y * 0.03) * 0.6;
+                        el.angle += el.spin;
 
                         if (el.y > height + 30) {
                             el.y = -30;
@@ -633,7 +739,7 @@
                         if (el.x > width + 30) el.x = -30;
                     });
 
-                    // Vẽ vệt chuột lá bài tây (đỏ - đen)
+                    // Vẽ vệt chuột lá bài tây
                     mouseTrails.forEach((trail, index) => {
                         ctx.fillStyle = trail.color;
                         ctx.globalAlpha = trail.life;
